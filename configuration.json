@@ -1,0 +1,16 @@
+{
+    "label": "Data System",
+    "name": "MData",
+    "count": 2,
+    "elements": [
+        {
+            "label": "基本信息",
+            "name": "base"
+        },
+
+        {
+            "label": "检验报告",
+            "name": "lab"
+        }
+    ]
+}

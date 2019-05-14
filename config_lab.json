@@ -1,0 +1,35 @@
+{
+    "class": "form",
+    "name": "lab",
+    "label": "检验报告",
+    "count": 3,
+
+    "elements": [
+
+        {
+            "class": "label",
+            "name": "patient_id",
+            "label": "ID",
+            "value": ""
+        },
+
+        {
+            "class": "number",
+            "name": "CEA",
+            "label": "肿标CEA",
+            "limit": [0,100],
+            "unit": "ng/mL",
+            "value": ""
+        },
+
+        {
+            "class": "number",
+            "name": "CA199",
+            "label": "肿标CA199",
+            "limit": [0,100],
+            "unit": "U/mL",
+            "value": ""
+        }
+
+    ]
+}

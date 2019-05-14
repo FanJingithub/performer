@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-resource.js"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div class="main-body">
+        <div class="heading">
+            <h1>临床科研数据库系统</h1>
+        </div>
+        <div id="menu" class="menu">
+            <div style="text-align:center">
+                <h3>导航栏</h3>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/base?patient_id={{patient_id}}">基本信息</a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/lab?patient_id={{patient_id}}">检验报告</a>
+            </div>
+            <div class="menu-item">病理报告</div>
+            <div class="menu-item">手术记录</div>
+            <div class="menu-item">化疗记录</div>
+            <div class="menu-item">放疗记录</div>
+            <div class="menu-item">随访记录</div>
+        </div>
+        <div class="container">
+            <div style="text-align:center">
+                <h2>检验报告</h2>
+            </div>
+            <br>
+            <form id="vm" v-on:submit="submit">
+                <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                <div class="form-part-1">
+                    <div>
+                        <label class="form-label">肿标CEA: </label>
+                        <input class="form-number" type="number" v-model.number="CEA" >
+                        <label>&nbsp;ng/mL</label>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="form-part-2">
+                    <div>
+                        <label class="form-label">肿标CA199: </label>
+                        <input class="form-number" type="number" v-model.number="CA199" >
+                        <label>&nbsp;U/mL</label>
+                        <br><br>
+                    </div></div>
+                <div class="form-part-3">
+                    <input type="submit" value="提交">
+                </div>    
+            </form>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#vm',
+            data: {
+                patient_id: "{{patient_id}}" ,
+                CEA: "{{CEA}}" ,
+                CA199: "{{CA199}}" 
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                this.$http.get('/api/lab?patient_id={{patient_id}}').then(function(res){
+                    this.patient_id=res.data.patient_id;
+                    this.CEA=res.data.CEA;
+                    this.CA199=res.data.CA199;
+                },function(){
+                    console.log('error');
+                });
+                },
+                submit: function(event) {
+                    event.preventDefault();
+                    var
+                    $form = $('#vm'),
+                    data = {
+                        patient_id: this.patient_id,
+                        CEA: this.CEA,
+                        CA199: this.CA199
+                    };
+                    this.$http.post('/lab',data,{emulateJSON:true}).then(function(res){
+                        document.write(res.body);    
+                    },function(res){
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
