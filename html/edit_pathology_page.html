@@ -63,24 +63,54 @@
         </div>
         <div class="container">
             <div style="text-align:center">
-                <h2>检验报告</h2>
+                <h2>病理报告</h2>
             </div>
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
                 <div class="form-part-1">
                     <div>
-                        <label class="form-label">CEA: </label>
-                        <input class="form-number" type="number" v-model.number="CEA" >
-                        <label>&nbsp;ng/mL</label>
+                        <label class="form-label">病理诊断: </label>
+                        <input class="form-text" v-model="patho_diagnosis" >
+                        <br><br>
+                    </div>
+                    <div>
+                        <label class="form-label">脉管癌栓: </label>
+                        <br>
+                        <input class="form-radio" type="radio" id="yes" value="yes" v-model="lym_vas_invasion" >
+                        <label for="yes">是</label>
+                        <br>
+                        <input class="form-radio" type="radio" id="no" value="no" v-model="lym_vas_invasion" >
+                        <label for="no">否</label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <label class="form-label">淋巴结数: </label>
+                        <input class="form-number" type="number" v-model.number="tot_lymph_node" >
+                        <label>&nbsp;</label>
                         <br><br>
                     </div>
                 </div>
                 <div class="form-part-2">
                     <div>
-                        <label class="form-label">CA199: </label>
-                        <input class="form-number" type="number" v-model.number="CA199" >
-                        <label>&nbsp;U/mL</label>
+                        <label class="form-label">浸润深度: </label>
+                        <input class="form-text" v-model="deep" >
+                        <br><br>
+                    </div>
+                    <div>
+                        <label class="form-label">神经侵犯: </label>
+                        <br>
+                        <input class="form-radio" type="radio" id="yes" value="yes" v-model="pni" >
+                        <label for="yes">是</label>
+                        <br>
+                        <input class="form-radio" type="radio" id="no" value="no" v-model="pni" >
+                        <label for="no">否</label>
+                        <br><br>
+                    </div>
+                    <div>
+                        <label class="form-label">淋巴阳性: </label>
+                        <input class="form-number" type="number" v-model.number="pos_lymph_node" >
+                        <label>&nbsp;</label>
                         <br><br>
                     </div></div>
                 <div class="form-part-3">
@@ -94,18 +124,26 @@
             el: '#vm',
             data: {
                 patient_id: "{{patient_id}}" ,
-                CEA: "{{CEA}}" ,
-                CA199: "{{CA199}}" 
+                patho_diagnosis: "{{patho_diagnosis}}" ,
+                lym_vas_invasion: "{{lym_vas_invasion}}" ,
+                tot_lymph_node: "{{tot_lymph_node}}" ,
+                deep: "{{deep}}" ,
+                pni: "{{pni}}" ,
+                pos_lymph_node: "{{pos_lymph_node}}" 
             },
             mounted(){
                 this.init()
             },
             methods:{
                 init:function(){
-                this.$http.get('/api/lab?patient_id={{patient_id}}').then(function(res){
+                this.$http.get('/api/pathology?patient_id={{patient_id}}').then(function(res){
                     this.patient_id=res.data.patient_id;
-                    this.CEA=res.data.CEA;
-                    this.CA199=res.data.CA199;
+                    this.patho_diagnosis=res.data.patho_diagnosis;
+                    this.lym_vas_invasion=res.data.lym_vas_invasion;
+                    this.tot_lymph_node=res.data.tot_lymph_node;
+                    this.deep=res.data.deep;
+                    this.pni=res.data.pni;
+                    this.pos_lymph_node=res.data.pos_lymph_node;
                 },function(){
                     console.log('error');
                 });
@@ -116,10 +154,14 @@
                     $form = $('#vm'),
                     data = {
                         patient_id: this.patient_id,
-                        CEA: this.CEA,
-                        CA199: this.CA199
+                        patho_diagnosis: this.patho_diagnosis,
+                        lym_vas_invasion: this.lym_vas_invasion,
+                        tot_lymph_node: this.tot_lymph_node,
+                        deep: this.deep,
+                        pni: this.pni,
+                        pos_lymph_node: this.pos_lymph_node
                     };
-                    this.$http.post('/lab',data,{emulateJSON:true}).then(function(res){
+                    this.$http.post('/pathology',data,{emulateJSON:true}).then(function(res){
                         document.write(res.body);    
                     },function(res){
                         console.log(res.status);

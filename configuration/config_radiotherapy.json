@@ -1,0 +1,25 @@
+{
+    "class": "form",
+    "name": "radiotherapy",
+    "label": "放疗记录",
+    "count": 2,
+
+    "elements": [
+
+        {
+            "class": "label",
+            "name": "patient_id",
+            "label": "ID",
+            "value": ""
+        },
+
+        {
+            "class": "number",
+            "name": "radio_count",
+            "label": "放疗次数",
+            "limit": [0,100],
+            "unit": "",
+            "value": ""
+        }
+    ]
+}

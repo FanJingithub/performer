@@ -1,0 +1,34 @@
+{
+    "class": "form",
+    "name": "follow_up",
+    "label": "随访记录",
+    "count": 2,
+
+    "elements": [
+
+        {
+            "class": "label",
+            "name": "patient_id",
+            "label": "ID",
+            "value": ""
+        },
+
+        {
+            "class": "radio",
+            "name": "recurrance",
+            "label": "是否复发",
+            "count": 2,
+            "options": [
+                {
+                    "value": "yes",
+                    "label": "是"
+                },
+                {
+                    "value": "no",
+                    "label": "否"
+                }
+            ],
+            "value": ""
+        }
+    ]
+}

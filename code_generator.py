@@ -161,12 +161,6 @@ def generateHTML(editable):
                 </a>
             </div>'''.format(element["name"], element["label"])
     code = code + '''
-            <div class="menu-item">病理报告</div>
-            <div class="menu-item">手术记录</div>
-            <div class="menu-item">化疗记录</div>
-            <div class="menu-item">放疗记录</div>
-            <div class="menu-item">随访记录</div>'''
-    code = code + '''
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -179,7 +173,7 @@ def generateHTML(editable):
 
 
     len_elements = len(config["elements"])
-    len_half = (len_elements+1) // 2
+    len_half = (len_elements) // 2 + 1
 
     for i in range(0,len_elements):
         if (i==len_half):
@@ -673,7 +667,7 @@ print(config_main["elements"][0])
 print("-------------------------------------------------------------------------")
 
 for config_element in config_main["elements"]:
-    config_name = "config_" + config_element["name"] + ".json"
+    config_name = "configuration/config_" + config_element["name"] + ".json"
     config_text = open(config_name)
     jsonData = config_text.read()
     config = json.loads(jsonData)

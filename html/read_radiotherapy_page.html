@@ -63,24 +63,16 @@
         </div>
         <div class="container">
             <div style="text-align:center">
-                <h2>检验报告</h2>
+                <h2>放疗记录</h2>
             </div>
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
                 <div class="form-part-1">
                     <div>
-                        <label class="form-label">CEA: </label>
-                        <input class="form-number" type="number" v-model.number="CEA" disabled>
-                        <label>&nbsp;ng/mL</label>
-                        <br><br>
-                    </div>
-                </div>
-                <div class="form-part-2">
-                    <div>
-                        <label class="form-label">CA199: </label>
-                        <input class="form-number" type="number" v-model.number="CA199" disabled>
-                        <label>&nbsp;U/mL</label>
+                        <label class="form-label">放疗次数: </label>
+                        <input class="form-number" type="number" v-model.number="radio_count" disabled>
+                        <label>&nbsp;</label>
                         <br><br>
                     </div></div>
                 <div class="form-part-3">
@@ -94,15 +86,14 @@
             el: '#vm',
             data: {
                 patient_id: "{{patient_id}}" ,
-                CEA: "{{CEA}}" ,
-                CA199: "{{CA199}}" 
+                radio_count: "{{radio_count}}" 
             },
             methods:{
                 submit:function(){
                     return 0;
                 },
                 edit:function(){
-                    window.location.href="/lab?patient_id={{patient_id}}&edit=1";
+                    window.location.href="/radiotherapy?patient_id={{patient_id}}&edit=1";
                 }
             }
         });

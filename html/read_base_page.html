@@ -35,11 +35,31 @@
                     <div>检验报告</div>
                 </a>
             </div>
-            <div class="menu-item">病理报告</div>
-            <div class="menu-item">手术记录</div>
-            <div class="menu-item">化疗记录</div>
-            <div class="menu-item">放疗记录</div>
-            <div class="menu-item">随访记录</div>
+            <div class="menu-item">
+                <a class="item-link" href="/pathology?patient_id={{patient_id}}">
+                    <div>病理报告</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/surgery?patient_id={{patient_id}}">
+                    <div>手术记录</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/chemotherapy?patient_id={{patient_id}}">
+                    <div>化疗记录</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/radiotherapy?patient_id={{patient_id}}">
+                    <div>放疗记录</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/follow_up?patient_id={{patient_id}}">
+                    <div>随访记录</div>
+                </a>
+            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -100,12 +120,6 @@
                         <label for="no">否</label>
                         <br><br>
                     </div>
-                    <div>
-                        <label class="form-label">肿瘤大小: </label>
-                        <input class="form-number" type="number" v-model.number="size" disabled>
-                        <label>&nbsp;cm</label>
-                        <br><br>
-                    </div>
                 </div>
                 <div class="form-part-2">
                     <div>
@@ -162,12 +176,6 @@
                         <input class="form-radio" type="radio" id="rectal" value="rectal" v-model="site" disabled>
                         <label for="rectal">直肠</label>
                         <br><br>
-                    </div>
-                    <div>
-                        <label class="form-label">肿标CEA: </label>
-                        <input class="form-number" type="number" v-model.number="CEA" disabled>
-                        <label>&nbsp;ng/mL</label>
-                        <br><br>
                     </div></div>
                 <div class="form-part-3">
                     <button class="submit" type="button" v-on:click="edit">编辑</button>
@@ -185,13 +193,11 @@
                 stage: "{{stage}}" ,
                 surgery: "{{surgery}}" ,
                 radiotherapy: "{{radiotherapy}}" ,
-                size: "{{size}}" ,
                 age: "{{age}}" ,
                 marriage: "{{marriage}}" ,
                 grade: "{{grade}}" ,
                 chemotherapy: "{{chemotherapy}}" ,
-                site: "{{site}}" ,
-                CEA: "{{CEA}}" 
+                site: "{{site}}" 
             },
             methods:{
                 submit:function(){

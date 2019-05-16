@@ -1,0 +1,39 @@
+{
+    "class": "form",
+    "name": "chemotherapy",
+    "label": "化疗记录",
+    "count": 2,
+
+    "elements": [
+
+        {
+            "class": "label",
+            "name": "patient_id",
+            "label": "ID",
+            "value": ""
+        },
+
+        {
+            "class": "radio",
+            "name": "chemo_way",
+            "label": "化疗方案",
+            "count": 3,
+            "options": [
+                {
+                    "value": "xelox",
+                    "label": "XELOX方案"
+                },
+                {
+                    "value": "xeliri",
+                    "label": "XELIRI方案"
+                },
+                {
+                    "value": "cap",
+                    "label": "卡培他滨单药"
+                }
+            ],
+            "value": ""
+        }
+
+    ]
+}

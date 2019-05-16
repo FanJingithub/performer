@@ -63,28 +63,20 @@
         </div>
         <div class="container">
             <div style="text-align:center">
-                <h2>检验报告</h2>
+                <h2>放疗记录</h2>
             </div>
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
                 <div class="form-part-1">
                     <div>
-                        <label class="form-label">CEA: </label>
-                        <input class="form-number" type="number" v-model.number="CEA" disabled>
-                        <label>&nbsp;ng/mL</label>
-                        <br><br>
-                    </div>
-                </div>
-                <div class="form-part-2">
-                    <div>
-                        <label class="form-label">CA199: </label>
-                        <input class="form-number" type="number" v-model.number="CA199" disabled>
-                        <label>&nbsp;U/mL</label>
+                        <label class="form-label">放疗次数: </label>
+                        <input class="form-number" type="number" v-model.number="radio_count" >
+                        <label>&nbsp;</label>
                         <br><br>
                     </div></div>
                 <div class="form-part-3">
-                    <button class="submit" type="button" v-on:click="edit">编辑</button>
+                    <input type="submit" value="提交">
                 </div>    
             </form>
         </div>
@@ -94,15 +86,33 @@
             el: '#vm',
             data: {
                 patient_id: "{{patient_id}}" ,
-                CEA: "{{CEA}}" ,
-                CA199: "{{CA199}}" 
+                radio_count: "{{radio_count}}" 
+            },
+            mounted(){
+                this.init()
             },
             methods:{
-                submit:function(){
-                    return 0;
+                init:function(){
+                this.$http.get('/api/radiotherapy?patient_id={{patient_id}}').then(function(res){
+                    this.patient_id=res.data.patient_id;
+                    this.radio_count=res.data.radio_count;
+                },function(){
+                    console.log('error');
+                });
                 },
-                edit:function(){
-                    window.location.href="/lab?patient_id={{patient_id}}&edit=1";
+                submit: function(event) {
+                    event.preventDefault();
+                    var
+                    $form = $('#vm'),
+                    data = {
+                        patient_id: this.patient_id,
+                        radio_count: this.radio_count
+                    };
+                    this.$http.post('/radiotherapy',data,{emulateJSON:true}).then(function(res){
+                        document.write(res.body);    
+                    },function(res){
+                        console.log(res.status);
+                    });
                 }
             }
         });

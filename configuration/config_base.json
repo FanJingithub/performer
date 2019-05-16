@@ -103,15 +103,6 @@
 
         {
             "class": "number",
-            "name": "size",
-            "label": "肿瘤大小",
-            "limit": [0,100],
-            "unit": "cm",
-            "value": ""
-        },
-
-        {
-            "class": "number",
             "name": "age",
             "label": "年龄",
             "limit": [0,100],
@@ -200,15 +191,6 @@
                     "label": "直肠"
                 }
             ],
-            "value": ""
-        }, 
-
-       {
-            "class": "number",
-            "name": "CEA",
-            "label": "肿标CEA",
-            "limit": [0,100],
-            "unit": "ng/mL",
             "value": ""
         }
     ]

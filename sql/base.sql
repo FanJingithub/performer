@@ -9,12 +9,10 @@ create table base (
     `stage`  varchar(12) default '',
     `surgery`  varchar(12) default '',
     `radiotherapy`  varchar(12) default '',
-    `size`  varchar(12) default '',
     `age`  varchar(12) default '',
     `marriage`  varchar(12) default '',
     `grade`  varchar(12) default '',
     `chemotherapy`  varchar(12) default '',
     `site`  varchar(12) default '',
-    `CEA`  varchar(12) default '',
     primary key(patient_id)
 ) engine=innodb         default charset=utf8;

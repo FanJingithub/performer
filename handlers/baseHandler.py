@@ -33,19 +33,19 @@ class baseHandler(tornado.web.RequestHandler):
             exist = row[0]
         self.cur.close()
 
-        res = [self.patient_id, "", "", "", "", "", "", "", "", "", "", "", ""]
+        res = [self.patient_id, "", "", "", "", "", "", "", "", "", ""]
 
         if (exist==1):
             # Get the data from the database
             self.cur = conn.cursor()
-            self.cur.execute('''SELECT patient_id,name,sex,stage,surgery,radiotherapy,size,age,marriage,grade,chemotherapy,site,CEA FROM base WHERE patient_id='{0}' '''.format(self.patient_id))
+            self.cur.execute('''SELECT patient_id,name,sex,stage,surgery,radiotherapy,age,marriage,grade,chemotherapy,site FROM base WHERE patient_id='{0}' '''.format(self.patient_id))
             for row in self.cur:
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_base_page.html", patient_id=self.patient_id , name=res[1], sex=res[2], stage=res[3], surgery=res[4], radiotherapy=res[5], size=res[6], age=res[7], marriage=res[8], grade=res[9], chemotherapy=res[10], site=res[11], CEA=res[12])
+            self.render("../html/read_base_page.html", patient_id=self.patient_id , name=res[1], sex=res[2], stage=res[3], surgery=res[4], radiotherapy=res[5], age=res[6], marriage=res[7], grade=res[8], chemotherapy=res[9], site=res[10])
         else:
-            self.render("../html/edit_base_page.html", patient_id=self.patient_id , name=res[1], sex=res[2], stage=res[3], surgery=res[4], radiotherapy=res[5], size=res[6], age=res[7], marriage=res[8], grade=res[9], chemotherapy=res[10], site=res[11], CEA=res[12])
+            self.render("../html/edit_base_page.html", patient_id=self.patient_id , name=res[1], sex=res[2], stage=res[3], surgery=res[4], radiotherapy=res[5], age=res[6], marriage=res[7], grade=res[8], chemotherapy=res[9], site=res[10])
 
     def post(self):
         print('----------------------------Submit----------------------------')
@@ -56,13 +56,11 @@ class baseHandler(tornado.web.RequestHandler):
         stage = self.get_body_argument("stage") 
         surgery = self.get_body_argument("surgery") 
         radiotherapy = self.get_body_argument("radiotherapy") 
-        size = self.get_body_argument("size") 
         age = self.get_body_argument("age") 
         marriage = self.get_body_argument("marriage") 
         grade = self.get_body_argument("grade") 
         chemotherapy = self.get_body_argument("chemotherapy") 
         site = self.get_body_argument("site") 
-        CEA = self.get_body_argument("CEA") 
         
         conn = MySQLdb.connect( host   = 'localhost',
                                 user   = 'debian-sys-maint',
@@ -73,7 +71,7 @@ class baseHandler(tornado.web.RequestHandler):
 
         # Insert the data into the database
         self.cur = conn.cursor()
-        sqls = '''REPLACE INTO base (patient_id, name, sex, stage, surgery, radiotherapy, size, age, marriage, grade, chemotherapy, site, CEA) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}') '''.format(self.patient_id, name,sex,stage,surgery,radiotherapy,size,age,marriage,grade,chemotherapy,site,CEA)
+        sqls = '''REPLACE INTO base (patient_id, name, sex, stage, surgery, radiotherapy, age, marriage, grade, chemotherapy, site) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}') '''.format(self.patient_id, name,sex,stage,surgery,radiotherapy,age,marriage,grade,chemotherapy,site)
         self.cur.execute(sqls)
 
         sqls = "SELECT * FROM data_status WHERE patient_id='" + self.patient_id + "'"
@@ -91,4 +89,4 @@ class baseHandler(tornado.web.RequestHandler):
         self.cur.execute(sqls)
         self.cur.close()
 
-        self.render("../html/read_base_page.html", patient_id=self.patient_id, name=name, sex=sex, stage=stage, surgery=surgery, radiotherapy=radiotherapy, size=size, age=age, marriage=marriage, grade=grade, chemotherapy=chemotherapy, site=site, CEA=CEA)
+        self.render("../html/read_base_page.html", patient_id=self.patient_id, name=name, sex=sex, stage=stage, surgery=surgery, radiotherapy=radiotherapy, age=age, marriage=marriage, grade=grade, chemotherapy=chemotherapy, site=site)

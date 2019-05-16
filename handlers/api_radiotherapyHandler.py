@@ -6,10 +6,10 @@ import tornado.gen
 import tornado.web
 import json
 
-class api_baseHandler(tornado.web.RequestHandler):
+class api_radiotherapyHandler(tornado.web.RequestHandler):
 
     def get(self):
-        print('----------------------------Get api-base----------------------')
+        print('----------------------------Get api-radiotherapy----------------------')
         self.patient_id = self.get_argument("patient_id", "")
         conn = MySQLdb.connect( host   = 'localhost',
                                 user   = 'debian-sys-maint',
@@ -19,9 +19,9 @@ class api_baseHandler(tornado.web.RequestHandler):
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        self.cur.execute('''SELECT patient_id,name,sex,stage,surgery,radiotherapy,age,marriage,grade,chemotherapy,site FROM base WHERE patient_id='{0}' '''.format(self.patient_id))
-        res = [self.patient_id, "", "", "", "", "", "", "", "", "", ""]
+        self.cur.execute('''SELECT patient_id,radio_count FROM radiotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
+        res = [self.patient_id, ""]
         for row in self.cur:
             res = row
-        self.data = { "patient_id":self.patient_id, "name":res[1], "sex":res[2], "stage":res[3], "surgery":res[4], "radiotherapy":res[5], "age":res[6], "marriage":res[7], "grade":res[8], "chemotherapy":res[9], "site":res[10]}
+        self.data = { "patient_id":self.patient_id, "radio_count":res[1]}
         self.write(json.dumps(self.data))

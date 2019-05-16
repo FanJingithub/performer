@@ -13,8 +13,18 @@ import json
 
 from handlers.baseHandler import baseHandler
 from handlers.labHandler import labHandler
+from handlers.pathologyHandler import pathologyHandler
+from handlers.surgeryHandler import surgeryHandler
+from handlers.chemotherapyHandler import chemotherapyHandler
+from handlers.radiotherapyHandler import radiotherapyHandler
+from handlers.follow_upHandler import follow_upHandler
 from handlers.api_baseHandler import api_baseHandler
 from handlers.api_labHandler import api_labHandler
+from handlers.api_pathologyHandler import api_pathologyHandler
+from handlers.api_surgeryHandler import api_surgeryHandler
+from handlers.api_chemotherapyHandler import api_chemotherapyHandler
+from handlers.api_radiotherapyHandler import api_radiotherapyHandler
+from handlers.api_follow_upHandler import api_follow_upHandler
 
 class listHandler(tornado.web.RequestHandler):
 
@@ -78,8 +88,18 @@ class Application(tornado.web.Application):
                         ("/api/list",      api_listHandler),
                         ("/base",      baseHandler),
                         ("/lab",      labHandler),
+                        ("/pathology",      pathologyHandler),
+                        ("/surgery",      surgeryHandler),
+                        ("/chemotherapy",      chemotherapyHandler),
+                        ("/radiotherapy",      radiotherapyHandler),
+                        ("/follow_up",      follow_upHandler),
                         ("/api/base",      api_baseHandler),
-                        ("/api/lab",      api_labHandler)
+                        ("/api/lab",      api_labHandler),
+                        ("/api/pathology",      api_pathologyHandler),
+                        ("/api/surgery",      api_surgeryHandler),
+                        ("/api/chemotherapy",      api_chemotherapyHandler),
+                        ("/api/radiotherapy",      api_radiotherapyHandler),
+                        ("/api/follow_up",      api_follow_upHandler)
                     ]
 
         tornado.web.Application.__init__(self, handlers)
