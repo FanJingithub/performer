@@ -81,13 +81,11 @@
     clear:both;
 }
 .submit {
-    width: 50px;
-    height: 26px;
     text-align: center;
     font-size: 18px;
     display: block;
     margin: auto;
-    padding: 5px 5px;
+    padding: 8px 20px 8px 20px;
     margin-top: 2px;
 	background-color: #009688;
     border: 1px solid #00BCD4;
@@ -98,6 +96,31 @@
 	cursor: pointer;
 }
 .submit:hover {
+    background-color: #E91E63;
+    border: 1px solid red;
+    color: white;
+}
+.table-sub-heading {
+    height: 50px;
+}
+.add {
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    font-size: 18px;
+    display: block;
+    margin: 5px 88px 5px 5px;
+    padding: 5px 5px;
+	background-color: #009688;
+    border: 1px solid #00BCD4;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+	outline: 0;
+    cursor: pointer;
+    float: right;
+}
+.add:hover {
     background-color: #E91E63;
     border: 1px solid red;
     color: white;

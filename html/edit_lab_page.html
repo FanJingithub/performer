@@ -20,10 +20,20 @@
                 <h3>导航栏</h3>
             </div>
             <div class="menu-item">
-                <a class="item-link" href="/base?patient_id={{patient_id}}">基本信息</a>
+                <a class="item-link" href="/list">
+                    <div>病例列表</div>
+                </a>
+            </div>
+            
+            <div class="menu-item">
+                <a class="item-link" href="/base?patient_id={{patient_id}}">
+                    <div>基本信息</div>
+                </a>
             </div>
             <div class="menu-item">
-                <a class="item-link" href="/lab?patient_id={{patient_id}}">检验报告</a>
+                <a class="item-link" href="/lab?patient_id={{patient_id}}">
+                    <div>检验报告</div>
+                </a>
             </div>
             <div class="menu-item">病理报告</div>
             <div class="menu-item">手术记录</div>
@@ -40,7 +50,7 @@
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
                 <div class="form-part-1">
                     <div>
-                        <label class="form-label">肿标CEA: </label>
+                        <label class="form-label">CEA: </label>
                         <input class="form-number" type="number" v-model.number="CEA" >
                         <label>&nbsp;ng/mL</label>
                         <br><br>
@@ -48,7 +58,7 @@
                 </div>
                 <div class="form-part-2">
                     <div>
-                        <label class="form-label">肿标CA199: </label>
+                        <label class="form-label">CA199: </label>
                         <input class="form-number" type="number" v-model.number="CA199" >
                         <label>&nbsp;U/mL</label>
                         <br><br>

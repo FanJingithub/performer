@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-resource.js"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <!--View-->
+    <div class="main-body">
+        <div class="heading">
+            <h1>临床科研数据库系统</h1>
+        </div>
+        <div class="table-container" id="vm">
+            <div style="text-align:center">
+                <h3>病例列表</h3>
+            </div>
+            <div class="table-sub-heading">
+                <button class="add" v-on:click="add">新增</button>
+            </div>
+            <div class="table_div">
+                <div class="div_clear">
+                    <div class="center_center">
+                        <div class="table_content">
+                            <table cellspacing="0px" cellpadding="0px">
+                                <thead >
+                                    <tr>
+                                        <th width="16%">病例号</th>
+                                        <th width="8%">性别</th>
+                                        <th width="8%">年龄</th>
+                                        <th width="16%">诊断</th>
+                                        <th width="32%">医院</th>
+                                        <th wdith="20%" style="border-right:none">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template v-for="patient in patient_list">
+                                    <tr>
+                                        <td width="16%">${ patient.patient_id }</td>
+                                        <td width="8%">${ patient.sex }</td>
+                                        <td width="8%">${ patient.age }</td>
+                                        <td width="16%">直肠癌</td>
+                                        <td width="32%">复旦大学附属肿瘤医院</td>
+                                        <td width="20%" style="border-right:none">
+                                            <img width='16' height='16' src="./images/view.jpg" style="vertical-align:middle"/>
+                                            <a :href="patient.view">查看</a>&nbsp;&nbsp;&nbsp;
+                                            <img width='16' height='16' src="./images/del.gif" style="vertical-align:middle"/>
+                                            <a href="#">删除</a>
+                                        </td>
+                                    </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="div_clear">
+                    <div class="left_bottom"></div>
+                    <div class="center_bottom">
+                        <span>&nbsp;&nbsp;共有 ${ list_length } 条记录，当前第 1/1 页</span>
+                        <div style="float:right;padding-right:30px">
+                            <input style="height:25px" type="button" value="首页"/>
+                            <input style="height:25px" type="button" value="上页"/>
+                            <input style="height:25px" type="button" value="下页"/>
+                            <input style="height:25px" type="button" value="尾页"/>
+                            <span>跳转到</span>
+                            <input type="text" size="1"/>
+                            <input style="height:25px" type="button" value="跳转"/>
+                        </div>
+                    </div>
+                    <div class="right_bottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            delimiters:['${','}'],
+            el: '#vm',
+            data: {
+                patient_list : [],
+                list_length: 0
+            },
+            mounted(){
+                this.init();
+            },
+            methods: {
+                init:function(){
+                    this.$http.get('/api/list').then(function(res){
+                        console.log(res.data)
+                        this.patient_list = res.data;
+                        this.list_length = this.patient_list.length
+                        this.patient_list.forEach(patient => {
+                            patient.view = "/base?patient_id=" + patient.patient_id;
+                        });
+                    },function(){
+                        console.log('error');
+                    });
+                },
+                add: function(){
+                    patient_id = prompt("请输入新病例的ID号");
+                    if (patient_id!="" && patient_id!=null){
+                        this.$http.get("/api/new?patient_id="+patient_id).then(function(res){
+                            patient_id = res.data.patient_id;
+                            result = res.data.result;
+                            if (result==0){
+                                window.location.href = "/base?patient_id="+patient_id;
+                            }else{
+                                alert("已存在ID为"+patient_id+"的病例！");
+                            }
+                        },function(){
+                            console.log('error');
+                        });
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

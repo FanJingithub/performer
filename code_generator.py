@@ -32,8 +32,16 @@ def generateHTML(editable):
                     code = code + ","
                 else:
                     code = code + '''
-            }
-        });'''
+            }},
+            methods:{{
+                submit:function(){{
+                    return 0;
+                }},
+                edit:function(){{
+                    window.location.href="/{0}?patient_id={{{{patient_id}}}}&edit=1";
+                }}
+            }}
+        }});'''.format(configName)
             #------------------------------------------------------------
         else:
             #-------------------------------------------------------------
@@ -136,11 +144,21 @@ def generateHTML(editable):
             <div style="text-align:center">
                 <h3>导航栏</h3>
             </div>'''
+
+    code = code + '''
+            <div class="menu-item">
+                <a class="item-link" href="/list">
+                    <div>病例列表</div>
+                </a>
+            </div>
+            '''
     for i in range(len(config_main["elements"])):
         element = config_main["elements"][i]
         code = code + '''
             <div class="menu-item">
-                <a class="item-link" href="/{0}?patient_id={{{{patient_id}}}}">{1}</a>
+                <a class="item-link" href="/{0}?patient_id={{{{patient_id}}}}">
+                    <div>{1}</div>
+                </a>
             </div>'''.format(element["name"], element["label"])
     code = code + '''
             <div class="menu-item">病理报告</div>
@@ -223,9 +241,7 @@ def generateHTML(editable):
     else:
         newCode = '''</div>
                 <div class="form-part-3">
-                    <div class="submit">
-                        <a class="item-link" href="/{0}?patient_id={{{{patient_id}}}}&edit=1">编辑</a>
-                    </div>
+                    <button class="submit" type="button" v-on:click="edit">编辑</button>
                 </div>    
             </form>
         </div>
@@ -545,7 +561,10 @@ import json
 
     part_1 = ""
     part_2 = ""
-    part_3 = ""
+    part_3 = '''("/list",      listHandler),
+                        ("/api/new",      api_newHandler),
+                        ("/api/list",      api_listHandler),
+                        '''
     part_4 = ""
     for i in range(len(config_main["elements"])):
         element = config_main["elements"][i]
@@ -563,6 +582,60 @@ import json
     code = code + part_1 +part_2
 
     code = code + '''
+class listHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------Get list--------------------------')
+        self.render("list.html")
+
+class api_newHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------Get new--------------------------')
+        self.patient_id = self.get_argument("patient_id", "")
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = 'debian-sys-maint',
+                                passwd = 'fmvKL0UlQ558lKWG',
+                                db     = 'MData',
+                                charset= 'utf8')
+        conn.autocommit(1)
+        # Get the data from the database
+        self.cur = conn.cursor()
+        sqls = "SELECT patient_id FROM base WHERE patient_id='" + self.patient_id + "'"
+        self.cur.execute(sqls)
+        result = 0
+        for row in self.cur:
+            result = 1
+        self.data = { "patient_id": self.patient_id, "result": result }
+        self.write(json.dumps(self.data))
+
+class api_listHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------Get api-list--------------------------')
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = 'debian-sys-maint',
+                                passwd = 'fmvKL0UlQ558lKWG',
+                                db     = 'MData',
+                                charset= 'utf8')
+        conn.autocommit(1)
+        # Get the data from the database
+        self.cur = conn.cursor()
+        sqls = "SELECT patient_id,sex,age FROM base"
+        self.cur.execute(sqls)
+        patient_list = []
+        for row in self.cur:
+            patient_list.append({
+                "patient_id": row[0],
+                "sex": row[1],
+                "age": row[2]
+            })
+        print(patient_list)
+        self.write(json.dumps(patient_list))
+'''
+
+    code = code + '''
+
 class Application(tornado.web.Application):
 
     def __init__(self):
