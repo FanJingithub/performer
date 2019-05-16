@@ -1,6 +1,6 @@
 use MData;
 
-grant select, insert, update, delete on MData.* to 'fanjin'@'localhost' identified by 'fmvKL0UlQ558lKWG';
+grant select, insert, update, delete on MData.* to 'debian-sys-maint'@'localhost' identified by 'fmvKL0UlQ558lKWG';
 
 create table pathology (
     `patient_id`  varchar(12) default '',

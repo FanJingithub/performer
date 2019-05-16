@@ -10,6 +10,10 @@ Date: 2019.05.11
 
 import json
 
+# username & password for MySQL
+username = "debian-sys-maint"
+password = "fmvKL0UlQ558lKWG"
+
 # generator the HTML code
 def generateHTML(editable):
 
@@ -241,7 +245,7 @@ def generateHTML(editable):
         </div>
     </div>
     <script>
-        '''.format(configName)
+        '''
     code = code + newCode
 
     code = code + generateJS(editable)
@@ -252,7 +256,7 @@ def generateHTML(editable):
 </html>'''
 
     fileName = "html/" + typeName + "_" +configName + "_page.html"
-    with open(fileName,"w") as coder:
+    with open(fileName,"w",encoding="utf-8") as coder:
         coder.write(code)
 
 # generator the Python Handler:
@@ -288,14 +292,14 @@ class '''
         
         # Get the patient's data status from the database
         conn = MySQLdb.connect( host   = 'localhost',
-                                user   = 'debian-sys-maint',
-                                passwd = 'fmvKL0UlQ558lKWG',
+                                user   = '{1}',
+                                passwd = '{2}',
                                 db     = 'MData',
                                 charset= 'utf8')
         conn.autocommit(1)
 
         self.cur = conn.cursor()
-        self.cur.execute('''.format(configName)
+        self.cur.execute('''.format(configName,username,password)
     code = code + "'''" + "SELECT " + configName + " FROM data_status WHERE patient_id='{0}' " + "'''"
     code = code + '''.format(self.patient_id))
         for row in self.cur:
@@ -381,15 +385,15 @@ class '''
 
     code = code + part_0 + '''
         conn = MySQLdb.connect( host   = 'localhost',
-                                user   = 'debian-sys-maint',
-                                passwd = 'fmvKL0UlQ558lKWG',
+                                user   = '{0}',
+                                passwd = '{1}',
                                 db     = 'MData',
                                 charset= 'utf8')
         conn.autocommit(1)
 
         # Insert the data into the database
         self.cur = conn.cursor()
-        '''
+        '''.format(username,password)
     code = code + "sqls = '''REPLACE INTO " + configName + " "
 
     code = code + "(" + part_1_1 + ") VALUES (" + part_1_2 + ")" + " '''.format(" + part_2 + ")"
@@ -441,14 +445,14 @@ class api_'''
     
     code = code + '''
         conn = MySQLdb.connect( host   = 'localhost',
-                                user   = 'debian-sys-maint',
-                                passwd = 'fmvKL0UlQ558lKWG',
+                                user   = '{0}',
+                                passwd = '{1}',
                                 db     = 'MData',
                                 charset= 'utf8')
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        self.cur.execute('''
+        self.cur.execute('''.format(username,password)
     code = code + "'''SELECT "
     # generate the dynamic part for api Handler
     part_1 = ""
@@ -488,9 +492,9 @@ class api_'''
 def generateSQL_Handler():
     code = '''use MData;
 
-grant select, insert, update, delete on MData.* to 'fanjin'@'localhost' identified by 'fmvKL0UlQ558lKWG';
+grant select, insert, update, delete on MData.* to '{0}'@'localhost' identified by '{1}';
 
-'''
+'''.format(username,password)
 
     code = code + "create table " + configName + " ("
     code = code + '''
@@ -512,9 +516,9 @@ grant select, insert, update, delete on MData.* to 'fanjin'@'localhost' identifi
 def generateSQL_dataStatus():
     code = '''use MData;
 
-grant select, insert, update, delete on MData.* to 'fanjin'@'localhost' identified by 'fmvKL0UlQ558lKWG';
+grant select, insert, update, delete on MData.* to '{0}'@'localhost' identified by '{1}';
 
-'''
+'''.format(username,password)
 
     code = code + "create table data_status ("
     code = code + '''
@@ -588,8 +592,8 @@ class api_newHandler(tornado.web.RequestHandler):
         print('----------------------------Get new--------------------------')
         self.patient_id = self.get_argument("patient_id", "")
         conn = MySQLdb.connect( host   = 'localhost',
-                                user   = 'debian-sys-maint',
-                                passwd = 'fmvKL0UlQ558lKWG',
+                                user   = '{0}',
+                                passwd = '{1}',
                                 db     = 'MData',
                                 charset= 'utf8')
         conn.autocommit(1)
@@ -600,7 +604,7 @@ class api_newHandler(tornado.web.RequestHandler):
         result = 0
         for row in self.cur:
             result = 1
-        self.data = { "patient_id": self.patient_id, "result": result }
+        self.data = {{ "patient_id": self.patient_id, "result": result }}
         self.write(json.dumps(self.data))
 
 class api_listHandler(tornado.web.RequestHandler):
@@ -608,8 +612,8 @@ class api_listHandler(tornado.web.RequestHandler):
     def get(self):
         print('----------------------------Get api-list--------------------------')
         conn = MySQLdb.connect( host   = 'localhost',
-                                user   = 'debian-sys-maint',
-                                passwd = 'fmvKL0UlQ558lKWG',
+                                user   = '{0}',
+                                passwd = '{1}',
                                 db     = 'MData',
                                 charset= 'utf8')
         conn.autocommit(1)
@@ -619,14 +623,14 @@ class api_listHandler(tornado.web.RequestHandler):
         self.cur.execute(sqls)
         patient_list = []
         for row in self.cur:
-            patient_list.append({
+            patient_list.append({{
                 "patient_id": row[0],
                 "sex": row[1],
                 "age": row[2]
-            })
+            }})
         print(patient_list)
         self.write(json.dumps(patient_list))
-'''
+'''.format(username,password)
 
     code = code + '''
 
@@ -657,26 +661,26 @@ if __name__ == "__main__":
 
 
 # loading the config file
-config_text = open("configuration.json")
+config_text = open("configuration.json",encoding="utf-8")
 jsonData = config_text.read()
 config_main = json.loads(jsonData)
 
 # test the loading file
-print("-------------------Check the main configuration File---------------------")
-print(config_main["elements"][0])
-print("-------------------------------------------------------------------------")
+#print("-------------------Check the main configuration File---------------------")
+#print(config_main["elements"][0])
+#print("-------------------------------------------------------------------------")
 
 for config_element in config_main["elements"]:
     config_name = "configuration/config_" + config_element["name"] + ".json"
-    config_text = open(config_name)
+    config_text = open(config_name,encoding="utf-8")
     jsonData = config_text.read()
     config = json.loads(jsonData)
     configName = config["name"]
 
     # test the loading file
-    print("--------------------------Test the Loading File--------------------------")
-    print(config["elements"][1])
-    print("-------------------------------------------------------------------------")
+    #print("--------------------------Test the Loading File--------------------------")
+    #print(config["elements"][1])
+    #print("-------------------------------------------------------------------------")
 
     generateHTML(0)
     generateHTML(1)
