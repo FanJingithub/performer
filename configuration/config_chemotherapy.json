@@ -33,6 +33,13 @@
                 }
             ],
             "value": ""
+        },
+
+        {
+            "class": "time",
+            "name": "last_chemo",
+            "label": "上次化疗时间",
+            "value": ""
         }
 
     ]

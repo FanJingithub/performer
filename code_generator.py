@@ -29,8 +29,13 @@ def generateHTML(editable):
             data: {'''
             for i in range(len(config["elements"])):
                 element = config["elements"][i]
+                dateTrans_1 = ""
+                dateTrans_2 = ""
+                if (element["class"]=="time"):
+                    dateTrans_1 = 'new Date(parseInt('
+                    dateTrans_2 = ")*1000)"
                 newCode = '''
-                {0}: "{{{{{0}}}}}" '''.format(element["name"])
+                {0}: {1}"{{{{{0}}}}}"{2} '''.format(element["name"],dateTrans_1,dateTrans_2)
                 code = code + newCode
                 if (i<len(config["elements"])-1):
                     code = code + ","
@@ -56,8 +61,13 @@ def generateHTML(editable):
             data: {'''
             for i in range(len(config["elements"])):
                 element = config["elements"][i]
+                dateTrans_1 = ""
+                dateTrans_2 = ""
+                if (element["class"]=="time"):
+                    dateTrans_1 = "new Date(parseInt("
+                    dateTrans_2 = ")*1000)"
                 newCode = '''
-                {0}: "{{{{{0}}}}}" '''.format(element["name"])
+                {0}: {1}"{{{{{0}}}}}"{2} '''.format(element["name"],dateTrans_1,dateTrans_2)
                 code = code + newCode
                 if (i<len(config["elements"])-1):
                     code = code + ","
@@ -71,10 +81,18 @@ def generateHTML(editable):
                 init:function(){{
                 this.$http.get('/api/{0}?patient_id={{{{patient_id}}}}').then(function(res){{'''.format(configName)
             
+            dateTrans_4 = ""
             for i in range(len(config["elements"])):
                 element = config["elements"][i]
+                dateTrans_1 = ""
+                dateTrans_2 = ""
+                if (element["class"]=="time"):
+                    dateTrans_1 = "new Date(parseInt("
+                    dateTrans_2 = ")*1000)"
+                    dateTrans_4 = '''
+                    if (isNaN(this.{0}.getTime())) this.{0}="";'''.format(element["name"])
                 newCode = '''
-                    this.{0}=res.data.{0};'''.format(element["name"])
+                    this.{0}={1}res.data.{0}{2};{3}'''.format(element["name"],dateTrans_1,dateTrans_2,dateTrans_4)
                 code = code + newCode
 
             code = code + '''
@@ -83,23 +101,32 @@ def generateHTML(editable):
                 });
                 },
                 submit: function(event) {
-                    event.preventDefault();
+                    event.preventDefault();'''
+                    
+
+            part_1 = ""
+            part_2 = ""
+            for i in range(len(config["elements"])):
+                element = config["elements"][i]
+                dateTrans_3 = ""
+                if (element["class"]=="time"):
+                    dateTrans_3 = '''
+                    if (this.{0}!="") this.{0}=this.{0}.getTime()/1000;'''.format(element["name"])
+                newCode = '''
+                        {0}: this.{0}'''.format(element["name"])
+                part_1 = part_1 + newCode
+                part_2 = part_2 + dateTrans_3
+                if (i<len(config["elements"])-1):
+                    part_1 = part_1 + ","
+                else:
+                    part_1 = part_1 + '''
+                    };'''
+
+            code = code + part_2 + '''
                     var
                     $form = $('#vm'),
                     data = {'''
-
-            for i in range(len(config["elements"])):
-                element = config["elements"][i]
-                newCode = '''
-                        {0}: this.{0}'''.format(element["name"])
-                code = code + newCode
-                if (i<len(config["elements"])-1):
-                    code = code + ","
-                else:
-                    code = code + '''
-                    };'''
-
-            code = code + '''
+            code = code + part_1 + '''
                     this.$http.post('/{0}',data,{{emulateJSON:true}}).then(function(res){{
                         document.write(res.body);    
                     }},function(res){{
@@ -135,9 +162,11 @@ def generateHTML(editable):
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
     <script src="./js/jquery-3.4.1.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
     <div class="main-body">
@@ -221,7 +250,13 @@ def generateHTML(editable):
                     </div>'''
             
         elif (element["class"]=="time"):
-            pass
+            newCode = '''
+                    <div>
+                        <label class="form-label">{0}: </label>
+                        <el-date-picker v-model="{1}" type="date" placeholder="Pick a day" {2}></el-date-picker>
+                        <br><br>
+                    </div>'''.format(element["label"], element["name"], disabled)
+            
         elif (element["class"]=="select"):
             pass
         code = code + newCode

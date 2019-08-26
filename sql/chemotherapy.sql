@@ -5,5 +5,6 @@ grant select, insert, update, delete on MData.* to 'debian-sys-maint'@'localhost
 create table chemotherapy (
     `patient_id`  varchar(12) default '',
     `chemo_way`  varchar(12) default '',
+    `last_chemo`  varchar(12) default '',
     primary key(patient_id)
 ) engine=innodb         default charset=utf8;

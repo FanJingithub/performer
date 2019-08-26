@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
     <script src="./js/jquery-3.4.1.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
     <div class="main-body">
@@ -74,6 +76,18 @@
                         <input class="form-number" type="number" v-model.number="radio_count" disabled>
                         <label>&nbsp;</label>
                         <br><br>
+                    </div>
+                    <div>
+                        <label class="form-label">放疗开始: </label>
+                        <el-date-picker v-model="radio_start" type="date" placeholder="Pick a day" disabled></el-date-picker>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="form-part-2">
+                    <div>
+                        <label class="form-label">放疗结束: </label>
+                        <el-date-picker v-model="radio_end" type="date" placeholder="Pick a day" disabled></el-date-picker>
+                        <br><br>
                     </div></div>
                 <div class="form-part-3">
                     <button class="submit" type="button" v-on:click="edit">编辑</button>
@@ -86,7 +100,9 @@
             el: '#vm',
             data: {
                 patient_id: "{{patient_id}}" ,
-                radio_count: "{{radio_count}}" 
+                radio_count: "{{radio_count}}" ,
+                radio_start: new Date(parseInt("{{radio_start}}")*1000) ,
+                radio_end: new Date(parseInt("{{radio_end}}")*1000) 
             },
             methods:{
                 submit:function(){

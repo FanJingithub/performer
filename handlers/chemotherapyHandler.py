@@ -33,25 +33,26 @@ class chemotherapyHandler(tornado.web.RequestHandler):
             exist = row[0]
         self.cur.close()
 
-        res = [self.patient_id, ""]
+        res = [self.patient_id, "", ""]
 
         if (exist==1):
             # Get the data from the database
             self.cur = conn.cursor()
-            self.cur.execute('''SELECT patient_id,chemo_way FROM chemotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
+            self.cur.execute('''SELECT patient_id,chemo_way,last_chemo FROM chemotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
             for row in self.cur:
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_chemotherapy_page.html", patient_id=self.patient_id , chemo_way=res[1])
+            self.render("../html/read_chemotherapy_page.html", patient_id=self.patient_id , chemo_way=res[1], last_chemo=res[2])
         else:
-            self.render("../html/edit_chemotherapy_page.html", patient_id=self.patient_id , chemo_way=res[1])
+            self.render("../html/edit_chemotherapy_page.html", patient_id=self.patient_id , chemo_way=res[1], last_chemo=res[2])
 
     def post(self):
         print('----------------------------Submit----------------------------')
 
         self.patient_id = self.get_body_argument("patient_id")
         chemo_way = self.get_body_argument("chemo_way") 
+        last_chemo = self.get_body_argument("last_chemo") 
         
         conn = MySQLdb.connect( host   = 'localhost',
                                 user   = 'debian-sys-maint',
@@ -62,7 +63,7 @@ class chemotherapyHandler(tornado.web.RequestHandler):
 
         # Insert the data into the database
         self.cur = conn.cursor()
-        sqls = '''REPLACE INTO chemotherapy (patient_id, chemo_way) VALUES ('{0}', '{1}') '''.format(self.patient_id, chemo_way)
+        sqls = '''REPLACE INTO chemotherapy (patient_id, chemo_way, last_chemo) VALUES ('{0}', '{1}', '{2}') '''.format(self.patient_id, chemo_way,last_chemo)
         self.cur.execute(sqls)
 
         sqls = "SELECT * FROM data_status WHERE patient_id='" + self.patient_id + "'"
@@ -80,4 +81,4 @@ class chemotherapyHandler(tornado.web.RequestHandler):
         self.cur.execute(sqls)
         self.cur.close()
 
-        self.render("../html/read_chemotherapy_page.html", patient_id=self.patient_id, chemo_way=chemo_way)
+        self.render("../html/read_chemotherapy_page.html", patient_id=self.patient_id, chemo_way=chemo_way, last_chemo=last_chemo)

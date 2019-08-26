@@ -33,25 +33,27 @@ class radiotherapyHandler(tornado.web.RequestHandler):
             exist = row[0]
         self.cur.close()
 
-        res = [self.patient_id, ""]
+        res = [self.patient_id, "", "", ""]
 
         if (exist==1):
             # Get the data from the database
             self.cur = conn.cursor()
-            self.cur.execute('''SELECT patient_id,radio_count FROM radiotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
+            self.cur.execute('''SELECT patient_id,radio_count,radio_start,radio_end FROM radiotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
             for row in self.cur:
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_radiotherapy_page.html", patient_id=self.patient_id , radio_count=res[1])
+            self.render("../html/read_radiotherapy_page.html", patient_id=self.patient_id , radio_count=res[1], radio_start=res[2], radio_end=res[3])
         else:
-            self.render("../html/edit_radiotherapy_page.html", patient_id=self.patient_id , radio_count=res[1])
+            self.render("../html/edit_radiotherapy_page.html", patient_id=self.patient_id , radio_count=res[1], radio_start=res[2], radio_end=res[3])
 
     def post(self):
         print('----------------------------Submit----------------------------')
 
         self.patient_id = self.get_body_argument("patient_id")
         radio_count = self.get_body_argument("radio_count") 
+        radio_start = self.get_body_argument("radio_start") 
+        radio_end = self.get_body_argument("radio_end") 
         
         conn = MySQLdb.connect( host   = 'localhost',
                                 user   = 'debian-sys-maint',
@@ -62,7 +64,7 @@ class radiotherapyHandler(tornado.web.RequestHandler):
 
         # Insert the data into the database
         self.cur = conn.cursor()
-        sqls = '''REPLACE INTO radiotherapy (patient_id, radio_count) VALUES ('{0}', '{1}') '''.format(self.patient_id, radio_count)
+        sqls = '''REPLACE INTO radiotherapy (patient_id, radio_count, radio_start, radio_end) VALUES ('{0}', '{1}', '{2}', '{3}') '''.format(self.patient_id, radio_count,radio_start,radio_end)
         self.cur.execute(sqls)
 
         sqls = "SELECT * FROM data_status WHERE patient_id='" + self.patient_id + "'"
@@ -80,4 +82,4 @@ class radiotherapyHandler(tornado.web.RequestHandler):
         self.cur.execute(sqls)
         self.cur.close()
 
-        self.render("../html/read_radiotherapy_page.html", patient_id=self.patient_id, radio_count=radio_count)
+        self.render("../html/read_radiotherapy_page.html", patient_id=self.patient_id, radio_count=radio_count, radio_start=radio_start, radio_end=radio_end)

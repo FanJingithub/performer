@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
     <script src="./js/jquery-3.4.1.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
     <div class="main-body">
@@ -81,6 +83,13 @@
                         <input class="form-radio" type="radio" id="cap" value="cap" v-model="chemo_way" >
                         <label for="cap">卡培他滨单药</label>
                         <br><br>
+                    </div>
+                </div>
+                <div class="form-part-2">
+                    <div>
+                        <label class="form-label">上次化疗时间: </label>
+                        <el-date-picker v-model="last_chemo" type="date" placeholder="Pick a day" ></el-date-picker>
+                        <br><br>
                     </div></div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
@@ -93,7 +102,8 @@
             el: '#vm',
             data: {
                 patient_id: "{{patient_id}}" ,
-                chemo_way: "{{chemo_way}}" 
+                chemo_way: "{{chemo_way}}" ,
+                last_chemo: new Date(parseInt("{{last_chemo}}")*1000) 
             },
             mounted(){
                 this.init()
@@ -103,17 +113,21 @@
                 this.$http.get('/api/chemotherapy?patient_id={{patient_id}}').then(function(res){
                     this.patient_id=res.data.patient_id;
                     this.chemo_way=res.data.chemo_way;
+                    this.last_chemo=new Date(parseInt(res.data.last_chemo)*1000);
+                    if (isNaN(this.last_chemo.getTime())) this.last_chemo="";
                 },function(){
                     console.log('error');
                 });
                 },
                 submit: function(event) {
                     event.preventDefault();
+                    if (this.last_chemo!="") this.last_chemo=this.last_chemo.getTime()/1000;
                     var
                     $form = $('#vm'),
                     data = {
                         patient_id: this.patient_id,
-                        chemo_way: this.chemo_way
+                        chemo_way: this.chemo_way,
+                        last_chemo: this.last_chemo
                     };
                     this.$http.post('/chemotherapy',data,{emulateJSON:true}).then(function(res){
                         document.write(res.body);    

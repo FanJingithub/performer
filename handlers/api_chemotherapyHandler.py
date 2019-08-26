@@ -19,9 +19,9 @@ class api_chemotherapyHandler(tornado.web.RequestHandler):
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        self.cur.execute('''SELECT patient_id,chemo_way FROM chemotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
-        res = [self.patient_id, ""]
+        self.cur.execute('''SELECT patient_id,chemo_way,last_chemo FROM chemotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
+        res = [self.patient_id, "", ""]
         for row in self.cur:
             res = row
-        self.data = { "patient_id":self.patient_id, "chemo_way":res[1]}
+        self.data = { "patient_id":self.patient_id, "chemo_way":res[1], "last_chemo":res[2]}
         self.write(json.dumps(self.data))

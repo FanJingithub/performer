@@ -5,5 +5,7 @@ grant select, insert, update, delete on MData.* to 'debian-sys-maint'@'localhost
 create table radiotherapy (
     `patient_id`  varchar(12) default '',
     `radio_count`  varchar(12) default '',
+    `radio_start`  varchar(12) default '',
+    `radio_end`  varchar(12) default '',
     primary key(patient_id)
 ) engine=innodb         default charset=utf8;

@@ -20,6 +20,20 @@
             "limit": [0,100],
             "unit": "",
             "value": ""
+        },
+
+        {
+            "class": "time",
+            "name": "radio_start",
+            "label": "放疗开始",
+            "value": ""
+        },
+
+        {
+            "class": "time",
+            "name": "radio_end",
+            "label": "放疗结束",
+            "value": ""
         }
     ]
 }
