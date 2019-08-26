@@ -10,5 +10,6 @@ create table data_status (
     `surgery`  INT default 0,
     `chemotherapy`  INT default 0,
     `radiotherapy`  INT default 0,
-    `follow_up`  INT default 0
+    `follow_up`  INT default 0,
+    `form3`  INT default 0
 ) engine=innodb         default charset=utf8;

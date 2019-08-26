@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style12.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -62,6 +62,11 @@
                     <div>随访记录</div>
                 </a>
             </div>
+            <div class="menu-item">
+                <a class="item-link" href="/form3?patient_id={{patient_id}}">
+                    <div>表单3</div>
+                </a>
+            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -70,19 +75,18 @@
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
-                <div class="form-part-1">
-                    <div>
-                        <label class="form-label">手术方式: </label>
-                        <br>
-                        <input class="form-radio" type="radio" id="dixon" value="dixon" v-model="resection_way" disabled>
-                        <label for="dixon">Dixon 式</label>
-                        <br>
-                        <input class="form-radio" type="radio" id="miles" value="miles" v-model="resection_way" disabled>
-                        <label for="miles">Miles 式</label>
-                        <br>
-                        <input class="form-radio" type="radio" id="no" value="no" v-model="resection_way" disabled>
-                        <label for="no">姑息手术</label>
-                        <br><br>
+                <div class="form-part">
+                    <div class="block">
+                        <h3></h3>
+                        <div>
+                            <label class="form-label">手术方式:</label>
+                            <input type="radio" id="dixon" value="dixon" v-model="resection_way" disabled>
+                            <label for="dixon">Dixon 式&nbsp;&nbsp;</label>
+                            <input type="radio" id="miles" value="miles" v-model="resection_way" disabled>
+                            <label for="miles">Miles 式&nbsp;&nbsp;</label>
+                            <input type="radio" id="no" value="no" v-model="resection_way" disabled>
+                            <label for="no">姑息手术&nbsp;&nbsp;</label><br>
+                        </div>
                     </div></div>
                 <div class="form-part-3">
                     <button class="submit" type="button" v-on:click="edit">编辑</button>
@@ -94,8 +98,8 @@
         var vm = new Vue({
             el: '#vm',
             data: {
-                patient_id: "{{patient_id}}" ,
-                resection_way: "{{resection_way}}" 
+                    patient_id: "{{patient_id}}",
+                    resection_way: "{{resection_way}}"
             },
             methods:{
                 submit:function(){

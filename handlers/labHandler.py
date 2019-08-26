@@ -43,9 +43,9 @@ class labHandler(tornado.web.RequestHandler):
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_lab_page.html", patient_id=self.patient_id , CEA=res[1], CA199=res[2])
+            self.render("../html/read_lab_page.html", patient_id=self.patient_id,  CEA=res[1], CA199=res[2])
         else:
-            self.render("../html/edit_lab_page.html", patient_id=self.patient_id , CEA=res[1], CA199=res[2])
+            self.render("../html/edit_lab_page.html", patient_id=self.patient_id,  CEA=res[1], CA199=res[2])
 
     def post(self):
         print('----------------------------Submit----------------------------')

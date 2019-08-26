@@ -43,9 +43,9 @@ class radiotherapyHandler(tornado.web.RequestHandler):
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_radiotherapy_page.html", patient_id=self.patient_id , radio_count=res[1], radio_start=res[2], radio_end=res[3])
+            self.render("../html/read_radiotherapy_page.html", patient_id=self.patient_id,  radio_count=res[1], radio_start=res[2], radio_end=res[3])
         else:
-            self.render("../html/edit_radiotherapy_page.html", patient_id=self.patient_id , radio_count=res[1], radio_start=res[2], radio_end=res[3])
+            self.render("../html/edit_radiotherapy_page.html", patient_id=self.patient_id,  radio_count=res[1], radio_start=res[2], radio_end=res[3])
 
     def post(self):
         print('----------------------------Submit----------------------------')

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style12.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -62,6 +62,11 @@
                     <div>随访记录</div>
                 </a>
             </div>
+            <div class="menu-item">
+                <a class="item-link" href="/form3?patient_id={{patient_id}}">
+                    <div>表单3</div>
+                </a>
+            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -70,24 +75,25 @@
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
-                <div class="form-part-1">
-                    <div>
-                        <label class="form-label">放疗次数: </label>
-                        <input class="form-number" type="number" v-model.number="radio_count" >
-                        <label>&nbsp;</label>
-                        <br><br>
-                    </div>
-                    <div>
-                        <label class="form-label">放疗开始: </label>
-                        <el-date-picker v-model="radio_start" type="date" placeholder="Pick a day" ></el-date-picker>
-                        <br><br>
-                    </div>
-                </div>
-                <div class="form-part-2">
-                    <div>
-                        <label class="form-label">放疗结束: </label>
-                        <el-date-picker v-model="radio_end" type="date" placeholder="Pick a day" ></el-date-picker>
-                        <br><br>
+                <div class="form-part">
+                    <div class="block">
+                        <h3></h3>
+                        <div>
+                            <label class="form-label">放疗次数: </label>
+                            <input style="width:36px; height:20px" type="number" v-model.number="radio_count" >
+                            <label>&nbsp;</label>
+                            <br>
+                        </div>
+                        <div>
+                            <label class="form-label">放疗开始: </label>
+                            <el-date-picker v-model="radio_start" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br><br>
+                        </div>
+                        <div>
+                            <label class="form-label">放疗结束: </label>
+                            <el-date-picker v-model="radio_end" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br><br>
+                        </div>
                     </div></div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
@@ -99,26 +105,26 @@
         var vm = new Vue({
             el: '#vm',
             data: {
-                patient_id: "{{patient_id}}" ,
-                radio_count: "{{radio_count}}" ,
-                radio_start: new Date(parseInt("{{radio_start}}")*1000) ,
-                radio_end: new Date(parseInt("{{radio_end}}")*1000) 
+                    patient_id: "{{patient_id}}",
+                    radio_count: "{{radio_count}}",
+                    radio_start: new Date(parseInt("{{radio_start}}")*1000),
+                    radio_end: new Date(parseInt("{{radio_end}}")*1000)
             },
             mounted(){
                 this.init()
             },
             methods:{
                 init:function(){
-                this.$http.get('/api/radiotherapy?patient_id={{patient_id}}').then(function(res){
-                    this.patient_id=res.data.patient_id;
-                    this.radio_count=res.data.radio_count;
-                    this.radio_start=new Date(parseInt(res.data.radio_start)*1000);
-                    if (isNaN(this.radio_start.getTime())) this.radio_start="";
-                    this.radio_end=new Date(parseInt(res.data.radio_end)*1000);
-                    if (isNaN(this.radio_end.getTime())) this.radio_end="";
-                },function(){
-                    console.log('error');
-                });
+                    this.$http.get('/api/radiotherapy?patient_id={{patient_id}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.radio_count=res.data.radio_count;
+                        this.radio_start=new Date(parseInt(res.data.radio_start)*1000);
+                        if (isNaN(this.radio_start.getTime())) this.radio_start="";
+                        this.radio_end=new Date(parseInt(res.data.radio_end)*1000);
+                        if (isNaN(this.radio_end.getTime())) this.radio_end="";
+                    },function(){
+                        console.log('error');
+                    });
                 },
                 submit: function(event) {
                     event.preventDefault();

@@ -43,9 +43,9 @@ class follow_upHandler(tornado.web.RequestHandler):
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_follow_up_page.html", patient_id=self.patient_id , recurrance=res[1])
+            self.render("../html/read_follow_up_page.html", patient_id=self.patient_id,  recurrance=res[1])
         else:
-            self.render("../html/edit_follow_up_page.html", patient_id=self.patient_id , recurrance=res[1])
+            self.render("../html/edit_follow_up_page.html", patient_id=self.patient_id,  recurrance=res[1])
 
     def post(self):
         print('----------------------------Submit----------------------------')

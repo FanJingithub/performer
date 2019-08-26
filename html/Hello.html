@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello</title>
+</head>
+<body>
+
+    <label>元素个数：&nbsp;</label>
+    <input id="cc_element" type="number" style="width:36px;height:20px"/><br/><br/>
+    <div id="root"></div>
+
+    <script>
+        var count_element_now = 0;
+        var flag = new Array(100);
+        var flag_table = new Array(100);
+        var count_option_now = new Array(100);
+        var count_element_element_now = new Array(100);
+        var flag_element = new Array(100);
+        count_option_now_element = new Array(100);
+        for (i=0;i<100;i++) {
+            flag[i]=0; flag_table[i]=0; count_option_now[i]=0;
+            count_element_element_now[i]=0; 
+            flag_element[i]=new Array(100); count_option_now_element[i] = new Array(100);
+            for (j=0;j<100;j++){
+                flag_element[i][j] = 0;
+                count_option_now_element[i][j] = 0;
+            }
+        }
+        document.getElementById("cc_element").addEventListener("change", function(event) {
+            count_element = document.getElementById("cc_element").value;
+            while(count_element_now<count_element){
+                var element = document.createElement("element"+ count_element_now);
+                count_element_now = count_element_now + 1;
+                element.id = "element" + count_element_now;
+                element.innerHTML = '<br/><div>'+'<select id="select'+count_element_now+ '" style="height:20px">\
+                    <option value="text">输入文字</option>\
+                    <option value="number">输入数字</option>\
+                    <option value="radio">选项</option>\
+                    <option value="table">表格</option>\
+                </select><br/>\
+                <label>字段名: &nbsp;</label><input type="text" style="width:50px" id="name_1">\
+                <label>字段名拼音: &nbsp;</label><input type="text" style="width:50px" id="label_1"><br/>\
+            </div><br/>'
+                document.getElementById("root").appendChild(element);
+                
+                flag[count_element_now] = 0;
+                flag_table[count_element_now] = 0;
+                document.getElementById("select"+count_element_now).addEventListener("change", function(event) {
+                    selectEventHandler(this.id);
+                });
+
+            }
+            while(count_element_now>count_element){
+                document.getElementById("root").removeChild(document.getElementById("element"+count_element_now));
+                count_element_now = count_element_now - 1;
+            }
+        });
+        
+
+        function selectEventHandler(selectID){
+            elementIndex = parseInt(selectID.slice(6));
+            //console.log(document.getElementById("select"+elementIndex).value);
+            console.log(elementIndex);
+            if (document.getElementById(selectID).value=="radio"){
+
+                if (flag_table[elementIndex]>0){
+                    document.getElementById("element"+elementIndex).removeChild(document.getElementById("table_div"+elementIndex))
+                    flag_table[elementIndex] = flag_table[elementIndex] - 1;
+                }
+
+                var cc_option =  document.createElement("cc_option");
+                flag[elementIndex] = flag[elementIndex] + 1;
+                cc_option.id = "cc_div" + elementIndex;
+                cc_option.innerHTML = '<div>\
+                        <label>选项个数:&nbsp;</label><input id="cc'+ elementIndex +'" type="number" style="width:36px;height:20px"/>\
+                    </div>'
+                document.getElementById("element"+elementIndex).appendChild(cc_option)
+                count_option_now[elementIndex] = 0;
+                document.getElementById("cc"+elementIndex).addEventListener("change", function(event) {
+                    countEventHandler(parseInt(this.id.slice(2)));
+                });
+            }
+
+            else if (document.getElementById(selectID).value=="text" || document.getElementById(selectID).value=="number"){
+                if (flag[elementIndex]>0){
+                    document.getElementById("element"+elementIndex).removeChild(document.getElementById("cc_div"+elementIndex))
+                    flag[elementIndex] = flag[elementIndex] - 1;
+                }
+                if (flag_table[elementIndex]>0){
+                    document.getElementById("element"+elementIndex).removeChild(document.getElementById("table_div"+elementIndex))
+                    flag_table[elementIndex] = flag_table[elementIndex] - 1;
+                }
+            }
+            else if (document.getElementById(selectID).value=="table"){
+
+                if (flag[elementIndex]>0){
+                    document.getElementById("element"+elementIndex).removeChild(document.getElementById("cc_div"+elementIndex))
+                    flag[elementIndex] = flag[elementIndex] - 1;
+                }
+
+                var table_div =  document.createElement("table_div"+ elementIndex);
+                flag[elementIndex] = flag[elementIndex] + 1;
+                table_div.id = "table_div" + elementIndex;
+                table_div.innerHTML = '<div>\
+                        <label>字段个数:&nbsp;</label><input id="col_cc'+ elementIndex +'" type="number" style="width:36px;height:20px"/>&nbsp;\
+                        <label>表格行数:&nbsp;</label><input id="row_cc'+ elementIndex +'" type="number" style="width:36px;height:20px"/>\
+                    </div>'
+                document.getElementById("element"+elementIndex).appendChild(table_div)
+                count_option_now[elementIndex] = 0;
+                document.getElementById("col_cc"+elementIndex).addEventListener("change", function(event) {
+                    colCountEventHandler(parseInt(this.id.slice(6)));
+                });
+            }
+            
+        }
+
+        function countEventHandler(elementIndex){
+            var count = document.getElementById("cc"+elementIndex).value;
+            //console.log(count);
+            while(count_option_now[elementIndex]<count){
+                var ee = document.createElement("ee"+count_option_now[elementIndex]);
+                count_option_now[elementIndex] = count_option_now[elementIndex] + 1;
+                ee.id = "ee" + count_option_now[elementIndex];
+                ee.innerHTML = '<label>选项值'+count_option_now[elementIndex]+':&nbsp;</label><input style="width:50px;height:20px"/>\
+                <label>选项拼音</label><input style="width:50px;height:20px"/><br/>'
+                document.getElementById("cc_div"+elementIndex).appendChild(ee);
+            }
+            while(count_option_now[elementIndex]>count){
+                document.getElementById("cc_div"+elementIndex).removeChild(document.getElementById("ee"+count_option_now[elementIndex]));
+                count_option_now[elementIndex] = count_option_now[elementIndex] - 1;
+            }
+        }
+
+        function colCountEventHandler(elementIndex){
+            var count = document.getElementById("col_cc"+elementIndex).value;
+            //console.log(count);
+            while(count_element_element_now[elementIndex]<count){
+                var element = document.createElement("element"+ elementIndex + "_" + count_element_element_now[elementIndex]);
+                count_element_element_now[elementIndex] = count_element_element_now[elementIndex] + 1;
+                element.id = "element" + elementIndex + "_" + count_element_element_now[elementIndex];
+                element.innerHTML = '<br/><div>'+'<select id="select'+ elementIndex + "_" +count_element_element_now[elementIndex]+ '" style="height:20px">\
+                    <option value="text">输入文字</option>\
+                    <option value="number">输入数字</option>\
+                    <option value="radio">选项</option>\
+                </select><br/>\
+                <label>字段名: &nbsp;</label><input type="text" style="width:50px" id="name_1">\
+                <label>字段名拼音: &nbsp;</label><input type="text" style="width:50px" id="label_1"><br/>\
+            </div><br/>'
+                document.getElementById("table_div"+ elementIndex).appendChild(element);
+                
+                flag_element[elementIndex,count_element_element_now[elementIndex]] = 0;
+                document.getElementById("select"+ elementIndex + "_" +count_element_element_now[elementIndex]).addEventListener("change", function(event) {
+                    selectEventHandler2(this.id);
+                });
+
+            }
+            while(count_element_element_now[elementIndex]>count){
+                document.getElementById("table_div"+ elementIndex).removeChild(document.getElementById("element"+ elementIndex + "_" +count_element_element_now[elementIndex]));
+                count_element_element_now[elementIndex] = count_element_element_now[elementIndex] - 1;
+            }
+        }
+
+        function selectEventHandler2(selectID){
+            elementIndex_1 = parseInt(selectID.split("_")[0].slice(6));
+            elementIndex_2 = parseInt(selectID.split("_")[1]);
+            //console.log(document.getElementById("select"+elementIndex).value);
+            console.log(elementIndex);
+            if (document.getElementById(selectID).value=="radio"){
+                var cc_option =  document.createElement("cc_option");
+                flag_element[elementIndex_1,elementIndex_2] = flag_element[elementIndex_1,elementIndex_2] + 1;
+                cc_option.id = "cc_div" + elementIndex_1 + "_"+elementIndex_2;
+                cc_option.innerHTML = '<div>\
+                        <label>选项个数:&nbsp;</label><input id="cc'+ elementIndex_1 + "_" + elementIndex_2 +'" type="number" style="width:36px;height:20px"/>\
+                    </div>'
+                document.getElementById("element"+elementIndex_1+ "_"+elementIndex_2).appendChild(cc_option)
+                count_option_now_element[elementIndex_1,elementIndex_2] = 0;
+                document.getElementById("cc"+elementIndex_1+"_"+elementIndex_2).addEventListener("change", function(event) {
+                    countEventHandler2(this.id);
+                });
+            }
+            else if ((document.getElementById(selectID).value=="text" || document.getElementById(selectID).value=="number") && flag_element[elementIndex_1,elementIndex_2]>0){
+                document.getElementById("element"+elementIndex_1+"_"+elementIndex_2).removeChild(document.getElementById("cc_div"+elementIndex_1+"_"+elementIndex_2))
+                flag_element[elementIndex_1,elementIndex_2] = flag_element[elementIndex_1,elementIndex_2] - 1;
+            }
+        }
+
+        function countEventHandler2(elementID){
+            elementIndex_1 = parseInt(elementID.split("_")[0].slice(2));
+            elementIndex_2 = parseInt(elementID.split("_")[1]);
+            var count = document.getElementById(elementID).value;
+            //console.log(count);
+            while(count_option_now_element[elementIndex_1,elementIndex_2]<count){
+                var ee = document.createElement("ee"+count_option_now_element[elementIndex_1,elementIndex_2]);
+                count_option_now_element[elementIndex_1,elementIndex_2] = count_option_now_element[elementIndex_1,elementIndex_2] + 1;
+                ee.id = "ee" + count_option_now_element[elementIndex_1,elementIndex_2];
+                ee.innerHTML = '<label>选项值'+count_option_now_element[elementIndex_1,elementIndex_2]+':&nbsp;</label><input style="width:50px;height:20px"/>\
+                <label>选项拼音</label><input style="width:50px;height:20px"/><br/>'
+                document.getElementById("cc_div"+elementIndex_1+"_"+elementIndex_2).appendChild(ee);
+            }
+            while(count_option_now_element[elementIndex_1,elementIndex_2]>count){
+                document.getElementById("cc_div"+elementIndex_1,"_"+elementIndex_2).removeChild(document.getElementById("ee"+count_option_now_element[elementIndex_1,elementIndex_2]));
+                count_option_now_element[elementIndex_1,elementIndex_2] = count_option_now_element[elementIndex_1,elementIndex_2] - 1;
+            }
+        }
+        
+    </script>
+</body>
+</html>

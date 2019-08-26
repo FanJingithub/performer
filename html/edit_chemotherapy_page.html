@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style12.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -62,6 +62,11 @@
                     <div>随访记录</div>
                 </a>
             </div>
+            <div class="menu-item">
+                <a class="item-link" href="/form3?patient_id={{patient_id}}">
+                    <div>表单3</div>
+                </a>
+            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -70,26 +75,72 @@
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
-                <div class="form-part-1">
-                    <div>
-                        <label class="form-label">化疗方案: </label>
-                        <br>
-                        <input class="form-radio" type="radio" id="xelox" value="xelox" v-model="chemo_way" >
-                        <label for="xelox">XELOX方案</label>
-                        <br>
-                        <input class="form-radio" type="radio" id="xeliri" value="xeliri" v-model="chemo_way" >
-                        <label for="xeliri">XELIRI方案</label>
-                        <br>
-                        <input class="form-radio" type="radio" id="cap" value="cap" v-model="chemo_way" >
-                        <label for="cap">卡培他滨单药</label>
-                        <br><br>
-                    </div>
-                </div>
-                <div class="form-part-2">
-                    <div>
-                        <label class="form-label">上次化疗时间: </label>
-                        <el-date-picker v-model="last_chemo" type="date" placeholder="Pick a day" ></el-date-picker>
-                        <br><br>
+                <div class="form-part">
+                    <div class="block">
+                        <h3></h3>
+                        <div>
+                            <label class="form-label">化疗方案:</label>
+                            <input type="radio" id="xelox" value="xelox" v-model="chemo_way" >
+                            <label for="xelox">XELOX方案&nbsp;&nbsp;</label>
+                            <input type="radio" id="xeliri" value="xeliri" v-model="chemo_way" >
+                            <label for="xeliri">XELIRI方案&nbsp;&nbsp;</label>
+                            <input type="radio" id="cap" value="cap" v-model="chemo_way" >
+                            <label for="cap">卡培他滨单药&nbsp;&nbsp;</label><br>
+                        </div>
+                        <div>
+                            <label class="form-label">上次化疗时间: </label>
+                            <el-date-picker v-model="last_chemo" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br><br>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">化疗时间</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">化疗方案</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">描述</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="chemo_time_0" type="date" placeholder="Pick a day" ></el-date-picker></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="xelox" value="xelox" v-model="chemo_way_0" >
+                                    <label style="font-size:12px" for="xelox">XELOX方案&nbsp;&nbsp;</label>
+                                    <input type="radio" id="xeliri" value="xeliri" v-model="chemo_way_0" >
+                                    <label style="font-size:12px" for="xeliri">XELIRI方案&nbsp;&nbsp;</label>
+                                    <input type="radio" id="cap" value="cap" v-model="chemo_way_0" >
+                                    <label style="font-size:12px" for="cap">卡培他滨单药&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="desc_0" ></td>
+                                </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="chemo_time_1" type="date" placeholder="Pick a day" ></el-date-picker></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="xelox" value="xelox" v-model="chemo_way_1" >
+                                    <label style="font-size:12px" for="xelox">XELOX方案&nbsp;&nbsp;</label>
+                                    <input type="radio" id="xeliri" value="xeliri" v-model="chemo_way_1" >
+                                    <label style="font-size:12px" for="xeliri">XELIRI方案&nbsp;&nbsp;</label>
+                                    <input type="radio" id="cap" value="cap" v-model="chemo_way_1" >
+                                    <label style="font-size:12px" for="cap">卡培他滨单药&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="desc_1" ></td>
+                                </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="chemo_time_2" type="date" placeholder="Pick a day" ></el-date-picker></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="xelox" value="xelox" v-model="chemo_way_2" >
+                                    <label style="font-size:12px" for="xelox">XELOX方案&nbsp;&nbsp;</label>
+                                    <input type="radio" id="xeliri" value="xeliri" v-model="chemo_way_2" >
+                                    <label style="font-size:12px" for="xeliri">XELIRI方案&nbsp;&nbsp;</label>
+                                    <input type="radio" id="cap" value="cap" v-model="chemo_way_2" >
+                                    <label style="font-size:12px" for="cap">卡培他滨单药&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="desc_2" ></td>
+                                </tr>
+                        </table>
                     </div></div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
@@ -101,33 +152,66 @@
         var vm = new Vue({
             el: '#vm',
             data: {
-                patient_id: "{{patient_id}}" ,
-                chemo_way: "{{chemo_way}}" ,
-                last_chemo: new Date(parseInt("{{last_chemo}}")*1000) 
+                    patient_id: "{{patient_id}}",
+                    chemo_way: "{{chemo_way}}",
+                    last_chemo: new Date(parseInt("{{last_chemo}}")*1000),
+                    chemo_time_0: new Date(parseInt("{{chemo_time_0}}")*1000),
+                    chemo_time_1: new Date(parseInt("{{chemo_time_1}}")*1000),
+                    chemo_time_2: new Date(parseInt("{{chemo_time_2}}")*1000),
+                    chemo_way_0: "{{chemo_way_0}}",
+                    chemo_way_1: "{{chemo_way_1}}",
+                    chemo_way_2: "{{chemo_way_2}}",
+                    desc_0: "{{desc_0}}",
+                    desc_1: "{{desc_1}}",
+                    desc_2: "{{desc_2}}"
             },
             mounted(){
                 this.init()
             },
             methods:{
                 init:function(){
-                this.$http.get('/api/chemotherapy?patient_id={{patient_id}}').then(function(res){
-                    this.patient_id=res.data.patient_id;
-                    this.chemo_way=res.data.chemo_way;
-                    this.last_chemo=new Date(parseInt(res.data.last_chemo)*1000);
-                    if (isNaN(this.last_chemo.getTime())) this.last_chemo="";
-                },function(){
-                    console.log('error');
-                });
+                    this.$http.get('/api/chemotherapy?patient_id={{patient_id}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.chemo_way=res.data.chemo_way;
+                        this.last_chemo=new Date(parseInt(res.data.last_chemo)*1000);
+                        if (isNaN(this.last_chemo.getTime())) this.last_chemo="";
+                        this.chemo_time_0=new Date(parseInt(res.data.chemo_time_0)*1000);
+                        if (isNaN(this.chemo_time_0.getTime())) this.chemo_time_0="";
+                        this.chemo_time_1=new Date(parseInt(res.data.chemo_time_1)*1000);
+                        if (isNaN(this.chemo_time_1.getTime())) this.chemo_time_1="";
+                        this.chemo_time_2=new Date(parseInt(res.data.chemo_time_2)*1000);
+                        if (isNaN(this.chemo_time_2.getTime())) this.chemo_time_2="";
+                        this.chemo_way_0=res.data.chemo_way_0;
+                        this.chemo_way_1=res.data.chemo_way_1;
+                        this.chemo_way_2=res.data.chemo_way_2;
+                        this.desc_0=res.data.desc_0;
+                        this.desc_1=res.data.desc_1;
+                        this.desc_2=res.data.desc_2;
+                    },function(){
+                        console.log('error');
+                    });
                 },
                 submit: function(event) {
                     event.preventDefault();
                     if (this.last_chemo!="") this.last_chemo=this.last_chemo.getTime()/1000;
+                    if (this.chemo_time_0!="") this.chemo_time_0=this.chemo_time_0.getTime()/1000;
+                    if (this.chemo_time_1!="") this.chemo_time_1=this.chemo_time_1.getTime()/1000;
+                    if (this.chemo_time_2!="") this.chemo_time_2=this.chemo_time_2.getTime()/1000;
                     var
                     $form = $('#vm'),
                     data = {
                         patient_id: this.patient_id,
                         chemo_way: this.chemo_way,
-                        last_chemo: this.last_chemo
+                        last_chemo: this.last_chemo,
+                        chemo_time_0: this.chemo_time_0,
+                        chemo_time_1: this.chemo_time_1,
+                        chemo_time_2: this.chemo_time_2,
+                        chemo_way_0: this.chemo_way_0,
+                        chemo_way_1: this.chemo_way_1,
+                        chemo_way_2: this.chemo_way_2,
+                        desc_0: this.desc_0,
+                        desc_1: this.desc_1,
+                        desc_2: this.desc_2
                     };
                     this.$http.post('/chemotherapy',data,{emulateJSON:true}).then(function(res){
                         document.write(res.body);    

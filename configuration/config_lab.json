@@ -2,34 +2,43 @@
     "class": "form",
     "name": "lab",
     "label": "检验报告",
-    "count": 3,
+    "count": 1,
 
-    "elements": [
-
+    "blocks": [
         {
-            "class": "label",
-            "name": "patient_id",
-            "label": "ID",
-            "value": ""
-        },
+            "class": "block",
+            "name": "block_1",
+            "label": "",
+            "count": 13,
 
-        {
-            "class": "number",
-            "name": "CEA",
-            "label": "CEA",
-            "limit": [0,100],
-            "unit": "ng/mL",
-            "value": ""
-        },
+            "elements": [
 
-        {
-            "class": "number",
-            "name": "CA199",
-            "label": "CA199",
-            "limit": [0,100],
-            "unit": "U/mL",
-            "value": ""
+                {
+                    "class": "label",
+                    "name": "patient_id",
+                    "label": "ID",
+                    "value": ""
+                },
+        
+                {
+                    "class": "number",
+                    "name": "CEA",
+                    "label": "CEA",
+                    "limit": [0,100],
+                    "unit": "ng/mL",
+                    "value": ""
+                },
+        
+                {
+                    "class": "number",
+                    "name": "CA199",
+                    "label": "CA199",
+                    "limit": [0,100],
+                    "unit": "U/mL",
+                    "value": ""
+                }
+        
+            ]
         }
-
     ]
 }

@@ -128,6 +128,7 @@
 .form-label {
     display: inline-block;
     width: 20%;
+    height: 50px;
     font-size: 25px;
 	font-weight: 400;
 	letter-spacing: 1px;
@@ -162,6 +163,28 @@ input[type="submit"]:hover {
     background-color: #E91E63;
     border: 1px solid red;
     color: white;
+}
+
+.tabtop13 {
+    margin-top: 13px;
+    border-style: solid none solid solid;
+    border-width: thin 0 thin thin;
+}
+.tabtop13 td{
+	background-color:#ffffff;
+	height:25px;
+	line-height:150%;
+    border-style: solid solid none none;
+    border-width: thin thin 0 0;
+}
+.font-center{ text-align:center}
+.btbg{background:#e9faff !important;}
+.titfont {
+	font-family: 微软雅黑;
+	font-size: 16px;
+	font-weight: bold;
+	color: #255e95;
+	background-color:#e9faff;
 }
 
 @media screen and (max-width: 640px){

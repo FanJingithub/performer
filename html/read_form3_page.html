@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data System</title>
+    <link rel="stylesheet" href="css/style12.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-resource.js"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+    <div class="main-body">
+        <div class="heading">
+            <h1>临床科研数据库系统</h1>
+        </div>
+        <div id="menu" class="menu">
+            <div style="text-align:center">
+                <h3>导航栏</h3>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/list">
+                    <div>病例列表</div>
+                </a>
+            </div>
+            
+            <div class="menu-item">
+                <a class="item-link" href="/base?patient_id={{patient_id}}">
+                    <div>基本信息</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/lab?patient_id={{patient_id}}">
+                    <div>检验报告</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/pathology?patient_id={{patient_id}}">
+                    <div>病理报告</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/surgery?patient_id={{patient_id}}">
+                    <div>手术记录</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/chemotherapy?patient_id={{patient_id}}">
+                    <div>化疗记录</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/radiotherapy?patient_id={{patient_id}}">
+                    <div>放疗记录</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/follow_up?patient_id={{patient_id}}">
+                    <div>随访记录</div>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="item-link" href="/form3?patient_id={{patient_id}}">
+                    <div>表单3</div>
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <div style="text-align:center">
+                <h2>调查表</h2>
+            </div>
+            <br>
+            <form id="vm" v-on:submit="submit">
+                <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                <div class="form-part">
+                    <div class="block">
+                        <h3>板块1</h3>
+                        <div>
+                            <label class="form-label">姓名: </label>
+                            <input style="width:60px; height:20px" v-model="xm" disabled>
+                            <br>
+                        </div>
+                        <div>
+                            <label class="form-label">性别:</label>
+                            <input type="radio" id="male" value="male" v-model="xb" disabled>
+                            <label for="male">男&nbsp;&nbsp;</label>
+                            <input type="radio" id="female" value="female" v-model="xb" disabled>
+                            <label for="female">女&nbsp;&nbsp;</label><br>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <h3>板块2</h3>
+                        <div>
+                            <label class="form-label">年龄: </label>
+                            <input style="width:36px; height:20px" type="number" v-model.number="nl" disabled>
+                            <label>&nbsp;岁</label>
+                            <br>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查时间</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查类型</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="sj_0" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_0" disabled></td>
+                                </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="sj_1" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_1" disabled></td>
+                                </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="sj_2" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_2" disabled></td>
+                                </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="sj_3" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_3" disabled></td>
+                                </tr>
+                            <tr>
+                                <td style="text-align: center"><el-date-picker v-model="sj_4" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_4" disabled></td>
+                                </tr>
+                        </table>
+                    </div></div>
+                <div class="form-part-3">
+                    <button class="submit" type="button" v-on:click="edit">编辑</button>
+                </div>    
+            </form>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#vm',
+            data: {
+                    xm: "{{xm}}",
+                    xb: "{{xb}}",
+                    nl: "{{nl}}",
+                    sj_0: new Date(parseInt("{{sj_0}}")*1000),
+                    sj_1: new Date(parseInt("{{sj_1}}")*1000),
+                    sj_2: new Date(parseInt("{{sj_2}}")*1000),
+                    sj_3: new Date(parseInt("{{sj_3}}")*1000),
+                    sj_4: new Date(parseInt("{{sj_4}}")*1000),
+                    lx_0: "{{lx_0}}",
+                    lx_1: "{{lx_1}}",
+                    lx_2: "{{lx_2}}",
+                    lx_3: "{{lx_3}}",
+                    lx_4: "{{lx_4}}"
+            },
+            methods:{
+                submit:function(){
+                    return 0;
+                },
+                edit:function(){
+                    window.location.href="/form3?patient_id={{patient_id}}&edit=1";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

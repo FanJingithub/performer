@@ -27,20 +27,34 @@ def generateHTML(editable):
             code =  '''var vm = new Vue({
             el: '#vm',
             data: {'''
-            for i in range(len(config["elements"])):
-                element = config["elements"][i]
-                dateTrans_1 = ""
-                dateTrans_2 = ""
-                if (element["class"]=="time"):
-                    dateTrans_1 = 'new Date(parseInt('
-                    dateTrans_2 = ")*1000)"
-                newCode = '''
-                {0}: {1}"{{{{{0}}}}}"{2} '''.format(element["name"],dateTrans_1,dateTrans_2)
-                code = code + newCode
-                if (i<len(config["elements"])-1):
-                    code = code + ","
-                else:
-                    code = code + '''
+            for ii in range(len(config["blocks"])):
+                block = config["blocks"][ii]
+                for i in range(len(block["elements"])):
+                    element = block["elements"][i]
+                    dateTrans_1 = ""
+                    dateTrans_2 = ""
+                    if (element["class"]=="time"):
+                        dateTrans_1 = 'new Date(parseInt('
+                        dateTrans_2 = ")*1000)"
+                    if (element["class"]!="table"):
+                        newCode = '''
+                    {0}: {1}"{{{{{0}}}}}"{2},'''.format(element["name"],dateTrans_1,dateTrans_2)
+                    else:
+                        newCode = ""
+                        for j in range(len(element["content"])):
+                            dateTrans_1 = ""
+                            dateTrans_2 = ""
+                            if (element["content"][j]["class"]=="time"):
+                                dateTrans_1 = 'new Date(parseInt('
+                                dateTrans_2 = ")*1000)"
+
+                            for k in range(int(element["row"])):
+                                newCode = newCode + '''
+                    {0}: {1}"{{{{{0}}}}}"{2},'''.format(element["content"][j]["name"]+"_"+str(k),dateTrans_1,dateTrans_2)
+                            
+                    code = code + newCode
+
+            code = code[:len(code)-1] + '''
             }},
             methods:{{
                 submit:function(){{
@@ -59,46 +73,80 @@ def generateHTML(editable):
             code = '''var vm = new Vue({
             el: '#vm',
             data: {'''
-            for i in range(len(config["elements"])):
-                element = config["elements"][i]
-                dateTrans_1 = ""
-                dateTrans_2 = ""
-                if (element["class"]=="time"):
-                    dateTrans_1 = "new Date(parseInt("
-                    dateTrans_2 = ")*1000)"
-                newCode = '''
-                {0}: {1}"{{{{{0}}}}}"{2} '''.format(element["name"],dateTrans_1,dateTrans_2)
-                code = code + newCode
-                if (i<len(config["elements"])-1):
-                    code = code + ","
-                else:
-                    code = code + '''
+            for ii in range(len(config["blocks"])):
+                block = config["blocks"][ii]
+                for i in range(len(block["elements"])):
+                    element = block["elements"][i]
+                    dateTrans_1 = ""
+                    dateTrans_2 = ""
+                    if (element["class"]=="time"):
+                        dateTrans_1 = "new Date(parseInt("
+                        dateTrans_2 = ")*1000)"
+                    if (element["class"]!="table"):
+                        newCode = '''
+                    {0}: {1}"{{{{{0}}}}}"{2},'''.format(element["name"],dateTrans_1,dateTrans_2)
+                    else:
+                        newCode = ""
+                        for j in range(len(element["content"])):
+                            dateTrans_1 = ""
+                            dateTrans_2 = ""
+                            if (element["content"][j]["class"]=="time"):
+                                dateTrans_1 = 'new Date(parseInt('
+                                dateTrans_2 = ")*1000)"
+
+                            for k in range(int(element["row"])):
+                                newCode = newCode + '''
+                    {0}: {1}"{{{{{0}}}}}"{2},'''.format(element["content"][j]["name"]+"_"+str(k),dateTrans_1,dateTrans_2)
+                    
+                    code = code + newCode
+            code = code[:len(code)-1] + '''
             }},
             mounted(){{
                 this.init()
             }},
             methods:{{
                 init:function(){{
-                this.$http.get('/api/{0}?patient_id={{{{patient_id}}}}').then(function(res){{'''.format(configName)
+                    this.$http.get('/api/{0}?patient_id={{{{patient_id}}}}').then(function(res){{'''.format(configName)
             
             dateTrans_4 = ""
-            for i in range(len(config["elements"])):
-                element = config["elements"][i]
-                dateTrans_1 = ""
-                dateTrans_2 = ""
-                if (element["class"]=="time"):
-                    dateTrans_1 = "new Date(parseInt("
-                    dateTrans_2 = ")*1000)"
-                    dateTrans_4 = '''
-                    if (isNaN(this.{0}.getTime())) this.{0}="";'''.format(element["name"])
-                newCode = '''
-                    this.{0}={1}res.data.{0}{2};{3}'''.format(element["name"],dateTrans_1,dateTrans_2,dateTrans_4)
-                code = code + newCode
+            for ii in range(len(config["blocks"])):
+                block = config["blocks"][ii]
+                for i in range(len(block["elements"])):
+                    element = block["elements"][i]
+                    dateTrans_1 = ""
+                    dateTrans_2 = ""
+                    dateTrans_4 = ""
+                    if (element["class"]=="time"):
+                        dateTrans_1 = "new Date(parseInt("
+                        dateTrans_2 = ")*1000)"
+                        dateTrans_4 = '''
+                        if (isNaN(this.{0}.getTime())) this.{0}="";'''.format(element["name"])
+                    if (element["class"]!="table"):
+                        newCode = '''
+                        this.{0}={1}res.data.{0}{2};{3}'''.format(element["name"],dateTrans_1,dateTrans_2,dateTrans_4)
+                    else:
+                        newCode = ""
+                        for j in range(len(element["content"])):
+                            for k in range(int(element["row"])):
+                                dateTrans_1 = ""
+                                dateTrans_2 = ""
+                                dateTrans_4 = ""
+                                if (element["content"][j]["class"]=="time"):
+                                    dateTrans_1 = "new Date(parseInt("
+                                    dateTrans_2 = ")*1000)"
+                                    dateTrans_4 = '''
+                        if (isNaN(this.{0}.getTime())) this.{0}="";'''.format(element["content"][j]["name"]+"_"+str(k))
+
+                            
+                                newCode = newCode + '''
+                        this.{0}={1}res.data.{0}{2};{3}'''.format(element["content"][j]["name"]+"_"+str(k),dateTrans_1,dateTrans_2,dateTrans_4)
+
+                    code = code + newCode
 
             code = code + '''
-                },function(){
-                    console.log('error');
-                });
+                    },function(){
+                        console.log('error');
+                    });
                 },
                 submit: function(event) {
                     event.preventDefault();'''
@@ -106,27 +154,37 @@ def generateHTML(editable):
 
             part_1 = ""
             part_2 = ""
-            for i in range(len(config["elements"])):
-                element = config["elements"][i]
-                dateTrans_3 = ""
-                if (element["class"]=="time"):
-                    dateTrans_3 = '''
+            for ii in range(len(config["blocks"])):
+                block = config["blocks"][ii]
+                for i in range(len(block["elements"])):
+                    element = block["elements"][i]
+                    dateTrans_3 = ""
+                    if (element["class"]=="time"):
+                        dateTrans_3 = '''
                     if (this.{0}!="") this.{0}=this.{0}.getTime()/1000;'''.format(element["name"])
-                newCode = '''
-                        {0}: this.{0}'''.format(element["name"])
-                part_1 = part_1 + newCode
-                part_2 = part_2 + dateTrans_3
-                if (i<len(config["elements"])-1):
-                    part_1 = part_1 + ","
-                else:
-                    part_1 = part_1 + '''
-                    };'''
+                    if (element["class"]!="table"):
+                        newCode = '''
+                        {0}: this.{0},'''.format(element["name"])
+                    else:
+                        newCode = ""
+                        for j in range(len(element["content"])):
+                            for k in range(int(element["row"])):
+                                if (element["content"][j]["class"]=="time"):
+                                    dateTrans_3 = dateTrans_3 + '''
+                    if (this.{0}!="") this.{0}=this.{0}.getTime()/1000;'''.format(element["content"][j]["name"]+"_"+str(k))
+
+                                newCode = newCode + '''
+                        {0}: this.{0},'''.format(element["content"][j]["name"]+"_"+str(k))
+
+                    part_1 = part_1 + newCode
+                    part_2 = part_2 + dateTrans_3
 
             code = code + part_2 + '''
                     var
                     $form = $('#vm'),
                     data = {'''
-            code = code + part_1 + '''
+            code = code + part_1[0:len(part_1)-1] + '''
+                    }};
                     this.$http.post('/{0}',data,{{emulateJSON:true}}).then(function(res){{
                         document.write(res.body);    
                     }},function(res){{
@@ -161,7 +219,7 @@ def generateHTML(editable):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style12.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -202,64 +260,111 @@ def generateHTML(editable):
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{{{patient_id}}}}" v-model="patient_id" v-show="false"></input>
-                <div class="form-part-1">'''.format(config["label"])
+                <div class="form-part">'''.format(config["label"])
 
 
-    len_elements = len(config["elements"])
-    len_half = (len_elements) // 2 + 1
+    num_blocks = len(config["blocks"])
+    for ii in range(num_blocks):
+        block = config["blocks"][ii]
+        len_elements = len(block["elements"])
+        code = code + '''
+                    <div class="block">
+                        <h3>{0}</h3>'''.format(block["label"])
 
-    for i in range(0,len_elements):
-        if (i==len_half):
-            code = code + '''
-                </div>
-                <div class="form-part-2">'''
+        for i in range(0,len_elements):
+            element = block["elements"][i]
+            newCode = ""
+            if (element["class"]=="label"):
+                pass
+            elif (element["class"]=="text"):
+                newCode = '''
+                        <div>
+                            <label class="form-label">{0}: </label>
+                            <input style="width:60px; height:20px" v-model="{1}" {2}>
+                            <br>
+                        </div>'''.format(element["label"], element["name"], disabled)
+            
+            elif (element["class"]=="number"):
+                newCode = '''
+                        <div>
+                            <label class="form-label">{0}: </label>
+                            <input style="width:36px; height:20px" type="number" v-model.number="{1}" {3}>
+                            <label>&nbsp;{2}</label>
+                            <br>
+                        </div>'''.format(element["label"], element["name"], element["unit"], disabled)
 
-        element = config["elements"][i]
-        newCode = ""
-        if (element["class"]=="label"):
-            pass
-        elif (element["class"]=="text"):
-            newCode = '''
-                    <div>
-                        <label class="form-label">{0}: </label>
-                        <input class="form-text" v-model="{1}" {2}>
-                        <br><br>
-                    </div>'''.format(element["label"], element["name"], disabled)
-        
-        elif (element["class"]=="number"):
-            newCode = '''
-                    <div>
-                        <label class="form-label">{0}: </label>
-                        <input class="form-number" type="number" v-model.number="{1}" {3}>
-                        <label>&nbsp;{2}</label>
-                        <br><br>
-                    </div>'''.format(element["label"], element["name"], element["unit"], disabled)
+            elif (element["class"]=="radio"):
+                newCode = '''
+                        <div>
+                            <label class="form-label">{0}:</label>'''.format(element["label"])
+                for j in range(len(element["options"])):
+                    newOption = '''
+                            <input type="radio" id="{0}" value="{0}" v-model="{2}" {3}>
+                            <label for="{0}">{1}&nbsp;&nbsp;</label>'''.format(
+                                element["options"][j]["value"], element["options"][j]["label"], element["name"], disabled)
+                    newCode = newCode + newOption
+                newCode = newCode + '''<br>
+                        </div>'''
+                
+            elif (element["class"]=="time"):
+                newCode = '''
+                        <div>
+                            <label class="form-label">{0}: </label>
+                            <el-date-picker v-model="{1}" type="date" placeholder="Pick a day" {2}></el-date-picker>
+                            <br><br>
+                        </div>'''.format(element["label"], element["name"], disabled)
+                
+            elif (element["class"]=="table"):
+                newCode = '''
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">'''
+                newRow = '''
+                            <tr>'''
+                for j in range(len(element["content"])):
+                    newRow = newRow + '''
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">{0}</td>'''.format(element["content"][j]['label'])
+                newRow = newRow + '''
+                            </tr>'''
+                newCode = newCode + newRow
 
-        elif (element["class"]=="radio"):
-            newCode = '''
-                    <div>
-                        <label class="form-label">{0}: </label>
-                        <br>'''.format(element["label"])
-            for j in range(len(element["options"])):
-                newOption = '''
-                        <input class="form-radio" type="radio" id="{0}" value="{0}" v-model="{2}" {3}>
-                        <label for="{0}">{1}</label>
-                        <br>'''.format(element["options"][j]["value"], element["options"][j]["label"], element["name"], disabled)
-                newCode = newCode + newOption
-            newCode = newCode + '''<br>
+                for k in range(int(element["row"])):
+                    newRow = '''
+                            <tr>'''
+                    for j in range(len(element["content"])):
+                        if (element["content"][j]["class"]=="text"):
+                            newRow = newRow + '''
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="{0}" {1}></td>'''.format(element["content"][j]["name"]+"_"+str(k),disabled)
+                        elif (element["content"][j]["class"]=="number"):
+                            newRow = newRow + '''
+                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model.number=="{0}" {1}></td>'''.format(element["content"][j]["name"]+"_"+str(k),disabled)
+                        elif (element["content"][j]["class"]=="radio"):
+                            newRow = newRow + '''
+                                <td style="text-align: center">'''
+                            for jj in range(len(element["content"][j]["options"])):
+                                newOption = '''
+                                    <input type="radio" id="{0}" value="{0}" v-model="{2}" {3}>
+                                    <label style="font-size:12px" for="{0}">{1}&nbsp;&nbsp;</label>'''.format(element["content"][j]["options"][jj]["value"],
+                                    element["content"][j]["options"][jj]["label"], element["content"][j]["name"]+"_"+str(k),disabled)
+                                newRow = newRow + newOption
+                            newRow = newRow + '''
+                                </td>'''
+                        elif (element["content"][j]["class"]=="time"):
+                            newRow = newRow + '''
+                                <td style="text-align: center"><el-date-picker v-model="{0}" type="date" placeholder="Pick a day" {1}></el-date-picker></td>'''.format(
+                                    element["content"][j]["name"]+"_"+str(k),disabled)
+                    newRow = newRow + '''
+                                </tr>'''
+                    newCode = newCode + newRow
+                newCode = newCode + '''
+                        </table>'''
+
+            
+            elif (element["class"]=="select"):
+                pass
+            code = code + newCode
+        code = code + '''
                     </div>'''
-            
-        elif (element["class"]=="time"):
-            newCode = '''
-                    <div>
-                        <label class="form-label">{0}: </label>
-                        <el-date-picker v-model="{1}" type="date" placeholder="Pick a day" {2}></el-date-picker>
-                        <br><br>
-                    </div>'''.format(element["label"], element["name"], disabled)
-            
-        elif (element["class"]=="select"):
-            pass
-        code = code + newCode
 
     if (editable==1):
         newCode = '''</div>
@@ -342,23 +447,31 @@ class '''
         self.cur.close()'''
     
     # generate the dynamic part for GET methon
-    part_1 = ""
-    part_2 = ' patient_id=self.patient_id '
+    part_1 = "patient_id,"
+    part_2 = ' patient_id=self.patient_id, '
     part_3 = ""
-    k = 0
-    for i in range(len(config["elements"])):
-        element = config["elements"][i]
-        part_1 = part_1 + element["name"]
-        if (element["class"]!="label"):
-            part_2 = part_2 + ''' {0}=res[{1}]'''.format(element["name"],k)
-        if (i<len(config["elements"])-1):
-            part_1 = part_1 + ","
-            part_2 = part_2 + ","
-            part_3 = part_3 + ', ""'
-        else:
-            part_1 = part_1 + " FROM "
-        k = k + 1
-
+    kk = 1
+    for ii in range(len(config["blocks"])):
+        block = config["blocks"][ii]
+        for i in range(len(block["elements"])):
+            element = block["elements"][i]
+            if (element["class"]!="label" and element["class"]!="table"):
+                part_1 = part_1 + element["name"]+ ","
+                part_2 = part_2 + ''' {0}=res[{1}],'''.format(element["name"],kk)
+                part_3 = part_3 + ', ""'
+                kk = kk + 1
+            elif (element["class"]=="table"):
+                for j in range(len(element["content"])):
+                    for k in range(int(element["row"])):
+                        part_1 = part_1 + element["content"][j]["name"]+"_"+str(k)+ ","
+                        part_2 = part_2 + ''' {0}=res[{1}],'''.format(element["content"][j]["name"]+"_"+str(k),kk)
+                        part_3 = part_3 + ', ""'
+                        kk = kk + 1
+            
+    part_1 = part_1[0:len(part_1)-1]
+    part_2 = part_2[0:len(part_2)-1]
+    #part_3 = part_3[0:len(part_3)-1]
+    
     code = code + '''
 
         res = ['''
@@ -372,7 +485,7 @@ class '''
             self.cur.execute('''
     code = code + "'''SELECT "
 
-    code = code + part_1 + configName + " WHERE patient_id='{0}' '''.format(self.patient_id))"
+    code = code + part_1 + " FROM " + configName + " WHERE patient_id='{0}' '''.format(self.patient_id))"
     code = code + '''
             for row in self.cur:
                 res = row'''
@@ -400,23 +513,36 @@ class '''
     part_1_2 = "'{0}', "
     part_2 = "self.patient_id, "
     part_3 = ' patient_id=self.patient_id, '
-    k = 0
-    for i in range(len(config["elements"])):
-        element = config["elements"][i]
-        if (element["class"]=="label"):
-            continue
-        part_0 = part_0 + element["name"] + ' = self.get_body_argument("'+ element["name"] + '") ' + '''
+    kk = 1
+    for ii in range(len(config["blocks"])):
+        block = config["blocks"][ii]
+        for i in range(len(block["elements"])):
+            element = block["elements"][i]
+            if (element["class"]=="label"):
+                continue
+            if (element["class"]!="table"):
+                part_0 = part_0 + element["name"] + ' = self.get_body_argument("'+ element["name"] + '") ' + '''
         '''
-        part_1_1 = part_1_1 + element["name"]
-        part_1_2 = part_1_2 + "'{" + str(i) + "}'"
-        part_2 = part_2 + element["name"]
-        part_3 = part_3 +  element["name"] + '=' + element["name"]
-        if (i<len(config["elements"])-1):
-            part_1_1 = part_1_1 + ", "
-            part_1_2 = part_1_2 + ", "
-            part_2 = part_2 + ","
-            part_3 = part_3 + ", "
-        k = k + 1
+                part_1_1 = part_1_1 + element["name"] + ", "
+                part_1_2 = part_1_2 + "'{" + str(kk) + "}', "
+                part_2 = part_2 + element["name"] + ","
+                part_3 = part_3 +  element["name"] + '=' + element["name"] + ", "
+                kk = kk + 1
+            else:
+                for j in range(len(element["content"])):
+                    for k in range(int(element["row"])):
+                        part_0 = part_0 + element["content"][j]["name"] +"_"+str(k) + ' = self.get_body_argument("'+ element["content"][j]["name"] +"_"+str(k) + '") ' + '''
+        '''
+                        part_1_1 = part_1_1 + element["content"][j]["name"] +"_"+str(k) + ", "
+                        part_1_2 = part_1_2 + "'{" + str(kk) + "}', "
+                        part_2 = part_2 + element["content"][j]["name"] +"_"+str(k) + ","
+                        part_3 = part_3 +  element["content"][j]["name"] +"_"+str(k) + '=' + element["content"][j]["name"] +"_"+str(k) + ", "
+                        kk = kk + 1
+    
+    part_1_1 = part_1_1[0:len(part_1_1)-2]
+    part_1_2 = part_1_2[0:len(part_1_2)-2]
+    part_2 = part_2[0:len(part_2)-1]
+    part_3 = part_3[0:len(part_3)-2]
 
     code = code + part_0 + '''
         conn = MySQLdb.connect( host   = 'localhost',
@@ -491,21 +617,31 @@ class api_'''
     code = code + "'''SELECT "
     # generate the dynamic part for api Handler
     part_1 = ""
-    part_2 = ' "patient_id":self.patient_id'
+    part_2 = ' "patient_id":self.patient_id,'
     part_3 = ""
-    for i in range(len(config["elements"])):
-        element = config["elements"][i]
-        part_1 = part_1 + element["name"]
-        if (element["class"]!="label"):
-            part_2 = part_2 + ''' "{0}":res[{1}]'''.format(element["name"],i)
-        if (i<len(config["elements"])-1):
-            part_1 = part_1 + ","
-            part_2 = part_2 + ","
-            part_3 = part_3 + ', ""'
-        else:
-            part_1 = part_1 + " FROM "
-            part_2 = part_2 + "}"
+    kk = 1
+    for ii in range(len(config["blocks"])):
+        block = config["blocks"][ii]
+        for i in range(len(block["elements"])):
+            element = block["elements"][i]
+            if (element["class"]!="table"):
+                part_1 = part_1 + element["name"] + ","
+                if (element["class"]!="label"):
+                    part_2 = part_2 + ''' "{0}":res[{1}],'''.format(element["name"],kk)
+                    part_3 = part_3 + ', ""'
+                    kk = kk + 1
+                    
+            else:
+                for j in range(len(element["content"])):
+                    for k in range(int(element["row"])):
+                        part_1 = part_1 + element["content"][j]["name"] + "_" + str(k) + ","
+                        part_2 = part_2 + ''' "{0}":res[{1}],'''.format(element["content"][j]["name"] + "_" + str(k), kk)
+                        part_3 = part_3 + ', ""'
+                        kk = kk + 1
     
+    part_1 = part_1[0:len(part_1)-1] + " FROM "
+    part_2 = part_2[0:len(part_2)-1] + "}"
+
     code = code + part_1 + configName + " WHERE patient_id='{0}' '''.format(self.patient_id))"
     code = code + '''
         res = ['''
@@ -534,10 +670,19 @@ grant select, insert, update, delete on MData.* to '{0}'@'localhost' identified 
     code = code + "create table " + configName + " ("
     code = code + '''
     '''
-    for i in range(len(config["elements"])):
-        element = config["elements"][i]
-        code = code + "`" + element["name"] + "`  varchar(12) default ''"
-        code = code + ''',
+    for ii in range(len(config["blocks"])):
+        block = config["blocks"][ii]
+        for i in range(len(block["elements"])):
+            element = block["elements"][i]
+            if (element["class"]!="table"):
+                code = code + "`" + element["name"] + "`  varchar(12) default ''"
+                code = code + ''',
+    '''
+            else:
+                for j in range(len(element["content"])):
+                    for k in range(int(element["row"])):
+                        code = code + "`" + element["content"][j]["name"] + "_" +str(k)  + "`  varchar(12) default ''"
+                        code = code + ''',
     '''
     code = code + '''primary key(patient_id)
 ) engine=innodb         default charset=utf8;

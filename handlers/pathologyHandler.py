@@ -43,9 +43,9 @@ class pathologyHandler(tornado.web.RequestHandler):
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_pathology_page.html", patient_id=self.patient_id , patho_diagnosis=res[1], lym_vas_invasion=res[2], tot_lymph_node=res[3], deep=res[4], pni=res[5], pos_lymph_node=res[6])
+            self.render("../html/read_pathology_page.html", patient_id=self.patient_id,  patho_diagnosis=res[1], lym_vas_invasion=res[2], tot_lymph_node=res[3], deep=res[4], pni=res[5], pos_lymph_node=res[6])
         else:
-            self.render("../html/edit_pathology_page.html", patient_id=self.patient_id , patho_diagnosis=res[1], lym_vas_invasion=res[2], tot_lymph_node=res[3], deep=res[4], pni=res[5], pos_lymph_node=res[6])
+            self.render("../html/edit_pathology_page.html", patient_id=self.patient_id,  patho_diagnosis=res[1], lym_vas_invasion=res[2], tot_lymph_node=res[3], deep=res[4], pni=res[5], pos_lymph_node=res[6])
 
     def post(self):
         print('----------------------------Submit----------------------------')

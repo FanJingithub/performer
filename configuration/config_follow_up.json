@@ -2,33 +2,42 @@
     "class": "form",
     "name": "follow_up",
     "label": "随访记录",
-    "count": 2,
+    "count": 1,
 
-    "elements": [
-
+    "blocks": [
         {
-            "class": "label",
-            "name": "patient_id",
-            "label": "ID",
-            "value": ""
-        },
+            "class": "block",
+            "name": "block_1",
+            "label": "",
+            "count": 13,
 
-        {
-            "class": "radio",
-            "name": "recurrance",
-            "label": "是否复发",
-            "count": 2,
-            "options": [
+            "elements": [
+
                 {
-                    "value": "yes",
-                    "label": "是"
+                    "class": "label",
+                    "name": "patient_id",
+                    "label": "ID",
+                    "value": ""
                 },
+        
                 {
-                    "value": "no",
-                    "label": "否"
+                    "class": "radio",
+                    "name": "recurrance",
+                    "label": "是否复发",
+                    "count": 2,
+                    "options": [
+                        {
+                            "value": "yes",
+                            "label": "是"
+                        },
+                        {
+                            "value": "no",
+                            "label": "否"
+                        }
+                    ],
+                    "value": ""
                 }
-            ],
-            "value": ""
+            ]
         }
     ]
 }

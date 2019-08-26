@@ -2,37 +2,46 @@
     "class": "form",
     "name": "surgery",
     "label": "手术记录",
-    "count": 2,
+    "count": 1,
 
-    "elements": [
-
+    "blocks": [
         {
-            "class": "label",
-            "name": "patient_id",
-            "label": "ID",
-            "value": ""
-        },
+            "class": "block",
+            "name": "block_1",
+            "label": "",
+            "count": 13,
 
-        {
-            "class": "radio",
-            "name": "resection_way",
-            "label": "手术方式",
-            "count": 3,
-            "options": [
+            "elements": [
+
                 {
-                    "value": "dixon",
-                    "label": "Dixon 式"
+                    "class": "label",
+                    "name": "patient_id",
+                    "label": "ID",
+                    "value": ""
                 },
+        
                 {
-                    "value": "miles",
-                    "label": "Miles 式"
-                },
-                {
-                    "value": "no",
-                    "label": "姑息手术"
+                    "class": "radio",
+                    "name": "resection_way",
+                    "label": "手术方式",
+                    "count": 3,
+                    "options": [
+                        {
+                            "value": "dixon",
+                            "label": "Dixon 式"
+                        },
+                        {
+                            "value": "miles",
+                            "label": "Miles 式"
+                        },
+                        {
+                            "value": "no",
+                            "label": "姑息手术"
+                        }
+                    ],
+                    "value": ""
                 }
-            ],
-            "value": ""
+            ]
         }
     ]
 }

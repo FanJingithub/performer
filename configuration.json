@@ -36,6 +36,11 @@
         {
             "label": "随访记录",
             "name": "follow_up"
-        }
+        },
+
+	    {
+            "label": "表单3",
+            "name": "form3"
+	    }
     ]
 }

@@ -2,45 +2,96 @@
     "class": "form",
     "name": "chemotherapy",
     "label": "化疗记录",
-    "count": 2,
+    "count": 1,
 
-    "elements": [
-
+    "blocks": [
         {
-            "class": "label",
-            "name": "patient_id",
-            "label": "ID",
-            "value": ""
-        },
+            "class": "block",
+            "name": "block_1",
+            "label": "",
+            "count": 13,
 
-        {
-            "class": "radio",
-            "name": "chemo_way",
-            "label": "化疗方案",
-            "count": 3,
-            "options": [
+            "elements": [
+
                 {
-                    "value": "xelox",
-                    "label": "XELOX方案"
+                    "class": "label",
+                    "name": "patient_id",
+                    "label": "ID",
+                    "value": ""
                 },
+        
                 {
-                    "value": "xeliri",
-                    "label": "XELIRI方案"
+                    "class": "radio",
+                    "name": "chemo_way",
+                    "label": "化疗方案",
+                    "count": 3,
+                    "options": [
+                        {
+                            "value": "xelox",
+                            "label": "XELOX方案"
+                        },
+                        {
+                            "value": "xeliri",
+                            "label": "XELIRI方案"
+                        },
+                        {
+                            "value": "cap",
+                            "label": "卡培他滨单药"
+                        }
+                    ],
+                    "value": ""
                 },
+        
                 {
-                    "value": "cap",
-                    "label": "卡培他滨单药"
+                    "class": "time",
+                    "name": "last_chemo",
+                    "label": "上次化疗时间",
+                    "value": ""
+                },
+        
+                {
+                    "class": "table",
+                    "name": "chemo_record",
+                    "label": "化疗记录",
+                    "row": 3,
+                    "col": 3,
+                    "content": [
+                        {
+                            "class": "time",
+                            "name": "chemo_time",
+                            "label": "化疗时间",
+                            "value": ""
+                        },
+                        {
+                            "class": "radio",
+                            "name": "chemo_way",
+                            "label": "化疗方案",
+                            "count": 3,
+                            "options": [
+                                {
+                                    "value": "xelox",
+                                    "label": "XELOX方案"
+                                },
+                                {
+                                    "value": "xeliri",
+                                    "label": "XELIRI方案"
+                                },
+                                {
+                                    "value": "cap",
+                                    "label": "卡培他滨单药"
+                                }
+                            ],
+                            "value": ""
+                        },
+                        {
+                            "class": "text",
+                            "name": "desc",
+                            "label": "描述",
+                            "value": ""
+                        }
+                    ]
                 }
-            ],
-            "value": ""
-        },
-
-        {
-            "class": "time",
-            "name": "last_chemo",
-            "label": "上次化疗时间",
-            "value": ""
+            ]
         }
-
     ]
 }

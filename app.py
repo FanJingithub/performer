@@ -18,6 +18,7 @@ from handlers.surgeryHandler import surgeryHandler
 from handlers.chemotherapyHandler import chemotherapyHandler
 from handlers.radiotherapyHandler import radiotherapyHandler
 from handlers.follow_upHandler import follow_upHandler
+from handlers.form3Handler import form3Handler
 from handlers.api_baseHandler import api_baseHandler
 from handlers.api_labHandler import api_labHandler
 from handlers.api_pathologyHandler import api_pathologyHandler
@@ -25,6 +26,7 @@ from handlers.api_surgeryHandler import api_surgeryHandler
 from handlers.api_chemotherapyHandler import api_chemotherapyHandler
 from handlers.api_radiotherapyHandler import api_radiotherapyHandler
 from handlers.api_follow_upHandler import api_follow_upHandler
+from handlers.api_form3Handler import api_form3Handler
 
 class listHandler(tornado.web.RequestHandler):
 
@@ -93,13 +95,15 @@ class Application(tornado.web.Application):
                         ("/chemotherapy",      chemotherapyHandler),
                         ("/radiotherapy",      radiotherapyHandler),
                         ("/follow_up",      follow_upHandler),
+                        ("/form3",      form3Handler),
                         ("/api/base",      api_baseHandler),
                         ("/api/lab",      api_labHandler),
                         ("/api/pathology",      api_pathologyHandler),
                         ("/api/surgery",      api_surgeryHandler),
                         ("/api/chemotherapy",      api_chemotherapyHandler),
                         ("/api/radiotherapy",      api_radiotherapyHandler),
-                        ("/api/follow_up",      api_follow_upHandler)
+                        ("/api/follow_up",      api_follow_upHandler),
+                        ("/api/form3",      api_form3Handler)
                     ]
 
         tornado.web.Application.__init__(self, handlers)

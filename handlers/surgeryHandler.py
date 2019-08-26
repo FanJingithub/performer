@@ -43,9 +43,9 @@ class surgeryHandler(tornado.web.RequestHandler):
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_surgery_page.html", patient_id=self.patient_id , resection_way=res[1])
+            self.render("../html/read_surgery_page.html", patient_id=self.patient_id,  resection_way=res[1])
         else:
-            self.render("../html/edit_surgery_page.html", patient_id=self.patient_id , resection_way=res[1])
+            self.render("../html/edit_surgery_page.html", patient_id=self.patient_id,  resection_way=res[1])
 
     def post(self):
         print('----------------------------Submit----------------------------')

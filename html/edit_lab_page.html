@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style12.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -62,6 +62,11 @@
                     <div>随访记录</div>
                 </a>
             </div>
+            <div class="menu-item">
+                <a class="item-link" href="/form3?patient_id={{patient_id}}">
+                    <div>表单3</div>
+                </a>
+            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -70,20 +75,21 @@
             <br>
             <form id="vm" v-on:submit="submit">
                 <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
-                <div class="form-part-1">
-                    <div>
-                        <label class="form-label">CEA: </label>
-                        <input class="form-number" type="number" v-model.number="CEA" >
-                        <label>&nbsp;ng/mL</label>
-                        <br><br>
-                    </div>
-                </div>
-                <div class="form-part-2">
-                    <div>
-                        <label class="form-label">CA199: </label>
-                        <input class="form-number" type="number" v-model.number="CA199" >
-                        <label>&nbsp;U/mL</label>
-                        <br><br>
+                <div class="form-part">
+                    <div class="block">
+                        <h3></h3>
+                        <div>
+                            <label class="form-label">CEA: </label>
+                            <input style="width:36px; height:20px" type="number" v-model.number="CEA" >
+                            <label>&nbsp;ng/mL</label>
+                            <br>
+                        </div>
+                        <div>
+                            <label class="form-label">CA199: </label>
+                            <input style="width:36px; height:20px" type="number" v-model.number="CA199" >
+                            <label>&nbsp;U/mL</label>
+                            <br>
+                        </div>
                     </div></div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
@@ -95,22 +101,22 @@
         var vm = new Vue({
             el: '#vm',
             data: {
-                patient_id: "{{patient_id}}" ,
-                CEA: "{{CEA}}" ,
-                CA199: "{{CA199}}" 
+                    patient_id: "{{patient_id}}",
+                    CEA: "{{CEA}}",
+                    CA199: "{{CA199}}"
             },
             mounted(){
                 this.init()
             },
             methods:{
                 init:function(){
-                this.$http.get('/api/lab?patient_id={{patient_id}}').then(function(res){
-                    this.patient_id=res.data.patient_id;
-                    this.CEA=res.data.CEA;
-                    this.CA199=res.data.CA199;
-                },function(){
-                    console.log('error');
-                });
+                    this.$http.get('/api/lab?patient_id={{patient_id}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.CEA=res.data.CEA;
+                        this.CA199=res.data.CA199;
+                    },function(){
+                        console.log('error');
+                    });
                 },
                 submit: function(event) {
                     event.preventDefault();
