@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style12.css">
+    <link rel="stylesheet" href="css/style_103.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -62,11 +62,6 @@
                     <div>随访记录</div>
                 </a>
             </div>
-            <div class="menu-item">
-                <a class="item-link" href="/form3?patient_id={{patient_id}}">
-                    <div>表单3</div>
-                </a>
-            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -80,39 +75,39 @@
                         <h3></h3>
                         <div>
                             <label class="form-label">病理诊断: </label>
-                            <input style="width:60px; height:20px" v-model="patho_diagnosis" disabled>
-                            <br>
+                            <input class="form-text" v-model="patho_diagnosis" disabled>
+                            <br/><br/>
                         </div>
                         <div>
                             <label class="form-label">脉管癌栓:</label>
                             <input type="radio" id="yes" value="yes" v-model="lym_vas_invasion" disabled>
                             <label for="yes">是&nbsp;&nbsp;</label>
                             <input type="radio" id="no" value="no" v-model="lym_vas_invasion" disabled>
-                            <label for="no">否&nbsp;&nbsp;</label><br>
+                            <label for="no">否&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">淋巴结数: </label>
-                            <input style="width:36px; height:20px" type="number" v-model.number="tot_lymph_node" disabled>
+                            <input class="form-number" type="number" v-model.number="tot_lymph_node" disabled>
                             <label>&nbsp;</label>
-                            <br>
+                            <br/><br/>
                         </div>
                         <div>
                             <label class="form-label">浸润深度: </label>
-                            <input style="width:60px; height:20px" v-model="deep" disabled>
-                            <br>
+                            <input class="form-text" v-model="deep" disabled>
+                            <br/><br/>
                         </div>
                         <div>
                             <label class="form-label">神经侵犯:</label>
                             <input type="radio" id="yes" value="yes" v-model="pni" disabled>
                             <label for="yes">是&nbsp;&nbsp;</label>
                             <input type="radio" id="no" value="no" v-model="pni" disabled>
-                            <label for="no">否&nbsp;&nbsp;</label><br>
+                            <label for="no">否&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">淋巴阳性: </label>
-                            <input style="width:36px; height:20px" type="number" v-model.number="pos_lymph_node" disabled>
+                            <input class="form-number" type="number" v-model.number="pos_lymph_node" disabled>
                             <label>&nbsp;</label>
-                            <br>
+                            <br/><br/>
                         </div>
                     </div></div>
                 <div class="form-part-3">

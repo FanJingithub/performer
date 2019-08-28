@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style12.css">
+    <link rel="stylesheet" href="css/style_103.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -62,11 +62,6 @@
                     <div>随访记录</div>
                 </a>
             </div>
-            <div class="menu-item">
-                <a class="item-link" href="/form3?patient_id={{patient_id}}">
-                    <div>表单3</div>
-                </a>
-            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -80,28 +75,28 @@
                         <h3>人口学信息</h3>
                         <div>
                             <label class="form-label">姓名: </label>
-                            <input style="width:60px; height:20px" v-model="name" >
-                            <br>
+                            <input class="form-text" v-model="name" >
+                            <br/><br/>
                         </div>
                         <div>
                             <label class="form-label">性别:</label>
                             <input type="radio" id="male" value="male" v-model="sex" >
                             <label for="male">男&nbsp;&nbsp;</label>
                             <input type="radio" id="female" value="female" v-model="sex" >
-                            <label for="female">女&nbsp;&nbsp;</label><br>
+                            <label for="female">女&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">年龄: </label>
-                            <input style="width:36px; height:20px" type="number" v-model.number="age" >
+                            <input class="form-number" type="number" v-model.number="age" >
                             <label>&nbsp;岁</label>
-                            <br>
+                            <br/><br/>
                         </div>
                         <div>
                             <label class="form-label">婚姻情况:</label>
                             <input type="radio" id="yes" value="yes" v-model="marriage" >
                             <label for="yes">已婚&nbsp;&nbsp;</label>
                             <input type="radio" id="no" value="no" v-model="marriage" >
-                            <label for="no">未婚&nbsp;&nbsp;</label><br>
+                            <label for="no">未婚&nbsp;&nbsp;</label><br/><br/>
                         </div>
                     </div>
                     <div class="block">
@@ -113,7 +108,7 @@
                             <input type="radio" id="right" value="right" v-model="site" >
                             <label for="right">右侧结肠&nbsp;&nbsp;</label>
                             <input type="radio" id="rectal" value="rectal" v-model="site" >
-                            <label for="rectal">直肠&nbsp;&nbsp;</label><br>
+                            <label for="rectal">直肠&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">分期:</label>
@@ -124,7 +119,7 @@
                             <input type="radio" id="3" value="3" v-model="stage" >
                             <label for="3">III 期&nbsp;&nbsp;</label>
                             <input type="radio" id="4" value="4" v-model="stage" >
-                            <label for="4">IV 期&nbsp;&nbsp;</label><br>
+                            <label for="4">IV 期&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">级别:</label>
@@ -135,28 +130,28 @@
                             <input type="radio" id="3" value="3" v-model="grade" >
                             <label for="3">III 级&nbsp;&nbsp;</label>
                             <input type="radio" id="4" value="4" v-model="grade" >
-                            <label for="4">IV 级&nbsp;&nbsp;</label><br>
+                            <label for="4">IV 级&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">是否手术:</label>
                             <input type="radio" id="yes" value="yes" v-model="surgery" >
                             <label for="yes">是&nbsp;&nbsp;</label>
                             <input type="radio" id="no" value="no" v-model="surgery" >
-                            <label for="no">否&nbsp;&nbsp;</label><br>
+                            <label for="no">否&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">是否放疗:</label>
                             <input type="radio" id="yes" value="yes" v-model="radiotherapy" >
                             <label for="yes">是&nbsp;&nbsp;</label>
                             <input type="radio" id="no" value="no" v-model="radiotherapy" >
-                            <label for="no">否&nbsp;&nbsp;</label><br>
+                            <label for="no">否&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">是否化疗:</label>
                             <input type="radio" id="yes" value="yes" v-model="chemotherapy" >
                             <label for="yes">是&nbsp;&nbsp;</label>
                             <input type="radio" id="no" value="no" v-model="chemotherapy" >
-                            <label for="no">否&nbsp;&nbsp;</label><br>
+                            <label for="no">否&nbsp;&nbsp;</label><br/><br/>
                         </div>
                     </div></div>
                 <div class="form-part-3">

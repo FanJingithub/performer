@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style12.css">
+    <link rel="stylesheet" href="css/style_103.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -62,11 +62,6 @@
                     <div>随访记录</div>
                 </a>
             </div>
-            <div class="menu-item">
-                <a class="item-link" href="/form3?patient_id={{patient_id}}">
-                    <div>表单3</div>
-                </a>
-            </div>
         </div>
         <div class="container">
             <div style="text-align:center">
@@ -88,12 +83,12 @@
                             <label for="cap">卡培他滨单药&nbsp;&nbsp;</label>
                             <input type="radio" value="other" v-model="chemo_way" disabled>
                             <label for="other">其他：&nbsp;</label>
-                            <input type="text" style="width:186px; height:20px" v-model="chemo_way_other"  disabled><br>
+                            <input type="text" class="form-text" v-model="chemo_way_other"  disabled><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">上次化疗时间: </label>
                             <el-date-picker v-model="last_chemo" type="date" placeholder="Pick a day" disabled></el-date-picker>
-                            <br><br>
+                            <br/><br/>
                         </div>
                         <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
                             <tr>

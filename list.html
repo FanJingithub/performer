@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style_103.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
     <script src="./js/jquery-3.4.1.js"></script>
@@ -18,19 +17,19 @@
             <h1>临床科研数据库系统</h1>
         </div>
         <div class="table-container" id="vm">
-            <div style="text-align:center">
-                <h3>病例列表</h3>
+            <div style="text-align:center;font-size:28px;font:bolder;padding-top:10px">
+                <label>病例列表</label>
             </div>
             <div class="table-sub-heading">
                 <button class="add" v-on:click="add">新增</button>
             </div>
             <div class="table_div">
                 <div class="div_clear">
-                    <div class="center_center">
+                    <div style="height:580px;width:95%;margin:0 auto">
                         <div class="table_content">
                             <table cellspacing="0px" cellpadding="0px">
                                 <thead >
-                                    <tr>
+                                    <tr height="30px">
                                         <th width="16%">病例号</th>
                                         <th width="8%">性别</th>
                                         <th width="8%">年龄</th>
@@ -49,9 +48,11 @@
                                         <td width="32%">复旦大学附属肿瘤医院</td>
                                         <td width="20%" style="border-right:none">
                                             <img width='16' height='16' src="./images/view.jpg" style="vertical-align:middle"/>
-                                            <a :href="patient.view">查看</a>&nbsp;&nbsp;&nbsp;
+                                            <a :href="patient.view">查看</a>
+                                            <!--
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <img width='16' height='16' src="./images/del.gif" style="vertical-align:middle"/>
-                                            <a href="#">删除</a>
+                                            <a href="#">删除</a>-->
                                         </td>
                                     </tr>
                                     </template>
@@ -62,16 +63,16 @@
                 </div>
                 <div class="div_clear">
                     <div class="left_bottom"></div>
-                    <div class="center_bottom">
-                        <span>&nbsp;&nbsp;共有 ${ list_length } 条记录，当前第 1/1 页</span>
+                    <div style="background: #009688;height:38px;width:90%;margin:0 auto;line-height:35px;">
+                        <span style="color:white;margin-top:3px">&nbsp;&nbsp;共有 ${ list_length } 条记录，当前第 1/1 页</span>
                         <div style="float:right;padding-right:30px">
-                            <input style="height:25px" type="button" value="首页"/>
-                            <input style="height:25px" type="button" value="上页"/>
-                            <input style="height:25px" type="button" value="下页"/>
-                            <input style="height:25px" type="button" value="尾页"/>
-                            <span>跳转到</span>
-                            <input type="text" size="1"/>
-                            <input style="height:25px" type="button" value="跳转"/>
+                            <input style="width:60px;height:30px;margin-top:3px" type="button" value="首页"/> &nbsp;&nbsp;
+                            <input style="width:60px;height:30px;margin-top:3px" type="button" value="上页"/>&nbsp;&nbsp;
+                            <input style="width:60px;height:30px;margin-top:3px" type="button" value="下页"/>&nbsp;&nbsp;
+                            <input style="width:60px;height:30px;margin-top:3px" type="button" value="尾页"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span style="color:white;margin-top:3px">跳转到</span>&nbsp;&nbsp;
+                            <input type="text" size="1" style="width:36px;height:20px;margin-top:3px"/>&nbsp;&nbsp;
+                            <input style="width:60px;height:30px;margin-top:3px" type="button" value="跳转"/>&nbsp;&nbsp;
                         </div>
                     </div>
                     <div class="right_bottom"></div>

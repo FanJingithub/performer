@@ -257,7 +257,7 @@ def generateHTML(editable):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style12.css">
+    <link rel="stylesheet" href="css/style_103.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -318,17 +318,17 @@ def generateHTML(editable):
                 newCode = '''
                         <div>
                             <label class="form-label">{0}: </label>
-                            <input style="width:60px; height:20px" v-model="{1}" {2}>
-                            <br>
+                            <input class="form-text" v-model="{1}" {2}>
+                            <br/><br/>
                         </div>'''.format(element["label"], element["name"], disabled)
             
             elif (element["class"]=="number"):
                 newCode = '''
                         <div>
                             <label class="form-label">{0}: </label>
-                            <input style="width:36px; height:20px" type="number" v-model.number="{1}" {3}>
+                            <input class="form-number" type="number" v-model.number="{1}" {3}>
                             <label>&nbsp;{2}</label>
-                            <br>
+                            <br/><br/>
                         </div>'''.format(element["label"], element["name"], element["unit"], disabled)
 
             elif (element["class"]=="radio"):
@@ -345,10 +345,10 @@ def generateHTML(editable):
                     newOption = '''
                             <input type="radio" value="other" v-model="{0}" {2}>
                             <label for="other">其他：&nbsp;</label>
-                            <input type="text" style="width:186px; height:20px" v-model="{1}"  {2}>'''.format(
+                            <input type="text" class="form-text" v-model="{1}"  {2}>'''.format(
                                 element["name"], element["name"]+"_other", disabled)
                     newCode = newCode + newOption
-                newCode = newCode + '''<br>
+                newCode = newCode + '''<br/><br/>
                         </div>'''
                 
             elif (element["class"]=="time"):
@@ -356,7 +356,7 @@ def generateHTML(editable):
                         <div>
                             <label class="form-label">{0}: </label>
                             <el-date-picker v-model="{1}" type="date" placeholder="Pick a day" {2}></el-date-picker>
-                            <br><br>
+                            <br/><br/>
                         </div>'''.format(element["label"], element["name"], disabled)
                 
             elif (element["class"]=="table"):
