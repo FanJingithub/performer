@@ -52,17 +52,9 @@
     text-decoration: none;
     color: white;
 }
-.form-part-1 {
-    background: white;
-    width:600px;
-    height: 680px;
-    float: left;
-    color: black;
-}
-
 .form-part-3 {
     margin-top: 16px;
-    width: 70%;
+    width: 75%;
     height: 50px;
     clear:both;
     margin:0 auto;
