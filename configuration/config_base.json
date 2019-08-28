@@ -14,12 +14,7 @@
 
             "elements": [
 
-                {
-                    "class": "label",
-                    "name": "patient_id",
-                    "label": "ID",
-                    "value": ""
-                },
+                {"class": "label","name": "patient_id","label": "ID","value": ""},
         
                 {
                     "class": "text",
@@ -33,6 +28,7 @@
                     "name": "sex",
                     "label": "性别",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "male",
@@ -60,6 +56,7 @@
                     "name": "marriage",
                     "label": "婚姻情况",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "yes",
@@ -87,6 +84,7 @@
                     "name": "site",
                     "label": "肿瘤部位",
                     "count": 3,
+                    "other": 0,
                     "options": [
                         {
                             "value": "left",
@@ -109,6 +107,7 @@
                     "name": "stage",
                     "label": "分期",
                     "count": 4,
+                    "other": 0,
                     "options": [
                         {
                             "value": "1",
@@ -135,6 +134,7 @@
                     "name": "grade",
                     "label": "级别",
                     "count": 4,
+                    "other": 0,
                     "options": [
                         {
                             "value": "1",
@@ -161,6 +161,7 @@
                     "name": "surgery",
                     "label": "是否手术",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "yes",
@@ -179,6 +180,7 @@
                     "name": "radiotherapy",
                     "label": "是否放疗",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "yes",
@@ -197,6 +199,7 @@
                     "name": "chemotherapy",
                     "label": "是否化疗",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "yes",

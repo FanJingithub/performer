@@ -32,6 +32,7 @@
                     "name": "lym_vas_invasion",
                     "label": "脉管癌栓",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "yes",
@@ -66,6 +67,7 @@
                     "name": "pni",
                     "label": "神经侵犯",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "yes",

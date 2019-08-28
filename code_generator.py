@@ -24,7 +24,9 @@ def generateHTML(editable):
             #-------------------------------------------------------------
             # read version
             #typeName = "read"
-            code =  '''var vm = new Vue({
+            code = ""
+            other_part = ""
+            code =  code + '''var vm = new Vue({
             el: '#vm',
             data: {'''
             for ii in range(len(config["blocks"])):
@@ -54,9 +56,24 @@ def generateHTML(editable):
                             
                     code = code + newCode
 
+                    if (element["class"]=="radio" and int(element["other"])==1):
+                        newCode = '''
+                    {0}: "{{{{{0}}}}}",'''.format(element["name"]+"_other")
+                        code = code + newCode
+                        other_part = other_part + '''
+                    if (this.{0}!="other") this.{1} = "";'''.format(element["name"],element["name"]+"_other")
+
             code = code[:len(code)-1] + '''
-            }},
-            methods:{{
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){'''
+
+            code = code + other_part
+            code = code + '''
+                }},
                 submit:function(){{
                     return 0;
                 }},
@@ -70,7 +87,9 @@ def generateHTML(editable):
             #-------------------------------------------------------------
             # edit version
             #typeName = "edit"
-            code = '''var vm = new Vue({
+            code = ""
+            other_part = ""
+            code = code + '''var vm = new Vue({
             el: '#vm',
             data: {'''
             for ii in range(len(config["blocks"])):
@@ -99,6 +118,14 @@ def generateHTML(editable):
                     {0}: {1}"{{{{{0}}}}}"{2},'''.format(element["content"][j]["name"]+"_"+str(k),dateTrans_1,dateTrans_2)
                     
                     code = code + newCode
+
+                    if (element["class"]=="radio" and int(element["other"])==1):
+                        newCode = '''
+                    {0}: "{{{{{0}}}}}",'''.format(element["name"]+"_other")
+                        code = code + newCode
+                        other_part = other_part + '''
+                        if (this.{0}!="other") this.{1} = "";'''.format(element["name"],element["name"]+"_other")
+                    
             code = code[:len(code)-1] + '''
             }},
             mounted(){{
@@ -143,6 +170,12 @@ def generateHTML(editable):
 
                     code = code + newCode
 
+                    if (element["class"]=="radio" and int(element["other"])==1):
+                        newCode = '''
+                        this.{0}=res.data.{0};'''.format(element["name"]+"_other")
+                        code = code + newCode
+
+            code = code + other_part
             code = code + '''
                     },function(){
                         console.log('error');
@@ -178,6 +211,11 @@ def generateHTML(editable):
 
                     part_1 = part_1 + newCode
                     part_2 = part_2 + dateTrans_3
+                    
+                    if (element["class"]=="radio" and int(element["other"])==1):
+                        newCode = '''
+                        {0}: this.{0},'''.format(element["name"]+"_other")
+                        part_1 = part_1 + newCode
 
             code = code + part_2 + '''
                     var
@@ -303,6 +341,13 @@ def generateHTML(editable):
                             <label for="{0}">{1}&nbsp;&nbsp;</label>'''.format(
                                 element["options"][j]["value"], element["options"][j]["label"], element["name"], disabled)
                     newCode = newCode + newOption
+                if (int(element["other"])==1):
+                    newOption = '''
+                            <input type="radio" value="other" v-model="{0}" {2}>
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" style="width:186px; height:20px" v-model="{1}"  {2}>'''.format(
+                                element["name"], element["name"]+"_other", disabled)
+                    newCode = newCode + newOption
                 newCode = newCode + '''<br>
                         </div>'''
                 
@@ -354,11 +399,16 @@ def generateHTML(editable):
                                 <td style="text-align: center"><el-date-picker v-model="{0}" type="date" placeholder="Pick a day" {1}></el-date-picker></td>'''.format(
                                     element["content"][j]["name"]+"_"+str(k),disabled)
                     newRow = newRow + '''
-                                </tr>'''
+                            </tr>'''
                     newCode = newCode + newRow
                 newCode = newCode + '''
                         </table>'''
-
+                if (element["explain"]!=""):
+                    explain = element["explain"]
+                    explain = explain.replace("\r\n","<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+                    explain = explain.replace("\n","<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+                    newCode = newCode + '''
+                        <label style="font-size:12px">注：{0}</label><br/><br/>'''.format(explain)
             
             elif (element["class"]=="select"):
                 pass
@@ -460,6 +510,12 @@ class '''
                 part_2 = part_2 + ''' {0}=res[{1}],'''.format(element["name"],kk)
                 part_3 = part_3 + ', ""'
                 kk = kk + 1
+                if (element["class"]=="radio" and int(element["other"])==1):
+                    part_1 = part_1 + element["name"]+ "_other,"
+                    part_2 = part_2 + ''' {0}=res[{1}],'''.format(element["name"]+"_other",kk)
+                    part_3 = part_3 + ', ""'
+                    kk = kk + 1
+
             elif (element["class"]=="table"):
                 for j in range(len(element["content"])):
                     for k in range(int(element["row"])):
@@ -528,6 +584,15 @@ class '''
                 part_2 = part_2 + element["name"] + ","
                 part_3 = part_3 +  element["name"] + '=' + element["name"] + ", "
                 kk = kk + 1
+                if (element["class"]=="radio" and int(element["other"])==1):
+                    part_0 = part_0 + element["name"] + '_other = self.get_body_argument("'+ element["name"] + '_other") ' + '''
+        '''
+                    part_1_1 = part_1_1 + element["name"] + "_other, "
+                    part_1_2 = part_1_2 + "'{" + str(kk) + "}', "
+                    part_2 = part_2 + element["name"] + "_other,"
+                    part_3 = part_3 +  element["name"] + '_other=' + element["name"] + "_other, "
+                    kk = kk + 1
+
             else:
                 for j in range(len(element["content"])):
                     for k in range(int(element["row"])):
@@ -630,6 +695,11 @@ class api_'''
                     part_2 = part_2 + ''' "{0}":res[{1}],'''.format(element["name"],kk)
                     part_3 = part_3 + ', ""'
                     kk = kk + 1
+                if (element["class"]=="radio" and int(element["other"])==1):
+                    part_1 = part_1 + element["name"] + "_other,"
+                    part_2 = part_2 + ''' "{0}":res[{1}],'''.format(element["name"]+"_other",kk)
+                    part_3 = part_3 + ', ""'
+                    kk = kk + 1
                     
             else:
                 for j in range(len(element["content"])):
@@ -675,13 +745,18 @@ grant select, insert, update, delete on MData.* to '{0}'@'localhost' identified 
         for i in range(len(block["elements"])):
             element = block["elements"][i]
             if (element["class"]!="table"):
-                code = code + "`" + element["name"] + "`  varchar(12) default ''"
+                code = code + "`" + element["name"] + "`  varchar(20) default ''"
                 code = code + ''',
     '''
+                if (element["class"]=="radio" and int(element["other"])==1):
+                    code = code + "`" + element["name"] + "_other`  varchar(50) default ''"
+                    code = code + ''',
+    '''
+
             else:
                 for j in range(len(element["content"])):
                     for k in range(int(element["row"])):
-                        code = code + "`" + element["content"][j]["name"] + "_" +str(k)  + "`  varchar(12) default ''"
+                        code = code + "`" + element["content"][j]["name"] + "_" +str(k)  + "`  varchar(20) default ''"
                         code = code + ''',
     '''
     code = code + '''primary key(patient_id)

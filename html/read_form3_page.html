@@ -88,7 +88,10 @@
                             <input type="radio" id="male" value="male" v-model="xb" disabled>
                             <label for="male">男&nbsp;&nbsp;</label>
                             <input type="radio" id="female" value="female" v-model="xb" disabled>
-                            <label for="female">女&nbsp;&nbsp;</label><br>
+                            <label for="female">女&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="xb" disabled>
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" style="width:186px; height:20px" v-model="xb_other"  disabled><br>
                         </div>
                     </div>
                     <div class="block">
@@ -111,23 +114,23 @@
                             <tr>
                                 <td style="text-align: center"><el-date-picker v-model="sj_0" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_0" disabled></td>
-                                </tr>
+                            </tr>
                             <tr>
                                 <td style="text-align: center"><el-date-picker v-model="sj_1" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_1" disabled></td>
-                                </tr>
+                            </tr>
                             <tr>
                                 <td style="text-align: center"><el-date-picker v-model="sj_2" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_2" disabled></td>
-                                </tr>
+                            </tr>
                             <tr>
                                 <td style="text-align: center"><el-date-picker v-model="sj_3" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_3" disabled></td>
-                                </tr>
+                            </tr>
                             <tr>
                                 <td style="text-align: center"><el-date-picker v-model="sj_4" type="date" placeholder="Pick a day" disabled></el-date-picker></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="lx_4" disabled></td>
-                                </tr>
+                            </tr>
                         </table>
                     </div></div>
                 <div class="form-part-3">
@@ -140,8 +143,10 @@
         var vm = new Vue({
             el: '#vm',
             data: {
+                    patient_id: "{{patient_id}}",
                     xm: "{{xm}}",
                     xb: "{{xb}}",
+                    xb_other: "{{xb_other}}",
                     nl: "{{nl}}",
                     sj_0: new Date(parseInt("{{sj_0}}")*1000),
                     sj_1: new Date(parseInt("{{sj_1}}")*1000),
@@ -154,7 +159,13 @@
                     lx_3: "{{lx_3}}",
                     lx_4: "{{lx_4}}"
             },
+            mounted(){
+                this.init()
+            },
             methods:{
+                init:function(){
+                    if (this.xb!="other") this.xb_other = "";
+                },
                 submit:function(){
                     return 0;
                 },

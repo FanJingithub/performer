@@ -85,7 +85,10 @@
                             <input type="radio" id="xeliri" value="xeliri" v-model="chemo_way" >
                             <label for="xeliri">XELIRI方案&nbsp;&nbsp;</label>
                             <input type="radio" id="cap" value="cap" v-model="chemo_way" >
-                            <label for="cap">卡培他滨单药&nbsp;&nbsp;</label><br>
+                            <label for="cap">卡培他滨单药&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="chemo_way" >
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" style="width:186px; height:20px" v-model="chemo_way_other"  ><br>
                         </div>
                         <div>
                             <label class="form-label">上次化疗时间: </label>
@@ -115,7 +118,7 @@
                                     <label style="font-size:12px" for="cap">卡培他滨单药&nbsp;&nbsp;</label>
                                 </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="desc_0" ></td>
-                                </tr>
+                            </tr>
                             <tr>
                                 <td style="text-align: center"><el-date-picker v-model="chemo_time_1" type="date" placeholder="Pick a day" ></el-date-picker></td>
                                 <td style="text-align: center">
@@ -127,7 +130,7 @@
                                     <label style="font-size:12px" for="cap">卡培他滨单药&nbsp;&nbsp;</label>
                                 </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="desc_1" ></td>
-                                </tr>
+                            </tr>
                             <tr>
                                 <td style="text-align: center"><el-date-picker v-model="chemo_time_2" type="date" placeholder="Pick a day" ></el-date-picker></td>
                                 <td style="text-align: center">
@@ -139,8 +142,9 @@
                                     <label style="font-size:12px" for="cap">卡培他滨单药&nbsp;&nbsp;</label>
                                 </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="desc_2" ></td>
-                                </tr>
+                            </tr>
                         </table>
+                        <label style="font-size:12px">注：第一行<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二行<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三行</label><br/><br/>
                     </div></div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
@@ -154,6 +158,7 @@
             data: {
                     patient_id: "{{patient_id}}",
                     chemo_way: "{{chemo_way}}",
+                    chemo_way_other: "{{chemo_way_other}}",
                     last_chemo: new Date(parseInt("{{last_chemo}}")*1000),
                     chemo_time_0: new Date(parseInt("{{chemo_time_0}}")*1000),
                     chemo_time_1: new Date(parseInt("{{chemo_time_1}}")*1000),
@@ -173,6 +178,7 @@
                     this.$http.get('/api/chemotherapy?patient_id={{patient_id}}').then(function(res){
                         this.patient_id=res.data.patient_id;
                         this.chemo_way=res.data.chemo_way;
+                        this.chemo_way_other=res.data.chemo_way_other;
                         this.last_chemo=new Date(parseInt(res.data.last_chemo)*1000);
                         if (isNaN(this.last_chemo.getTime())) this.last_chemo="";
                         this.chemo_time_0=new Date(parseInt(res.data.chemo_time_0)*1000);
@@ -187,6 +193,7 @@
                         this.desc_0=res.data.desc_0;
                         this.desc_1=res.data.desc_1;
                         this.desc_2=res.data.desc_2;
+                        if (this.chemo_way!="other") this.chemo_way_other = "";
                     },function(){
                         console.log('error');
                     });
@@ -202,6 +209,7 @@
                     data = {
                         patient_id: this.patient_id,
                         chemo_way: this.chemo_way,
+                        chemo_way_other: this.chemo_way_other,
                         last_chemo: this.last_chemo,
                         chemo_time_0: this.chemo_time_0,
                         chemo_time_1: this.chemo_time_1,

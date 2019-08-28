@@ -133,7 +133,12 @@
                     pni: "{{pni}}",
                     pos_lymph_node: "{{pos_lymph_node}}"
             },
+            mounted(){
+                this.init()
+            },
             methods:{
+                init:function(){
+                },
                 submit:function(){
                     return 0;
                 },

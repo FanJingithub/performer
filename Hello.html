@@ -185,6 +185,7 @@
                 flag_table[blockIndex][elementIndex] = flag_table[blockIndex][elementIndex] + 1;
                 table_div.id = "table_div_"+ blockIndex + "_" + elementIndex;
                 table_div.innerHTML = '<div style="margin-left:36px">\
+                        <label>表格注释(选填):&nbsp;</label><br/><textarea id="explain_'+ blockIndex + "_"+ elementIndex +'" rows="5" cols="86"></textarea><br/><br/>\
                         <label>字段个数:&nbsp;</label><input id="col_cc_'+ blockIndex + "_"+ elementIndex +'" type="number" style="width:36px;height:20px"/>&nbsp;&nbsp;\
                         <label>表格行数:&nbsp;</label><input id="row_cc_'+ blockIndex + "_"+ elementIndex +'" type="number" style="width:36px;height:20px"/><br/>\
                     </div><br/>'
@@ -344,12 +345,14 @@
                     else if (element_type=="radio"){
                         var option_count = document.getElementById("cc_"+ blockIndex + "_"+elementIndex).value;
                         var options = [];
+                        var other = 0;
                         for (optionIndex=1;optionIndex<=option_count;optionIndex++){
                             var option = {
                                 value :  document.getElementById("option_name_"+ blockIndex + "_" + elementIndex+ "_" + optionIndex).value,
                                 label :  document.getElementById("option_label_"+ blockIndex + "_" + elementIndex+ "_" + optionIndex).value
                             }
-                            options.push(option);
+                            if (option.value=="*other") other = 1
+                            else options.push(option);
                         }
 
                         var element = {
@@ -358,6 +361,7 @@
                             label: document.getElementById("label_" + blockIndex + "_"+elementIndex).value,
                             count: option_count,
                             options: options,
+                            other: other,
                             value: ""
                         }
                     }
@@ -413,7 +417,8 @@
                             label: document.getElementById("label_" + blockIndex + "_"+elementIndex).value,
                             row: document.getElementById("row_cc_"+ blockIndex + "_"+elementIndex).value,
                             col: column_count,
-                            content: columns
+                            content: columns,
+                            explain: document.getElementById("explain_" + blockIndex + "_"+elementIndex).value
                         }
                     }
                     elements.push(element);

@@ -25,6 +25,7 @@
                     "name": "resection_way",
                     "label": "手术方式",
                     "count": 3,
+                    "other": 0,
                     "options": [
                         {
                             "value": "dixon",

@@ -19,9 +19,9 @@ class api_form3Handler(tornado.web.RequestHandler):
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        self.cur.execute('''SELECT xm,xb,nl,sj_0,sj_1,sj_2,sj_3,sj_4,lx_0,lx_1,lx_2,lx_3,lx_4 FROM form3 WHERE patient_id='{0}' '''.format(self.patient_id))
-        res = [self.patient_id, "", "", "", "", "", "", "", "", "", "", "", "", ""]
+        self.cur.execute('''SELECT patient_id,xm,xb,xb_other,nl,sj_0,sj_1,sj_2,sj_3,sj_4,lx_0,lx_1,lx_2,lx_3,lx_4 FROM form3 WHERE patient_id='{0}' '''.format(self.patient_id))
+        res = [self.patient_id, "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
         for row in self.cur:
             res = row
-        self.data = { "patient_id":self.patient_id, "xm":res[1], "xb":res[2], "nl":res[3], "sj_0":res[4], "sj_1":res[5], "sj_2":res[6], "sj_3":res[7], "sj_4":res[8], "lx_0":res[9], "lx_1":res[10], "lx_2":res[11], "lx_3":res[12], "lx_4":res[13]}
+        self.data = { "patient_id":self.patient_id, "xm":res[1], "xb":res[2], "xb_other":res[3], "nl":res[4], "sj_0":res[5], "sj_1":res[6], "sj_2":res[7], "sj_3":res[8], "sj_4":res[9], "lx_0":res[10], "lx_1":res[11], "lx_2":res[12], "lx_3":res[13], "lx_4":res[14]}
         self.write(json.dumps(self.data))

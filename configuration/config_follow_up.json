@@ -25,6 +25,7 @@
                     "name": "recurrance",
                     "label": "是否复发",
                     "count": 2,
+                    "other": 0,
                     "options": [
                         {
                             "value": "yes",

@@ -25,6 +25,7 @@
                     "name": "chemo_way",
                     "label": "化疗方案",
                     "count": 3,
+                    "other": 1,
                     "options": [
                         {
                             "value": "xelox",
@@ -89,7 +90,8 @@
                             "label": "描述",
                             "value": ""
                         }
-                    ]
+                    ],
+                    "explain": "第一行\n第二行\n第三行"
                 }
             ]
         }

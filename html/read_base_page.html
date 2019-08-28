@@ -181,7 +181,12 @@
                     radiotherapy: "{{radiotherapy}}",
                     chemotherapy: "{{chemotherapy}}"
             },
+            mounted(){
+                this.init()
+            },
             methods:{
+                init:function(){
+                },
                 submit:function(){
                     return 0;
                 },

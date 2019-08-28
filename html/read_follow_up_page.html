@@ -99,7 +99,12 @@
                     patient_id: "{{patient_id}}",
                     recurrance: "{{recurrance}}"
             },
+            mounted(){
+                this.init()
+            },
             methods:{
+                init:function(){
+                },
                 submit:function(){
                     return 0;
                 },

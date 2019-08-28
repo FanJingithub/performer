@@ -101,7 +101,12 @@
                     patient_id: "{{patient_id}}",
                     resection_way: "{{resection_way}}"
             },
+            mounted(){
+                this.init()
+            },
             methods:{
+                init:function(){
+                },
                 submit:function(){
                     return 0;
                 },
