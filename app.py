@@ -32,6 +32,12 @@ class listHandler(tornado.web.RequestHandler):
         print('----------------------------Get list--------------------------')
         self.render("list.html")
 
+class helloHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------Get hello--------------------------')
+        self.render("Hello.html")
+
 class api_newHandler(tornado.web.RequestHandler):
 
     def get(self):
@@ -84,6 +90,7 @@ class Application(tornado.web.Application):
 
         handlers =  [
                         ("/list",      listHandler),
+                        ("/hello",      helloHandler),
                         ("/api/new",      api_newHandler),
                         ("/api/list",      api_listHandler),
                         ("/base",      baseHandler),

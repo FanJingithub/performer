@@ -815,6 +815,7 @@ import json
     part_1 = ""
     part_2 = ""
     part_3 = '''("/list",      listHandler),
+                        ("/hello",      helloHandler),
                         ("/api/new",      api_newHandler),
                         ("/api/list",      api_listHandler),
                         '''
@@ -840,6 +841,12 @@ class listHandler(tornado.web.RequestHandler):
     def get(self):
         print('----------------------------Get list--------------------------')
         self.render("list.html")
+
+class helloHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------Get hello--------------------------')
+        self.render("Hello.html")
 
 class api_newHandler(tornado.web.RequestHandler):
 
