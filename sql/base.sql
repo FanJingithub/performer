@@ -10,7 +10,6 @@ create table base (
     `marriage`  varchar(20) default '',
     `site`  varchar(20) default '',
     `stage`  varchar(20) default '',
-    `grade`  varchar(20) default '',
     `surgery`  varchar(20) default '',
     `radiotherapy`  varchar(20) default '',
     `chemotherapy`  varchar(20) default '',

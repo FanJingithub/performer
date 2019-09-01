@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data System</title>
-    <link rel="stylesheet" href="css/style_186.css">
+    <link rel="stylesheet" href="css/style_1871.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.js"></script>
@@ -122,17 +122,6 @@
                             <label for="4">IV 期&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
-                            <label class="form-label">级别:</label>
-                            <input type="radio" id="1" value="1" v-model="grade" disabled>
-                            <label for="1">I 级&nbsp;&nbsp;</label>
-                            <input type="radio" id="2" value="2" v-model="grade" disabled>
-                            <label for="2">II 级&nbsp;&nbsp;</label>
-                            <input type="radio" id="3" value="3" v-model="grade" disabled>
-                            <label for="3">III 级&nbsp;&nbsp;</label>
-                            <input type="radio" id="4" value="4" v-model="grade" disabled>
-                            <label for="4">IV 级&nbsp;&nbsp;</label><br/><br/>
-                        </div>
-                        <div>
                             <label class="form-label">是否手术:</label>
                             <input type="radio" id="yes" value="yes" v-model="surgery" disabled>
                             <label for="yes">是&nbsp;&nbsp;</label>
@@ -171,7 +160,6 @@
                     marriage: "{{marriage}}",
                     site: "{{site}}",
                     stage: "{{stage}}",
-                    grade: "{{grade}}",
                     surgery: "{{surgery}}",
                     radiotherapy: "{{radiotherapy}}",
                     chemotherapy: "{{chemotherapy}}"

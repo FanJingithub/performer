@@ -33,19 +33,19 @@ class baseHandler(tornado.web.RequestHandler):
             exist = row[0]
         self.cur.close()
 
-        res = [self.patient_id, "", "", "", "", "", "", "", "", "", ""]
+        res = [self.patient_id, "", "", "", "", "", "", "", "", ""]
 
         if (exist==1):
             # Get the data from the database
             self.cur = conn.cursor()
-            self.cur.execute('''SELECT patient_id,name,sex,age,marriage,site,stage,grade,surgery,radiotherapy,chemotherapy FROM base WHERE patient_id='{0}' '''.format(self.patient_id))
+            self.cur.execute('''SELECT patient_id,name,sex,age,marriage,site,stage,surgery,radiotherapy,chemotherapy FROM base WHERE patient_id='{0}' '''.format(self.patient_id))
             for row in self.cur:
                 res = row
 
         if (exist==1 and edit=="0"):
-            self.render("../html/read_base_page.html", patient_id=self.patient_id,  name=res[1], sex=res[2], age=res[3], marriage=res[4], site=res[5], stage=res[6], grade=res[7], surgery=res[8], radiotherapy=res[9], chemotherapy=res[10])
+            self.render("../html/read_base_page.html", patient_id=self.patient_id,  name=res[1], sex=res[2], age=res[3], marriage=res[4], site=res[5], stage=res[6], surgery=res[7], radiotherapy=res[8], chemotherapy=res[9])
         else:
-            self.render("../html/edit_base_page.html", patient_id=self.patient_id,  name=res[1], sex=res[2], age=res[3], marriage=res[4], site=res[5], stage=res[6], grade=res[7], surgery=res[8], radiotherapy=res[9], chemotherapy=res[10])
+            self.render("../html/edit_base_page.html", patient_id=self.patient_id,  name=res[1], sex=res[2], age=res[3], marriage=res[4], site=res[5], stage=res[6], surgery=res[7], radiotherapy=res[8], chemotherapy=res[9])
 
     def post(self):
         print('----------------------------Submit----------------------------')
@@ -57,7 +57,6 @@ class baseHandler(tornado.web.RequestHandler):
         marriage = self.get_body_argument("marriage") 
         site = self.get_body_argument("site") 
         stage = self.get_body_argument("stage") 
-        grade = self.get_body_argument("grade") 
         surgery = self.get_body_argument("surgery") 
         radiotherapy = self.get_body_argument("radiotherapy") 
         chemotherapy = self.get_body_argument("chemotherapy") 
@@ -71,7 +70,7 @@ class baseHandler(tornado.web.RequestHandler):
 
         # Insert the data into the database
         self.cur = conn.cursor()
-        sqls = '''REPLACE INTO base (patient_id, name, sex, age, marriage, site, stage, grade, surgery, radiotherapy, chemotherapy) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}') '''.format(self.patient_id, name,sex,age,marriage,site,stage,grade,surgery,radiotherapy,chemotherapy)
+        sqls = '''REPLACE INTO base (patient_id, name, sex, age, marriage, site, stage, surgery, radiotherapy, chemotherapy) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}') '''.format(self.patient_id, name,sex,age,marriage,site,stage,surgery,radiotherapy,chemotherapy)
         self.cur.execute(sqls)
 
         sqls = "SELECT * FROM data_status WHERE patient_id='" + self.patient_id + "'"
@@ -89,4 +88,4 @@ class baseHandler(tornado.web.RequestHandler):
         self.cur.execute(sqls)
         self.cur.close()
 
-        self.render("../html/read_base_page.html", patient_id=self.patient_id, name=name, sex=sex, age=age, marriage=marriage, site=site, stage=stage, grade=grade, surgery=surgery, radiotherapy=radiotherapy, chemotherapy=chemotherapy)
+        self.render("../html/read_base_page.html", patient_id=self.patient_id, name=name, sex=sex, age=age, marriage=marriage, site=site, stage=stage, surgery=surgery, radiotherapy=radiotherapy, chemotherapy=chemotherapy)

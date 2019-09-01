@@ -128,33 +128,7 @@
                     ],
                     "value": ""
                 },
-        
-                {
-                    "class": "radio",
-                    "name": "grade",
-                    "label": "级别",
-                    "count": 4,
-                    "other": 0,
-                    "options": [
-                        {
-                            "value": "1",
-                            "label": "I 级"
-                        },
-                        {
-                            "value": "2",
-                            "label": "II 级"
-                        },
-                        {
-                            "value": "3",
-                            "label": "III 级"
-                        },
-                        {
-                            "value": "4",
-                            "label": "IV 级"
-                        }
-                    ],
-                    "value": ""
-                },
+
         
                {
                     "class": "radio",
