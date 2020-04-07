@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <script src="./js/vue.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+    <!--View-->
+    <div id="app" class="main-body">
+        <div class="heading">
+            <h1>熠旦·医学代码工作室</h1>
+            <p>Via Jin</p>
+        </div>
+        <div class="container">
+            <h3>用代码推动医学科研和临床实践进步</h3>
+            <br>
+            <div style="text-align:right">
+                <p>——熠旦科技有限公司</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+            // Module
+            var m = {
+                word: 'The result is',
+                picked: ''
+            }
+    
+            // ViewModel
+            var vm = new Vue({
+                el: '#app',
+                data: m
+            })
+    
+        </script>
+</body>
+</html>

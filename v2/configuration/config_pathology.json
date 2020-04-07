@@ -1,0 +1,97 @@
+{
+    "class": "form",
+    "name": "pathology",
+    "label": "病理报告",
+    "count": 1,
+
+    "blocks": [
+        {
+            "class": "block",
+            "name": "block_1",
+            "label": "",
+            "count": 13,
+
+            "elements": [
+
+                {
+                    "class": "label",
+                    "name": "patient_id",
+                    "label": "ID",
+                    "value": ""
+                },
+        
+                {
+                    "class": "text",
+                    "name": "patho_diagnosis",
+                    "label": "病理诊断",
+                    "value": ""
+                },
+        
+                {
+                    "class": "radio",
+                    "name": "lym_vas_invasion",
+                    "label": "脉管癌栓",
+                    "count": 2,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "yes",
+                            "label": "是"
+                        },
+                        {
+                            "value": "no",
+                            "label": "否"
+                        }
+                    ],
+                    "value": ""
+                },
+        
+                {
+                    "class": "number",
+                    "name": "tot_lymph_node",
+                    "label": "淋巴结数",
+                    "limit": [0,100],
+                    "unit": "",
+                    "value": ""
+                },
+        
+                {
+                    "class": "text",
+                    "name": "deep",
+                    "label": "浸润深度",
+                    "value": ""
+                },
+        
+                {
+                    "class": "radio",
+                    "name": "pni",
+                    "label": "神经侵犯",
+                    "count": 2,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "yes",
+                            "label": "是"
+                        },
+                        {
+                            "value": "no",
+                            "label": "否"
+                        }
+                    ],
+                    "value": ""
+                },
+        
+        
+                {
+                    "class": "number",
+                    "name": "pos_lymph_node",
+                    "label": "淋巴阳性",
+                    "limit": [0,100],
+                    "unit": "",
+                    "value": ""
+                }
+            ]
+
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "label": "Data System",
+    "name": "MData",
+    "count":7,
+    "elements": [
+        {
+            "label": "基本信息",
+            "name": "base"
+        },
+
+        {
+            "label": "检验报告",
+            "name": "lab"
+        },
+
+        {
+            "label": "病理报告",
+            "name": "pathology"
+        },
+
+        {
+            "label": "手术记录",
+            "name": "surgery"
+        },
+
+        {
+            "label": "化疗记录",
+            "name": "chemotherapy"
+        },
+
+        {
+            "label": "放疗记录",
+            "name": "radiotherapy"
+        },
+
+        {
+            "label": "随访记录",
+            "name": "follow_up"
+        }
+    ]
+}

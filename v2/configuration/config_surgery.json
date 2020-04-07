@@ -1,0 +1,48 @@
+{
+    "class": "form",
+    "name": "surgery",
+    "label": "手术记录",
+    "count": 1,
+
+    "blocks": [
+        {
+            "class": "block",
+            "name": "block_1",
+            "label": "",
+            "count": 13,
+
+            "elements": [
+
+                {
+                    "class": "label",
+                    "name": "patient_id",
+                    "label": "ID",
+                    "value": ""
+                },
+        
+                {
+                    "class": "radio",
+                    "name": "resection_way",
+                    "label": "手术方式",
+                    "count": 3,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "dixon",
+                            "label": "Dixon 式"
+                        },
+                        {
+                            "value": "miles",
+                            "label": "Miles 式"
+                        },
+                        {
+                            "value": "no",
+                            "label": "姑息手术"
+                        }
+                    ],
+                    "value": ""
+                }
+            ]
+        }
+    ]
+}

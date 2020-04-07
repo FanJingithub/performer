@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <title>数据库系统</title>
+
+        <link href="/templates/upload_materials/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/upload_materials/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/upload_materials/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/upload_materials/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/upload_materials/assets/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/templates/upload_materials/assets/js/jquery.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.js"></script>
+
+    <link rel="stylesheet" href="css/style_2036.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+
+  <body>
+  <section id="container" >
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <a href="#" class="logo"><b>数据库系统</b></a>
+            <div class="top-menu">
+            </div>
+        </header>
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <ul class="sidebar-menu" id="nav-accordion">
+                <li class="mt">
+                    <a href="/list">
+                        <i class="fa fa-dashboard"></i>
+                        <span>病例列表</span>
+                    </a>
+                </li>
+            
+                <li class="sub-menu">
+                    <a href="/base?patient_id={{patient_id}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>基本信息</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/lab?patient_id={{patient_id}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>检验报告</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/pathology?patient_id={{patient_id}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>病理报告</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/surgery?patient_id={{patient_id}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>手术记录</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/chemotherapy?patient_id={{patient_id}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>化疗记录</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/radiotherapy?patient_id={{patient_id}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>放疗记录</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/follow_up?patient_id={{patient_id}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>随访记录</span>
+                    </a>
+                </li>
+              </ul>
+          </div>
+      </aside>
+
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+                <h3><i class="fa fa-angle-right"></i>手术记录</h3>
+                <hr>
+            
+                <form id="vm" v-on:submit="submit">
+                    <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                    <div class="form-part">
+                    <div class="block">
+                        <h3></h3>
+                        <div>
+                            <label class="form-label">手术方式:</label>
+                            <input type="radio" id="dixon" value="dixon" v-model="resection_way" disabled>
+                            <label for="dixon">Dixon 式&nbsp;&nbsp;</label>
+                            <input type="radio" id="miles" value="miles" v-model="resection_way" disabled>
+                            <label for="miles">Miles 式&nbsp;&nbsp;</label>
+                            <input type="radio" id="no" value="no" v-model="resection_way" disabled>
+                            <label for="no">姑息手术&nbsp;&nbsp;</label><br/><br/>
+                        </div>
+                    </div></div>
+                <div class="form-part-3">
+                    <button class="submit" type="button" v-on:click="edit">编辑</button>
+                </div>    
+            </form>
+        
+            </section>
+      </section>
+
+      <footer class="site-footer">
+          <div class="text-center">
+              2020 - Fan
+              <a href="gallery.html#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/templates/upload_materials/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/upload_materials/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/upload_materials/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/upload_materials/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/upload_materials/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--common script for all pages-->
+        <script src="/templates/upload_materials/assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script type="text/javascript">
+        $(function() {
+            jQuery(".fancybox").fancybox();
+        });
+    </script>
+    <script>
+    var vm = new Vue({
+            el: '#vm',
+            data: {
+                    patient_id: "{{patient_id}}",
+                    resection_way: "{{resection_way}}"
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                },
+                submit:function(){
+                    return 0;
+                },
+                edit:function(){
+                    window.location.href="/surgery?patient_id={{patient_id}}&edit=1";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

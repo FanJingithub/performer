@@ -1,0 +1,192 @@
+
+{
+    "class": "form",
+    "name": "base",
+    "label": "基本信息",
+    "count": 1,
+
+    "blocks": [
+        {
+            "class": "block",
+            "name": "block_1",
+            "label": "人口学信息",
+            "count": 13,
+
+            "elements": [
+
+                {"class": "label","name": "patient_id","label": "ID","value": ""},
+        
+                {
+                    "class": "text",
+                    "name": "name",
+                    "label": "姓名",
+                    "value": ""
+                },
+        
+                {
+                    "class": "radio",
+                    "name": "sex",
+                    "label": "性别",
+                    "count": 2,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "male",
+                            "label": "男"
+                        },
+                        {
+                            "value": "female",
+                            "label": "女"
+                        }
+                    ],
+                    "value": ""
+                },
+        
+                {
+                    "class": "number",
+                    "name": "age",
+                    "label": "年龄",
+                    "limit": [0,100],
+                    "unit": "岁",
+                    "value": ""
+                },
+        
+                {
+                    "class": "radio",
+                    "name": "marriage",
+                    "label": "婚姻情况",
+                    "count": 2,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "yes",
+                            "label": "已婚"
+                        },
+                        {
+                            "value": "no",
+                            "label": "未婚"
+                        }
+                    ],
+                    "value": ""
+                }
+            ]
+        },
+
+        {
+            "class": "block",
+            "name": "block_2",
+            "label": "疾病基本信息",
+            "count": 13,
+
+            "elements" : [
+                {
+                    "class": "radio",
+                    "name": "site",
+                    "label": "肿瘤部位",
+                    "count": 3,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "左侧结肠"
+                        },
+                        {
+                            "value": "right",
+                            "label": "右侧结肠"
+                        },
+                        {
+                            "value": "rectal",
+                            "label": "直肠"
+                        }
+                    ],
+                    "value": ""
+                },
+                
+                {
+                    "class": "radio",
+                    "name": "stage",
+                    "label": "分期",
+                    "count": 4,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "1",
+                            "label": "I 期"
+                        },
+                        {
+                            "value": "2",
+                            "label": "II 期"
+                        },
+                        {
+                            "value": "3",
+                            "label": "III 期"
+                        },
+                        {
+                            "value": "4",
+                            "label": "IV 期"
+                        }
+                    ],
+                    "value": ""
+                },
+
+        
+               {
+                    "class": "radio",
+                    "name": "surgery",
+                    "label": "是否手术",
+                    "count": 2,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "yes",
+                            "label": "是"
+                        },
+                        {
+                            "value": "no",
+                            "label": "否"
+                        }
+                    ],
+                    "value": ""
+                },
+        
+               {
+                    "class": "radio",
+                    "name": "radiotherapy",
+                    "label": "是否放疗",
+                    "count": 2,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "yes",
+                            "label": "是"
+                        },
+                        {
+                            "value": "no",
+                            "label": "否"
+                        }
+                    ],
+                    "value": ""
+                }, 
+        
+               {
+                    "class": "radio",
+                    "name": "chemotherapy",
+                    "label": "是否化疗",
+                    "count": 2,
+                    "other": 0,
+                    "options": [
+                        {
+                            "value": "yes",
+                            "label": "是"
+                        },
+                        {
+                            "value": "no",
+                            "label": "否"
+                        }
+                    ],
+                    "value": ""
+                }
+            ]
+        }
+    ]
+}

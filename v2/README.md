@@ -2,14 +2,9 @@
 ## 介绍
 Performer框架是一个全自动的全栈式Web框架（或者说网站构建工具），本质是一套代码生成器，可以产生大量的表单式网页html和对应的后端Python代码。Performer这个名字有两层含义：1. 执行者，数据库系统的执行者； 2. per-form-er，每个表单的构建者。对应发布的软件，被命名为Performer平台。
 
-使用这个工具之前，需要编辑一个主配置文件"configuration.json"和一系列子配置文件"config_xx.json"。根据这些配置文件，运行code_generator.py程序即可产生所需的HTML, Javascript, Python 及 SQL代码。用户不需要编写任何代码。并且本工具支持自动化部署，只需运行如下三行命令即可完成数据库的完整构建：
-```
-python3 code_generator.py
-fab upload
-fab deploy
-```
+使用这个工具之前，需要编辑一个主配置文件"configuration.json"和一系列子配置文件"config_xx.json"。根据这些配置文件，运行code_generator.py程序即可产生所需的HTML, Javascript, Python 及 SQL代码。用户不需要编写任何代码。
 
-Performer平台的简单示例，可参考: [科研数据库系统](http://123.206.137.251:92/list)
+Performer平台的简单示例，可参考: [科研数据库系统](http://123.206.137.251:85/list)
 
 考虑到编写子配置文件（"config_xx.json"）比较困难，本平台还提供了一个Hello界面用来生成子配置文件，用户在浏览器中打开Hello.html即可进行配置。
 

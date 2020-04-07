@@ -1,0 +1,48 @@
+{
+    "class": "form",
+    "name": "radiotherapy",
+    "label": "放疗记录",
+    "count": 1,
+
+    "blocks": [
+        {
+            "class": "block",
+            "name": "block_1",
+            "label": "",
+            "count": 13,
+
+            "elements": [
+
+                {
+                    "class": "label",
+                    "name": "patient_id",
+                    "label": "ID",
+                    "value": ""
+                },
+        
+                {
+                    "class": "number",
+                    "name": "radio_count",
+                    "label": "放疗次数",
+                    "limit": [0,100],
+                    "unit": "",
+                    "value": ""
+                },
+        
+                {
+                    "class": "time",
+                    "name": "radio_start",
+                    "label": "放疗开始",
+                    "value": ""
+                },
+        
+                {
+                    "class": "time",
+                    "name": "radio_end",
+                    "label": "放疗结束",
+                    "value": ""
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据库系统</title>
+    <link rel="stylesheet" href="css/style_2036.css">
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-resource.js"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <!--View-->
+    <div class="list-main-body">
+        <div class="heading">
+            <h1>病例数据库系统</h1>
+        </div>
+        <div class="table-container" id="vm">
+            <div style="text-align:center;font-size:28px;font:bolder;padding-top:10px">
+                <div>病例列表</div>
+            </div>
+            <div class="table-sub-heading">
+                <button class="add" v-on:click="add">新增</button>
+            </div>
+            <div class="table_div">
+                <div class="div_clear">
+                    <div style="height:526px;width:95%;margin:0 auto">
+                        <div class="table_content">
+                            <table cellspacing="0px" cellpadding="0px">
+                                <thead >
+                                    <tr height="30px">
+                                        <th width="15%">序号</th>
+                                        <th width="12%">性别</th>
+                                        <th width="12%">年龄</th>
+                                        <th width="25%">医院</th>
+                                        <th wdith="12%" style="border-right:none">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template v-for="patient in patient_list">
+                                    <tr>
+                                        <td width="15%">${ patient.patient_id }</td>
+                                        <td width="12%">${ patient.sex }</td>
+                                        <td width="12%">${ patient.age }</td>
+                                        <td width="25%">中山医院</td>
+                                        <td width="12%" style="border-right:none">
+                                            <a :href="patient.view">查看</a>
+                                        </td>
+                                    </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="div_clear">
+                    <div class="left_bottom"></div>
+                    <div style="background: #009688;height:38px;width:90%;margin:0 auto;line-height:35px;">
+                        <span style="color:white;margin-top:3px">&nbsp;&nbsp;共有 ${ list_length } 条记录</span>
+                    </div>
+                    <div class="right_bottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            delimiters:['${','}'],
+            el: '#vm',
+            data: {
+                patient_list : [],
+                list_length: 0
+            },
+            mounted(){
+                this.init();
+            },
+            methods: {
+                init:function(){
+                    this.$http.get('/api/list').then(function(res){
+                        console.log(res.data)
+                        this.patient_list = res.data;
+                        this.list_length = this.patient_list.length
+                        this.patient_list.forEach(patient => {
+                            patient.view = "/base?patient_id=" + patient.patient_id;
+                        });
+                    },function(){
+                        console.log('error');
+                    });
+                },
+                add: function(){
+                    patient_id = prompt("请输入新病例的ID号");
+                    if (patient_id!="" && patient_id!=null){
+                        this.$http.get("/api/new?patient_id="+patient_id).then(function(res){
+                            patient_id = res.data.patient_id;
+                            result = res.data.result;
+                            if (result==0){
+                                window.location.href = "/base?patient_id="+patient_id;
+                            }else{
+                                alert("已存在ID为"+patient_id+"的病例！");
+                            }
+                        },function(){
+                            console.log('error');
+                        });
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
