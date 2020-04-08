@@ -23,6 +23,7 @@ env.sudo_user = server_info["user"]
 env.password = server_info["passwd"]
 
 app_Name = "Test"
+version = "1"
 app_dir = "/srv/MData_all/Test"
 app_dir_www = "/srv/MData_all/Test/www"
 
@@ -47,6 +48,7 @@ def download():
 def deploy():
     run("bash %s/v2/shell/clear.sh" % _REMOTE_BASE_DIR)
     with cd("%s/shell" % app_dir_www):
-        run("bash sql.sh")
-        run("bash nginx.sh")
+        if version=="0":
+            run("bash sql.sh")
+            run("bash nginx.sh")
         run("bash supervisor.sh")

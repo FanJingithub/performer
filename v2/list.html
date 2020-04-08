@@ -3,19 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>数据库系统</title>
-    <link rel="stylesheet" href="css/style_2036.css">
-    <script src="./js/vue.js"></script>
-    <script src="./js/vue-resource.js"></script>
+
+    <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+    <link href="/templates/assets/css/style.css" rel="stylesheet">
+    <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
+    <script src="/templates/assets/js/jquery.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/vue-resource.js"></script>
+
+    <link href="css/style_2036.css" rel="stylesheet">
     <script src="./js/jquery-3.4.1.js"></script>
 </head>
 <body>
-    <!--View-->
-    <div class="list-main-body">
-        <div class="heading">
-            <h1>病例数据库系统</h1>
-        </div>
+
+        <section id="container" >
+                <!-- **********************************************************************************************************************************************************
+                TOP BAR CONTENT & NOTIFICATIONS
+                *********************************************************************************************************************************************************** -->
+                <!--header start-->
+                <header class="header black-bg">
+                        <div class="sidebar-toggle-box">
+                            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                        </div>
+                      <a href="#" class="logo"><b>数据库系统</b></a>
+                      <div class="nav notify-row" id="top_menu">
+                          <!--  notification start -->
+                          <ul class="nav top-menu">
+                              <!-- settings start -->
+                              <li class="dropdown">
+                                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                      <i class="fa fa-tasks"></i>
+                                      <span class="badge bg-theme">3</span>
+                                  </a>
+                                  <ul class="dropdown-menu extended tasks-bar">
+                                      <div class="notify-arrow notify-arrow-green"></div>
+                                      <li>
+                                              <p class="green">您有三个任务需完成</p>
+                                          </li>
+                                          <li>
+                                                  <a href="#">
+                                                      <span class="message">
+                                                          病例FZ00101需完善放疗后问卷
+                                                      </span>
+                                                  </a>
+                                              </li>
+                                              <li>
+                                                  <a href="#">
+                                                      <span class="message">
+                                                          病例FZ00102需填写基线问卷
+                                                      </span>
+                                                  </a>
+                                              </li>
+                                              <li>
+                                                      <a href="#">
+                                                          <span class="message">
+                                                              病例FZ00103需填写基线问卷
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                              <li class="external">
+                                                  <a href="#">查看所有任务</a>
+                                              </li>
+                                  </ul>
+                              </li>
+                              <!-- settings end -->
+                              <!-- inbox dropdown start-->
+                              <li id="header_inbox_bar" class="dropdown">
+                                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                      <i class="fa fa-envelope-o"></i>
+                                      <span class="badge bg-theme">2</span>
+                                  </a>
+                                  <ul class="dropdown-menu extended inbox">
+                                      <div class="notify-arrow notify-arrow-green"></div>
+                                      <li>
+                                              <p class="green">您有2条新消息</p>
+                                          </li>
+                                          <li>
+                                              <a href="#">
+                                                  <span class="photo"><img alt="avatar" src="templates/assets/img/ui-zac.jpg"></span>
+                                                  <span class="subject">
+                                                  <span class="from">刘教授</span>
+                                                  <span class="time">刚刚</span>
+                                                  </span>
+                                                  <span class="message">
+                                                      邀请您参加研究者会议
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="#">
+                                                  <span class="photo"><img alt="avatar" src="templates/assets/img/ui-sherman.jpg"></span>
+                                                  <span class="subject">
+                                                  <span class="from">张同学</span>
+                                                  <span class="time">40分钟前</span>
+                                                  </span>
+                                                  <span class="message">
+                                                   咨询统计问题
+                                                  </span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="#">查看所有消息</a>
+                                          </li>
+                                  </ul>
+                              </li>
+                              <!-- inbox dropdown end -->
+                          </ul>
+                          <!--  notification end -->
+                      </div>
+                      <div class="top-menu">
+                          <ul class="nav pull-right top-menu">
+                              <li><a class="logout" href="templates/login.html">退出</a></li>
+                          </ul>
+                      </div>
+                  </header>
+                
+                <!-- **********************************************************************************************************************************************************
+                MAIN SIDEBAR MENU
+                *********************************************************************************************************************************************************** -->
+                <!--sidebar start-->
+                <aside>
+                    <div id="sidebar"  class="nav-collapse ">
+                        <!-- sidebar menu start-->
+                        <ul class="sidebar-menu" id="nav-accordion">
+                        
+                              <p class="centered"><a href="profile.html"><img src="/templates/assets/img/ic_person.png" class="img-circle" width="60"></a></p>
+                              <h5 class="centered">研究管理员</h5>
+                                  
+                                <li class="mt">
+                                    <a href="/templates/index.html">
+                                        <i class="fa fa-dashboard"></i>
+                                        <span>系统主页</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="sub-menu">
+                                        <a href="/list">
+                                            <i class="fa fa-tasks"></i>
+                                            <span>病例列表</span>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="sub-menu">
+                                        <a href="/templates/chartjs.html">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                            <span>统计概况</span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="sub-menu">
+                                          <a href="/templates/login.html">
+                                              <i class="fa fa-cogs"></i>
+                                              <span>账户信息</span>
+                                          </a>
+                                      </li>
+            
+                                    <li class="sub-menu">
+                                          <a href="/templates/lock_screen.html">
+                                              <i class="fa fa-desktop"></i>
+                                              <span>锁定屏幕</span>
+                                          </a>
+                                    </li>
+          
+                        </ul>
+                        <!-- sidebar menu end-->
+                    </div>
+                </aside>
+                <!--sidebar end-->
+                
+                <!-- **********************************************************************************************************************************************************
+                MAIN CONTENT
+                *********************************************************************************************************************************************************** -->
+                <!--main content start-->
+          
+                <section id="main-content">
+                    <section class="wrapper site-min-height">
+   
         <div class="table-container" id="vm">
             <div style="text-align:center;font-size:28px;font:bolder;padding-top:10px">
                 <div>病例列表</div>
@@ -30,22 +199,24 @@
                             <table cellspacing="0px" cellpadding="0px">
                                 <thead >
                                     <tr height="30px">
-                                        <th width="15%">序号</th>
+                                        <th width="25%">序号</th>
+                                        <th width="15%">姓名</th>
                                         <th width="12%">性别</th>
                                         <th width="12%">年龄</th>
-                                        <th width="25%">医院</th>
-                                        <th wdith="12%" style="border-right:none">操作</th>
+                                        <th wdith="26%" style="border-right:none">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <template v-for="patient in patient_list">
-                                    <tr>
-                                        <td width="15%">${ patient.patient_id }</td>
+                                    <tr height="30px">
+                                        <td width="25%">${ patient.patient_id }</td>
+                                        <td width="15%">${ patient.name }</td>
                                         <td width="12%">${ patient.sex }</td>
                                         <td width="12%">${ patient.age }</td>
-                                        <td width="25%">中山医院</td>
-                                        <td width="12%" style="border-right:none">
-                                            <a :href="patient.view">查看</a>
+                                        <td width="26%" style="border-right:none">
+                                            <a :href="patient.view" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            &nbsp;&nbsp;
+                                            <a href="#" :id="patient.patient_id" class="btn btn-danger btn-xs" v-on:click="remove($event)"><i class="fa fa-trash-o "></i></a>
                                         </td>
                                     </tr>
                                     </template>
@@ -56,14 +227,46 @@
                 </div>
                 <div class="div_clear">
                     <div class="left_bottom"></div>
-                    <div style="background: #009688;height:38px;width:90%;margin:0 auto;line-height:35px;">
-                        <span style="color:white;margin-top:3px">&nbsp;&nbsp;共有 ${ list_length } 条记录</span>
+                    <div style="background: #F0FFFF;height:38px;width:90%;margin:0 auto;line-height:35px;">
+                        <span style="margin-top:3px">&nbsp;&nbsp;共有 ${ list_length } 条记录</span>
                     </div>
                     <div class="right_bottom"></div>
                 </div>
             </div>
         </div>
+    
+    </section>
+</section>
+
+<footer class="site-footer">
+    <div class="text-center">
+        2020 - Fan
+        <a href="#" class="go-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
     </div>
+</footer>
+</section>
+<!--
+             <a  style="color:#f2f2f2;text-align:center;border-radius:2px;-webkit-border-radius:2px;padding:2px 3px;margin-right:3px;background:#00CED1 center;margin-top:3px;">查看</a>
+-->
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+    <script src="/templates/assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+<!--common script for all pages-->
+    <script src="/templates/assets/js/common-scripts.js"></script>
+
+<!--script for this page-->
+<script type="text/javascript">
+    $(function() {
+        jQuery(".fancybox").fancybox();
+    });
+</script>
+
     <script>
         var vm = new Vue({
             delimiters:['${','}'],
@@ -83,6 +286,7 @@
                         this.list_length = this.patient_list.length
                         this.patient_list.forEach(patient => {
                             patient.view = "/base?patient_id=" + patient.patient_id;
+                            patient.delete = "/delete?patient_id=" + patient.patient_id;
                         });
                     },function(){
                         console.log('error');
@@ -99,6 +303,18 @@
                             }else{
                                 alert("已存在ID为"+patient_id+"的病例！");
                             }
+                        },function(){
+                            console.log('error');
+                        });
+                    }
+                },
+                remove: function(e){
+                    patient = e.currentTarget;
+                    console.log(patient.id);
+                    delete_true = confirm("确定要删除病例"+patient.id+"吗？");
+                    if (delete_true){
+                        this.$http.get("/api/remove?patient_id="+patient.id).then(function(res){
+                            window.location.href = "/list";
                         },function(){
                             console.log('error');
                         });

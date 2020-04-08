@@ -31,11 +31,11 @@
                     "other": 0,
                     "options": [
                         {
-                            "value": "male",
+                            "value": "男",
                             "label": "男"
                         },
                         {
-                            "value": "female",
+                            "value": "女",
                             "label": "女"
                         }
                     ],

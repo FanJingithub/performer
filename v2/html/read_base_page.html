@@ -7,13 +7,13 @@
 
     <title>数据库系统</title>
 
-        <link href="/templates/upload_materials/assets/css/bootstrap.css" rel="stylesheet">
-        <link href="/templates/upload_materials/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        <link href="/templates/upload_materials/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
-        <link href="/templates/upload_materials/assets/css/style.css" rel="stylesheet">
-        <link href="/templates/upload_materials/assets/css/style-responsive.css" rel="stylesheet">
+        <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
 
-        <script src="/templates/upload_materials/assets/js/jquery.js"></script>
+        <script src="/templates/assets/js/jquery.js"></script>
         <script src="/js/vue.js"></script>
         <script src="/js/vue-resource.js"></script>
 
@@ -37,53 +37,66 @@
               <ul class="sidebar-menu" id="nav-accordion">
                 <li class="mt">
                     <a href="/list">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>病例列表</span>
                     </a>
                 </li>
             
                 <li class="sub-menu">
                     <a href="/base?patient_id={{patient_id}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>基本信息</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="/lab?patient_id={{patient_id}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>检验报告</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="/pathology?patient_id={{patient_id}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>病理报告</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="/surgery?patient_id={{patient_id}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>手术记录</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="/chemotherapy?patient_id={{patient_id}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>化疗记录</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="/radiotherapy?patient_id={{patient_id}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>放疗记录</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="/follow_up?patient_id={{patient_id}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tasks"></i>
                         <span>随访记录</span>
                     </a>
                 </li>
+                <li class="sub-menu">
+                    <a href="/upload?patient_id={{patient_id}}">
+                        <i class="fa fa-tasks"></i>
+                        <span>上传图片</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/show?patient_id={{patient_id}}">
+                        <i class="fa fa-tasks"></i>
+                        <span>查阅图片</span>
+                    </a>
+                </li>
+        
               </ul>
           </div>
       </aside>
@@ -105,10 +118,10 @@
                         </div>
                         <div>
                             <label class="form-label">性别:</label>
-                            <input type="radio" id="male" value="male" v-model="sex" disabled>
-                            <label for="male">男&nbsp;&nbsp;</label>
-                            <input type="radio" id="female" value="female" v-model="sex" disabled>
-                            <label for="female">女&nbsp;&nbsp;</label><br/><br/>
+                            <input type="radio" id="男" value="男" v-model="sex" disabled>
+                            <label for="男">男&nbsp;&nbsp;</label>
+                            <input type="radio" id="女" value="女" v-model="sex" disabled>
+                            <label for="女">女&nbsp;&nbsp;</label><br/><br/>
                         </div>
                         <div>
                             <label class="form-label">年龄: </label>
@@ -187,14 +200,14 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-        <script src="/templates/upload_materials/assets/js/fancybox/jquery.fancybox.js"></script>
-        <script src="/templates/upload_materials/assets/js/bootstrap.min.js"></script>
-        <script class="include" type="text/javascript" src="/templates/upload_materials/assets/js/jquery.dcjqaccordion.2.7.js"></script>
-        <script src="/templates/upload_materials/assets/js/jquery.scrollTo.min.js"></script>
-        <script src="/templates/upload_materials/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
     <!--common script for all pages-->
-        <script src="/templates/upload_materials/assets/js/common-scripts.js"></script>
+        <script src="/templates/assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
     <script type="text/javascript">
