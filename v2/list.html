@@ -133,23 +133,30 @@
                         <!-- sidebar menu start-->
                         <ul class="sidebar-menu" id="nav-accordion">
                         
-                              <p class="centered"><a href="profile.html"><img src="/templates/assets/img/ic_person.png" class="img-circle" width="60"></a></p>
+                              <p class="centered"><a href="#"><img src="/templates/assets/img/ic_person.png" class="img-circle" width="60"></a></p>
                               <h5 class="centered">研究管理员</h5>
                                   
                                 <li class="mt">
-                                    <a href="/templates/index.html">
+                                    <a href="/index">
                                         <i class="fa fa-dashboard"></i>
-                                        <span>系统主页</span>
+                                        <span>研究主页</span>
                                     </a>
                                 </li>
                                 
                                 <li class="sub-menu">
-                                        <a href="/list">
+                                        <a class="active" href="/list">
                                             <i class="fa fa-tasks"></i>
                                             <span>病例列表</span>
                                         </a>
                                     </li>
                                 
+                                    <li class="sub-menu">
+                                        <a href="/templates/download.html">
+                                            <i class="fa fa-th"></i>
+                                            <span>下载数据</span>
+                                        </a>
+                                    </li>
+
                                     <li class="sub-menu">
                                         <a href="/templates/chartjs.html">
                                             <i class="fa fa-bar-chart-o"></i>
@@ -299,7 +306,7 @@
                             patient_id = res.data.patient_id;
                             result = res.data.result;
                             if (result==0){
-                                window.location.href = "/base?patient_id="+patient_id;
+                                window.location.href = "/base?patient_id="+patient_id+"&page_index=0";
                             }else{
                                 alert("已存在ID为"+patient_id+"的病例！");
                             }

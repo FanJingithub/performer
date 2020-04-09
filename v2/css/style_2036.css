@@ -87,6 +87,7 @@
     margin: auto;
     padding: 10px 25px;
     margin-top: 25px;
+    width: 160px;
     background-color: #F4A460;
     border: 1px solid #CD853F;
     color: white;
@@ -97,8 +98,28 @@
         outline: 0;
         cursor: pointer;
 }
-
 .submit:hover {
+    background-color: #E91E63;
+    border: 1px solid red;
+    color: white;
+}
+.remove {
+    display: block;
+    margin: auto;
+    padding: 10px 25px;
+    margin-top: 25px;
+    width: 160px;
+    background-color: #d9534f;
+    border: 1px solid #d43f3a;
+    color: white;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+        outline: 0;
+        cursor: pointer;
+}
+.remove:hover {
     background-color: #E91E63;
     border: 1px solid red;
     color: white;
@@ -159,6 +180,7 @@ input[type="submit"] {
     margin: auto;
     padding: 10px 25px;
     margin-top: 25px;
+    width: 160px;
     border-radius:3px;
     -webkit-border-radius:3px;
 	background-color: #F4A460;

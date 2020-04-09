@@ -11,6 +11,11 @@ class api_radiotherapyHandler(tornado.web.RequestHandler):
     def get(self):
         print('----------------------------Get api-radiotherapy----------------------')
         self.patient_id = self.get_argument("patient_id", "")
+        try:
+            page_index = self.get_argument("page_index", "0")
+        except:
+            page_index = "0"
+
         conn = MySQLdb.connect( host   = 'localhost',
                                 user   = 'root',
                                 passwd = '1',
@@ -19,7 +24,7 @@ class api_radiotherapyHandler(tornado.web.RequestHandler):
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        self.cur.execute('''SELECT patient_id,radio_count,radio_start,radio_end FROM radiotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
+        self.cur.execute('''SELECT patient_id,radio_count,radio_start,radio_end FROM radiotherapy_{0} WHERE patient_id='{1}' '''.format(page_index,self.patient_id))
         res = [self.patient_id, "", "", ""]
         for row in self.cur:
             res = row

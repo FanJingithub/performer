@@ -35,68 +35,8 @@
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <ul class="sidebar-menu" id="nav-accordion">
-                <li class="mt">
-                    <a href="/list">
-                        <i class="fa fa-tasks"></i>
-                        <span>病例列表</span>
-                    </a>
-                </li>
+                {% raw side_menu %}
             
-                <li class="sub-menu">
-                    <a href="/base?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>基本信息</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/lab?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>检验报告</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/pathology?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>病理报告</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/surgery?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>手术记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/chemotherapy?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>化疗记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/radiotherapy?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>放疗记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/follow_up?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>随访记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/upload?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>上传图片</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/show?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>查阅图片</span>
-                    </a>
-                </li>
-        
               </ul>
           </div>
       </aside>
@@ -150,6 +90,7 @@
                     </div></div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
                 </div>    
             </form>
         
@@ -199,7 +140,7 @@
             },
             methods:{
                 init:function(){
-                    this.$http.get('/api/pathology?patient_id={{patient_id}}').then(function(res){
+                    this.$http.get('/api/pathology?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
                         this.patient_id=res.data.patient_id;
                         this.patho_diagnosis=res.data.patho_diagnosis;
                         this.lym_vas_invasion=res.data.lym_vas_invasion;
@@ -224,8 +165,15 @@
                         pni: this.pni,
                         pos_lymph_node: this.pos_lymph_node
                     };
-                    this.$http.post('/pathology',data,{emulateJSON:true}).then(function(res){
-                        document.write(res.body);    
+                    this.$http.post('/pathology?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
+                        window.location.href="/pathology?patient_id={{patient_id}}&page_index={{page_index}}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=pathology').then(function(res){
+                        window.location.href="{% raw page_previous %}";
                     },function(res){
                         console.log(res.status);
                     });

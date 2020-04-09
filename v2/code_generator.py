@@ -22,11 +22,108 @@ app_Name = "Test"
 port_in = "92"
 port_out = "6012"
 app_dir = "/srv/MData_all/Test"
-#app_dir = "/home/fanjin/work/Web/MedicalData/v2"
 remote_base_dir = '/home/ubuntu/files/Web'
 needPic = "1"
 clear = ""
+maxPage = 10
 
+app_info = {"app_name":app_Name, "version":version, "app_dir":app_dir}
+app_info_text = json.dumps(app_info,sort_keys=True, indent=4, separators=(',', ': '))
+fileName = "../app_info.json"
+with open(fileName,"w") as newfile:
+    newfile.write(app_info_text)
+
+#--------------------------------------------------------------------------------------------------------------------------
+# get side menu
+def getSideMenu(active_item,page_index):
+
+    side_code = '''
+        side_menu = {0}
+            <li class="mt">
+		        <a href="/list">
+                        <i class="fa fa-tasks"></i>
+                        <span>病例列表</span>
+                    </a>
+            </li>
+            {0}
+        '''.format("'''")
+    
+    side_part_1 = "self.cur.execute('''SELECT "
+    side_part_2 = "for row in self.cur:"
+    side_part_3 = ""
+    active = ''
+    active_generate = ''
+    active_generate_prepare = ''
+    if (page_index>=0):
+        active_generate_prepare = '''
+            if i==page_index:
+                active = ' class="active"'
+            else:
+                active = "" '''
+
+    for i in range(len(config_main["elements"])):
+        config_name = config_main["elements"][i]["name"]
+        config_label = config_main["elements"][i]["label"]
+        if config_name==active_item:
+            active = 'class="active" '
+            active_generate = active_generate_prepare
+        else:
+            active = ''
+            active_generate = ''
+        side_part_1 = side_part_1 + config_name
+        if (i<(len(config_main["elements"])-1)):
+            side_part_1 = side_part_1 + ","
+        else:
+            side_part_1 = side_part_1 + ''' FROM data_status WHERE patient_id='{{0}}' {0}.format(self.patient_id))
+        '''.format("'''")
+        side_part_2 = side_part_2 + '''
+            {0}_page_status = row[{1}]'''.format(config_name,str(i))
+        side_part_3 = side_part_3 + '''
+        side_menu = side_menu + {0}
+            <li class="sub-menu">
+                <a {2}href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>{1}</span>
+                </a>
+                <ul class="sub">{0}
+        active = ''
+        for i in range(len({3}_page_status)):{4}
+            side_menu = side_menu + {0}
+                <li{{0}}><a  href="/{3}?patient_id={{1}}&page_index={{2}}">{1}_{{3}}</a></li>
+            {0}.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + {0}
+                <li><a  href="/{3}?patient_id={{0}}&page_index={{1}}">新增</a></li>
+            {0}.format(self.patient_id,str(len({3}_page_status)))
+        side_menu = side_menu + {0}
+                </ul>
+            </li>
+            {0}
+        '''.format("'''",config_label,active,config_name,active_generate)
+
+    side_code = side_code + side_part_1 + side_part_2 + '''
+        self.cur.close()
+        ''' + side_part_3
+    if needPic=="1":
+        side_code = side_code + '''
+        side_menu = side_menu + {0}
+            <li class="sub-menu">
+                    <a href="/upload?patient_id={{0}}">
+                    <i class="fa fa-tasks"></i>
+                    <span>上传图片</span>
+                </a>
+            </li>
+
+            <li class="sub-menu">
+                    <a href="/show?patient_id={{0}}">
+                    <i class="fa fa-tasks"></i>
+                    <span>查阅图片</span>
+                </a>
+            </li>
+        {0}.format(self.patient_id)
+        '''.format("'''")
+    return(side_code)
+
+#--------------------------------------------------------------------------------------------------------------------------
 # generator the HTML code
 def generateHTML(editable):
 
@@ -92,6 +189,13 @@ def generateHTML(editable):
                 }},
                 edit:function(){{
                     window.location.href="/{0}?patient_id={{{{patient_id}}}}&edit=1";
+                }},
+                remove:function(){{
+                    this.$http.get('/api/removePage?patient_id={{{{patient_id}}}}&page_index={{{{page_index}}}}&page_name={0}').then(function(res){{
+                        window.location.href="{{% raw page_previous %}}";
+                    }},function(res){{
+                        console.log(res.status);
+                    }});
                 }}
             }}
         }});'''.format(configName)
@@ -146,7 +250,7 @@ def generateHTML(editable):
             }},
             methods:{{
                 init:function(){{
-                    this.$http.get('/api/{0}?patient_id={{{{patient_id}}}}').then(function(res){{'''.format(configName)
+                    this.$http.get('/api/{0}?patient_id={{{{patient_id}}}}&page_index={{{{page_index}}}}').then(function(res){{'''.format(configName)
             
             dateTrans_4 = ""
             for ii in range(len(config["blocks"])):
@@ -236,8 +340,15 @@ def generateHTML(editable):
                     data = {'''
             code = code + part_1[0:len(part_1)-1] + '''
                     }};
-                    this.$http.post('/{0}',data,{{emulateJSON:true}}).then(function(res){{
-                        document.write(res.body);    
+                    this.$http.post('/{0}?page_index={{{{page_index}}}}',data,{{emulateJSON:true}}).then(function(res){{
+                        window.location.href="/{0}?patient_id={{{{patient_id}}}}&page_index={{{{page_index}}}}";
+                    }},function(res){{
+                        console.log(res.status);
+                    }});
+                }},
+                remove:function(){{
+                    this.$http.get('/api/removePage?patient_id={{{{patient_id}}}}&page_index={{{{page_index}}}}&page_name={0}').then(function(res){{
+                        window.location.href="{{% raw page_previous %}}";
                     }},function(res){{
                         console.log(res.status);
                     }});
@@ -302,37 +413,9 @@ def generateHTML(editable):
               <ul class="sidebar-menu" id="nav-accordion">'''
 
     code = code + '''
-                <li class="mt">
-                    <a href="/list">
-                        <i class="fa fa-tasks"></i>
-                        <span>病例列表</span>
-                    </a>
-                </li>
+                {% raw side_menu %}
             '''
-    for i in range(len(config_main["elements"])):
-        element = config_main["elements"][i]
-        code = code + '''
-                <li class="sub-menu">
-                    <a href="/{0}?patient_id={{{{patient_id}}}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>{1}</span>
-                    </a>
-                </li>'''.format(element["name"], element["label"])
-    if (needPic == "1"):
-        code = code + '''
-                <li class="sub-menu">
-                    <a href="/upload?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>上传图片</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/show?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>查阅图片</span>
-                    </a>
-                </li>
-        '''
+    
     code = code + '''
               </ul>
           </div>
@@ -467,6 +550,7 @@ def generateHTML(editable):
         newCode = '''</div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
                 </div>    
             </form>
         '''
@@ -474,6 +558,7 @@ def generateHTML(editable):
         newCode = '''</div>
                 <div class="form-part-3">
                     <button class="submit" type="button" v-on:click="edit">编辑</button>
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
                 </div>    
             </form>
         '''
@@ -522,6 +607,7 @@ def generateHTML(editable):
     with open(fileName,"w",encoding="utf-8") as coder:
         coder.write(code)
 
+#--------------------------------------------------------------------------------------------------------------------------
 # generator the Python Handler:
 def generatePython_Handler():
 
@@ -549,9 +635,16 @@ class '''
             edit = self.get_argument("edit", "0")
         except:
             edit = "0"
+        try:
+            page_index = self.get_argument("page_index", "0")
+        except:
+            page_index = "0"
+        page_index = int(page_index)
         
         self.patient_id = self.get_argument("patient_id", "")
         exist = 0
+        submitted = "0"
+        page_status = "0"
         
         # Get the patient's data status from the database
         conn = MySQLdb.connect( host   = 'localhost',
@@ -566,8 +659,11 @@ class '''
     code = code + "'''" + "SELECT " + configName + " FROM data_status WHERE patient_id='{0}' " + "'''"
     code = code + '''.format(self.patient_id))
         for row in self.cur:
-            exist = row[0]
-        self.cur.close()'''
+            page_status = row[0]
+
+        if len(page_status)>page_index:
+            exist = 1
+            submitted = page_status[page_index]'''
     
     # generate the dynamic part for GET methon
     part_1 = "patient_id,"
@@ -608,24 +704,37 @@ class '''
 
     code =code + '''
 
-        if (exist==1):
+        if (submitted=="1"):
             # Get the data from the database
-            self.cur = conn.cursor()
             self.cur.execute('''
     code = code + "'''SELECT "
 
-    code = code + part_1 + " FROM " + configName + " WHERE patient_id='{0}' '''.format(self.patient_id))"
+    code = code + part_1 + " FROM " + configName + "_{0} WHERE patient_id='{1}' '''.format(page_index,self.patient_id))"
     code = code + '''
             for row in self.cur:
-                res = row'''
+                res = row
+
+        if (exist==0):
+            page_status = page_status + "0"
+            sql = "UPDATE data_status SET {0}='" + page_status + "' WHERE patient_id='" + self.patient_id + "'"
+            self.cur.execute(sql)
+        '''.format(configName)
+
+    side_code = getSideMenu(configName,1)
+    code = code + side_code
+    
     code = code + '''
 
-        if (exist==1 and edit=="0"):
-            self.render("../html/read_'''
-    code = code + configName + '''_page.html",''' + part_2 + ''')
+        if page_index>0:
+            page_previous = "/{0}?patient_id="+self.patient_id+"&page_index="+str(page_index-1)
+        else:
+            page_previous = "/base?patient_id="+self.patient_id
+        if (submitted=="1" and edit=="0"):
+            self.render("../html/read_'''.format(configName)
+    code = code + configName + '''_page.html", side_menu=side_menu, page_index=page_index, page_previous=page_previous,''' + part_2 + ''')
         else:
             self.render("../html/edit_'''
-    code = code + configName + '''_page.html",''' + part_2 + ''')'''
+    code = code + configName + '''_page.html", side_menu=side_menu, page_index=page_index, page_previous=page_previous,''' + part_2 + ''')'''
 
     # ------------------------
     # generate the POST method
@@ -635,14 +744,19 @@ class '''
         print('----------------------------Submit----------------------------')
 
         self.patient_id = self.get_body_argument("patient_id")
+        try:
+            page_index = self.get_argument("page_index", "0")
+        except:
+            page_index = "0"
+        page_index = int(page_index)
         '''
     # generate the dynamic part for POST method
     part_0 = ""
     part_1_1 = "patient_id, "
-    part_1_2 = "'{0}', "
+    part_1_2 = "'{1}', "
     part_2 = "self.patient_id, "
     part_3 = ' patient_id=self.patient_id, '
-    kk = 1
+    kk = 2
     for ii in range(len(config["blocks"])):
         block = config["blocks"][ii]
         for i in range(len(block["elements"])):
@@ -693,31 +807,30 @@ class '''
         # Insert the data into the database
         self.cur = conn.cursor()
         '''.format(username,password,database)
-    code = code + "sqls = '''REPLACE INTO " + configName + " "
+    code = code + "sql = '''REPLACE INTO " + configName + "_{0} "
 
-    code = code + "(" + part_1_1 + ") VALUES (" + part_1_2 + ")" + " '''.format(" + part_2 + ")"
+    code = code + "(" + part_1_1 + ") VALUES (" + part_1_2 + ")" + " '''.format(page_index, " + part_2 + ")"
     code = code + '''
-        self.cur.execute(sqls)
+        self.cur.execute(sql)
 
-        sqls = "SELECT * FROM data_status WHERE patient_id='" + self.patient_id + "'"
-        self.cur.execute(sqls)
-        exist_data = 0
+        sql = "SELECT {0} FROM data_status WHERE patient_id='" + self.patient_id + "'"
+        self.cur.execute(sql)
+        page_status = "0"
         for row in self.cur:
-            exist_data = row
-            exist_data = 1
-        
-        if (exist_data == 1):
-            sqls = "UPDATE data_status SET {0}=1 WHERE patient_id='" + self.patient_id + "'"
-        else:
-            sqls = "REPLACE INTO data_status (patient_id,{0}) VALUES ('"+ self.patient_id + "'," + "1)"
+            page_status = row[0]
 
-        self.cur.execute(sqls)
-        self.cur.close()'''.format(configName)
+        page_status_new = page_status[0:page_index] + "1" + page_status[(page_index+1):len(page_status)]
+        sql = "UPDATE data_status SET {0}=" + page_status_new + " WHERE patient_id='" + self.patient_id + "'"
+
+        self.cur.execute(sql)
+
+        '''.format(configName)
     
+    code = code + side_code
+
     code = code + '''
 
-        self.render("../html/read_'''
-    code = code + configName + '''_page.html",''' + part_3 + ''')
+        self.write("finished")
 '''
 
     fileName = "./handlers/" + configName + "Handler.py"
@@ -743,6 +856,11 @@ class api_'''
         self.patient_id = self.get_argument("patient_id", "")'''.format(configName)
     
     code = code + '''
+        try:
+            page_index = self.get_argument("page_index", "0")
+        except:
+            page_index = "0"
+
         conn = MySQLdb.connect( host   = 'localhost',
                                 user   = '{0}',
                                 passwd = '{1}',
@@ -785,7 +903,7 @@ class api_'''
     part_1 = part_1[0:len(part_1)-1] + " FROM "
     part_2 = part_2[0:len(part_2)-1] + "}"
 
-    code = code + part_1 + configName + " WHERE patient_id='{0}' '''.format(self.patient_id))"
+    code = code + part_1 + configName + "_{0} WHERE patient_id='{1}' '''.format(page_index,self.patient_id))"
     code = code + '''
         res = ['''
     code = code + "self.patient_id" + part_3 +"]"
@@ -802,6 +920,7 @@ class api_'''
     with open(fileName,"w") as coder:
         coder.write(code)
     
+#--------------------------------------------------------------------------------------------------------------------------
 # generator the SQL code: Handler
 def generateSQL_Handler():
     code = '''use {0};
@@ -809,38 +928,40 @@ def generateSQL_Handler():
 grant select, insert, update, delete on {0}.* to '{1}'@'localhost' identified by '{2}';
 
 '''.format(database,username,password)
-
-    code = code + "drop table if exists " + configName + ";\n\n"
-    code = code + "create table " + configName + " ("
-    code = code + '''
+    for iii in range(maxPage):
+        code = code + "drop table if exists " + configName + "_" + str(iii)+ ";\n\n"
+        code = code + "create table " + configName + "_" + str(iii) + " ("
+        code = code + '''
     '''
-    for ii in range(len(config["blocks"])):
-        block = config["blocks"][ii]
-        for i in range(len(block["elements"])):
-            element = block["elements"][i]
-            if (element["class"]!="table"):
-                code = code + "`" + element["name"] + "`  varchar(20) default ''"
-                code = code + ''',
-    '''
-                if (element["class"]=="radio" and int(element["other"])==1):
-                    code = code + "`" + element["name"] + "_other`  varchar(50) default ''"
+        for ii in range(len(config["blocks"])):
+            block = config["blocks"][ii]
+            for i in range(len(block["elements"])):
+                element = block["elements"][i]
+                if (element["class"]!="table"):
+                    code = code + "`" + element["name"] + "`  varchar(20) default ''"
                     code = code + ''',
     '''
-
-            else:
-                for j in range(len(element["content"])):
-                    for k in range(int(element["row"])):
-                        code = code + "`" + element["content"][j]["name"] + "_" +str(k)  + "`  varchar(20) default ''"
+                    if (element["class"]=="radio" and int(element["other"])==1):
+                        code = code + "`" + element["name"] + "_other`  varchar(50) default ''"
                         code = code + ''',
     '''
-    code = code + '''primary key(patient_id)
+
+                else:
+                    for j in range(len(element["content"])):
+                        for k in range(int(element["row"])):
+                            code = code + "`" + element["content"][j]["name"] + "_" +str(k)  + "`  varchar(20) default ''"
+                            code = code + ''',
+    '''
+        code = code + '''primary key(patient_id)
 ) engine=innodb         default charset=utf8;
+
 '''
 
     fileName = "./sql/" + configName + ".sql"
     with open(fileName,"w") as coder:
         coder.write(code)
 
+#--------------------------------------------------------------------------------------------------------------------------
 # generator the SQL code: TABLE data_status
 def generateSQL_dataStatus():
     code = '''use {2};
@@ -856,7 +977,7 @@ grant select, insert, update, delete on {2}.* to '{0}'@'localhost' identified by
     '''
     for i in range(len(config_main["elements"])):
         element = config_main["elements"][i]
-        code = code + "`" + element["name"] + "`  INT default 0"
+        code = code + "`" + element["name"] + '''`  varchar(20) default "0"'''
         if (i<len(config_main["elements"])-1):
             code = code + ''',
     '''
@@ -869,6 +990,7 @@ grant select, insert, update, delete on {2}.* to '{0}'@'localhost' identified by
     with open(fileName,"w") as coder:
         coder.write(code)
 
+#--------------------------------------------------------------------------------------------------------------------------
 # generator the Python App.py:
 def generatePython_App():
 
@@ -891,8 +1013,11 @@ import json
     part_2 = ""
     part_3 = '''("/list",      listHandler),
                         ("/hello",      helloHandler),
+                        ("/index",      indexHandler),
                         ("/api/new",      api_newHandler),
                         ("/api/remove",      api_removeHandler),
+                        ("/api/removePage",      api_removePageHandler),
+                        ("/downloadExcel",      downloadExcelHandler),
                         ("/api/list",      api_listHandler),
                         '''
     if (needPic == "1"):
@@ -924,7 +1049,16 @@ class uploadHandler(tornado.web.RequestHandler):
         print('----------------------------Prepare Upload--------------------------')
         self.patient_id = self.get_argument("patient_id", "")
         print(self.patient_id)
-        self.render("templates/upload.html", patient_id=self.patient_id)
+        # Get the patient's data status from the database
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = '{0}',
+                                passwd = '{1}',
+                                db     = '{2}',
+                                charset= 'utf8')
+        conn.autocommit(1)
+        self.cur = conn.cursor()
+        {3}
+        self.render("templates/upload.html", side_menu=side_menu, patient_id=self.patient_id)
 
     def post(self):
         print('----post------')
@@ -984,9 +1118,17 @@ class showHandler(tornado.web.RequestHandler):
     def get(self):
         print('----------------------------Show Pic--------------------------')
         self.patient_id = self.get_argument("patient_id", "")
-
-        self.render("templates/show.html", patient_id=self.patient_id)
-'''.format(username,password,database)
+        # Get the patient's data status from the database
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = '{0}',
+                                passwd = '{1}',
+                                db     = '{2}',
+                                charset= 'utf8')
+        conn.autocommit(1)
+        self.cur = conn.cursor()
+        {4}
+        self.render("templates/show.html", side_menu=side_menu, patient_id=self.patient_id)
+'''.format(username,password,database,getSideMenu("upload",-1),getSideMenu("show",-1))
 
     code = code + '''
 class listHandler(tornado.web.RequestHandler):
@@ -1014,11 +1156,15 @@ class api_newHandler(tornado.web.RequestHandler):
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        sqls = "SELECT patient_id FROM base WHERE patient_id='" + self.patient_id + "'"
+        sqls = "SELECT patient_id FROM base_0 WHERE patient_id='" + self.patient_id + "'"
         self.cur.execute(sqls)
         result = 0
         for row in self.cur:
             result = 1
+        if (result == 0):
+            sql = "INSERT INTO data_status (patient_id,base) VALUES ('" + self.patient_id + "','0')"
+            self.cur.execute(sql)
+        self.cur.close()
         self.data = {{ "patient_id": self.patient_id, "result": result }}
         self.write(json.dumps(self.data))
 
@@ -1039,8 +1185,9 @@ class api_removeHandler(tornado.web.RequestHandler):
 
     for i in range(len(config_main["elements"])):
         element = config_main["elements"][i]
-        code = code + '''
-                "DELETE FROM ''' + element["name"] + ''' WHERE patient_id='" + self.patient_id + "'" '''
+        for j in range(10):
+            code = code + '''
+                "DELETE FROM ''' + element["name"] + '_' + str(j) + ''' WHERE patient_id='" + self.patient_id + "'" '''
         if (i<len(config_main["elements"])-1):
             code = code + ''','''
     code = code + ''']
@@ -1049,6 +1196,96 @@ class api_removeHandler(tornado.web.RequestHandler):
         for sql in sqls:
             self.cur.execute(sql)
         self.cur.close()
+
+class api_removePageHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------remove page--------------------------')
+        self.patient_id = self.get_argument("patient_id", "")
+        self.page_name = self.get_argument("page_name", "")
+        self.page_index = self.get_argument("page_index", "")
+        page_index =int(self.page_index)
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = '{0}',
+                                passwd = '{1}',
+                                db     = '{2}',
+                                charset= 'utf8')
+        conn.autocommit(1)
+        # Get the data from the database
+        self.cur = conn.cursor()
+        sql = "SELECT " + self.page_name + " FROM data_status WHERE patient_id='" + self.patient_id + "'"
+        self.cur.execute(sql)
+        page_status = "0"
+        for row in self.cur:
+            page_status = row[0]
+        if page_index>0:
+            page_status_new = page_status[0:page_index] + page_status[(page_index+1):len(page_status)]
+        else:
+            page_status_new = "0"
+        sql = "UPDATE data_status SET " + self.page_name + "=" + page_status_new + " WHERE patient_id='" + self.patient_id + "'"
+        self.cur.execute(sql)
+
+        sql = "DELETE FROM " + self.page_name + "_" + str(page_index)+ " WHERE patient_id='" + self.patient_id + "'"
+        self.cur.execute(sql)
+
+        for i in range(page_index,len(page_status)-1):
+            sql = "INSERT INTO " + self.page_name + "_" + str(i)+ " SELECT * FROM " + self.page_name + "_" + str(i+1) + " WHERE patient_id='" + self.patient_id + "'"
+            self.cur.execute(sql)
+            sql = "DELETE FROM " + self.page_name + "_" + str(i+1)+ " WHERE patient_id='" + self.patient_id + "'"
+            self.cur.execute(sql)
+        self.cur.close()
+        self.write("finished")
+
+class downloadExcelHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------download Excel--------------------------')
+        os.system("python3 download_xls.py")
+        self.set_header ('Content-Disposition', 'attachment; filename='+"data.xls")
+        with open("download/data.xls", 'rb') as f:
+            while True:
+                data = f.read(1024)
+                if not data:
+                    break
+                self.write(data)
+        self.finish()
+
+class indexHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('----------------------------index--------------------------')
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = '{0}',
+                                passwd = '{1}',
+                                db     = '{2}',
+                                charset= 'utf8')
+        conn.autocommit(1)
+        # Get the data from the database
+        cur = conn.cursor()
+        sql = "SELECT patient_id FROM data_status"
+        cur.execute(sql)
+        num_plan = 50
+        num_tot = 0
+        for row in cur:
+            num_tot = num_tot + 1
+        percent_0 = int(num_tot/num_plan*100)
+        percent_1 = 100-percent_0
+        if num_tot==0:
+            num = [0,0,0,0,0,0]
+        if num_tot==1:
+            num = [0,0,0,0,0,1]
+        if num_tot==2:
+            num = [0,0,0,0,1,1]
+        if num_tot==3:
+            num = [0,0,0,1,0,2]
+        if num_tot==4:
+            num = [0,0,0,1,0,3]
+        if num_tot>4:
+            num = [int(num_tot*0.15),int(num_tot*0.15),int(num_tot*0.15),int(num_tot*0.15),int(num_tot*0.15)]
+            num_6 = num_tot - (num[0]+num[1]+num[2]+num[3]+num[4])
+            num.extend([num_6])
+        
+        self.render("templates/index.html", num_tot=num_tot, percent_0=percent_0, percent_1=percent_1, num_1=num[0], num_2=num[1], num_3=num[2], num_4=num[3], num_5=num[4], num_6=num[5])
 
 class api_listHandler(tornado.web.RequestHandler):
 
@@ -1062,7 +1299,7 @@ class api_listHandler(tornado.web.RequestHandler):
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        sqls = "SELECT patient_id,name,sex,age FROM base"
+        sqls = "SELECT patient_id,name,sex,age FROM base_0"
         self.cur.execute(sqls)
         patient_list = []
         for row in self.cur:
@@ -1103,6 +1340,8 @@ if __name__ == "__main__":
     with open(fileName,"w") as coder:
         coder.write(code)
 
+#--------------------------------------------------------------------------------------------------------------------------
+# generate Nginx configuration
 def generateNginx_config():
 
     code = '''server {{
@@ -1128,7 +1367,8 @@ def generateNginx_config():
     with open(fileName,"w") as coder:
         coder.write(code)
 
-
+#--------------------------------------------------------------------------------------------------------------------------
+# generate Supervisor configuration
 def generateSupervisor_config():
 
     code = '''[program:{0}]
@@ -1148,6 +1388,8 @@ stdout_logfile          = {1}/log/app.log
     with open(fileName,"w") as coder:
         coder.write(code)
 
+#--------------------------------------------------------------------------------------------------------------------------
+# generate  Shell code
 def generateShell():
 
     code = "#!/bin/bash\n\n"
@@ -1239,7 +1481,186 @@ EOF
     with open(fileName,"w") as coder:
         coder.write(code)
 
+#--------------------------------------------------------------------------------------------------------------------------
+# download data into Excel
+def generateDownloadExcel():
+    code = '''
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
 
+# Download data into Excel
+# Date for Version 2: 2020.04.08
+
+import MySQLdb
+import xlrd,xlwt
+import time
+from datetime import datetime
+import os
+
+def getData():
+
+    file_new = xlwt.Workbook(encoding = 'utf-8')
+    sheet_1 = file_new.add_sheet('main')
+
+    # prepare some settings
+    dateFormat = xlwt.XFStyle()
+    dateFormat.num_format_str = 'yyyy-mm-dd'
+
+    warning_style = xlwt.XFStyle()
+    fnt = xlwt.Font()
+    fnt.colour_index = 2
+    warning_style.font = fnt
+
+    tt = 60*60*24
+    s_date = int(datetime(1899, 12, 31).timestamp()/tt)-2
+
+    conn = MySQLdb.connect( host   = 'localhost',
+                            user   = 'root',
+                            passwd = '1',
+                            db     = 'Test',
+                            charset= 'utf8')
+    conn.autocommit(1)
+    cur = conn.cursor()
+'''
+
+    part_1 = '''
+    '''
+    part_2 = '''
+    sql = "SELECT patient_id'''
+    part_3 = '''cur.execute(sql)
+    patient_id = []
+    '''
+    part_4 = '''
+    for row in cur:
+        patient_id.extend([row[0]])
+    '''
+    part_5 = '''
+    row_max = len(patient_id)
+    col_max = '''
+
+    part_6 = '''
+    matrix = [list("" for i in range(col_max)) for i in range(row_max+2)]
+    for ii in range(len(patient_id)):
+        patient = patient_id[ii]
+        kk = 0
+        '''
+    part_7 = '''
+    col_names_all = ["patient_id"]
+    col_labels_all = ["病例号"]'''
+    transfer = '''
+    '''
+    transfer_2 = '''
+    '''
+
+    for iii in range(len(config_main["elements"])):
+        config_element = config_main["elements"][iii]
+        config_name = clear + "configuration/config_" + config_element["name"] + ".json"
+        config_text = open(config_name,encoding="utf-8")
+        jsonData = config_text.read()
+        config = json.loads(jsonData)
+        config_name = config["name"]
+
+        col_names = []
+        col_labels = []
+
+        for ii in range(len(config["blocks"])):
+            block = config["blocks"][ii]
+            for i in range(len(block["elements"])):
+                element = block["elements"][i]
+                if (element["class"]!="table"):
+                    col_names.extend([element["name"]])
+                    col_labels.extend([element["label"]])
+                    if (element["class"]=="radio" and int(element["other"])==1):
+                        col_names.extend([element["name"] + "_other"])
+                        col_labels.extend([element["label"] + "_other"])
+                else:
+                    for j in range(len(element["content"])):
+                        for k in range(int(element["row"])):
+                            col_names.extend([element["content"][j]["name"] + "_" +str(k)])
+                            col_labels.extend([element["content"][j]["label"] + "_" +str(k)])
+
+        col_names_trans = '["' + '","'.join(col_names[1:]) + '"]'
+        col_labels_trans = '["' + '","'.join(col_labels[1:]) + '"]'
+        transfer = transfer + '''{0}_col_names = {1}
+    '''.format(config_name,col_names_trans)
+        transfer_2 = transfer_2 + '''{0}_col_labels = {1}
+    '''.format(config_name,col_labels_trans)
+        col_names = ','.join(col_names[1:])
+
+        part_1 = part_1 + '''{0}_col = len({0}_col_names)
+    '''.format(config_name)
+        part_2 = part_2 + "," + config_name
+        part_3 = part_3 + '''{0}_page_max = 0
+    '''.format(config_name)
+        part_4 = part_4 + '''
+        {0}_page_status = str(row[{1}])
+        {0}_page_status = str(int({0}_page_status[::-1]))[::-1] # delete 0 in tail
+        {0}_page_max = max({0}_page_max,len({0}_page_status))
+        '''.format(config_name,str(iii+1))
+        part_5 = part_5 + '''{0}_col*{0}_page_max + '''.format(config_name)
+        part_6 = part_6 + '''
+        for i in range({0}_page_max):
+            page = "{0}_" + str(i)
+            sql = "SELECT {1} FROM " + page + " WHERE patient_id='" + patient + "'"
+            cur.execute(sql)
+            record = []
+            for row in cur:
+                record = row
+            if len(record)==0:
+                record = ["" for j in range({0}_col)]
+            for v in record:
+                kk = kk + 1
+                matrix[ii+2][kk] = v
+            '''.format(config_name,col_names)
+        
+        part_7 = part_7 + '''
+    for i in range({0}_page_max):
+        name_suffix = "_form"+str(i+1)
+        label_suffix = "_表"+str(i+1)
+        if i==0:
+            name_suffix = ""
+            label_suffix = ""
+        col_names = []
+        col_labels = []
+        for j in range(len({0}_col_names)):
+            col_name = {0}_col_names[j]
+            col_label = {0}_col_labels[j]
+            col_names.extend([col_name+name_suffix])
+            col_labels.extend([col_label+label_suffix])
+        col_names_all.extend(col_names)
+        col_labels_all.extend(col_labels)
+    '''.format(config_name)
+
+    part_2 = part_2 + ''' FROM data_status" 
+    '''
+    part_5 = part_5 + "1"
+
+    code = code + transfer + transfer_2 + part_1 + part_2 + part_3 + part_4 + part_5 + part_6 + part_7
+
+    code = code + '''
+    for j in range(col_max):
+        matrix[0][j] = col_labels_all[j]
+        matrix[1][j] = col_names_all[j]
+    for i in range(row_max):
+        matrix[i+2][0] = patient_id[i]
+    for i in range(row_max+2):
+        for j in range(col_max):
+            sheet_1.write(i, j, label=matrix[i][j])
+            
+    # save the file
+    new_file = 'download/data.xls'
+    if os.path.exists(new_file):
+        os.remove(new_file)
+    file_new.save(new_file)
+
+getData()
+'''
+
+    fileName = "download_xls.py"
+    with open(fileName,"w") as coder:
+        coder.write(code)
+
+#--------------------------------------------------------------------------------------------------------------------------
 # prepare the directories
 if os.path.exists("handlers"):
     shutil.rmtree("handlers")
@@ -1298,3 +1719,4 @@ generatePython_App()
 generateNginx_config()
 generateSupervisor_config()
 generateShell()
+generateDownloadExcel()

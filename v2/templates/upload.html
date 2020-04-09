@@ -52,40 +52,8 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <li class="mt">
-                          <a href="/list">
-                          <i class="fa fa-tasks"></i>
-                          <span>病例列表</span>
-                      </a>
-                  </li>
+                  {% raw side_menu %}
 
-                  <li class="sub-menu">
-                          <a href="/base?patient_id={{patient_id}}">
-                          <i class="fa fa-tasks"></i>
-                          <span>基本信息</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                          <a href="/radio?patient_id={{patient_id}}">
-                          <i class="fa fa-tasks"></i>
-                          <span>放射报告</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                          <a href="/upload?patient_id={{patient_id}}">
-                          <i class="fa fa-tasks"></i>
-                          <span>上传图片</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                          <a href="/show?patient_id={{patient_id}}">
-                          <i class="fa fa-tasks"></i>
-                          <span>查阅图片</span>
-                      </a>
-                  </li>
               </ul>
               <!-- sidebar menu end-->
           </div>

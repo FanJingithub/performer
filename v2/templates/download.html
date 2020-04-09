@@ -12,6 +12,14 @@
 
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
+
+    <script src="assets/js/chart-master/Chart.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/vue-resource.js"></script>
     
   </head>
 
@@ -139,39 +147,39 @@
                         </li>
                         
                         <li class="sub-menu">
-                                <a href="/list">
-                                    <i class="fa fa-tasks"></i>
-                                    <span>病例列表</span>
-                                </a>
-                            </li>
+                            <a href="/list">
+                                <i class="fa fa-tasks"></i>
+                                <span>病例列表</span>
+                            </a>
+                        </li>
+                    
+                        <li class="sub-menu">
+                            <a class="active" href="/templates/download.html">
+                                <i class="fa fa-th"></i>
+                                <span>下载数据</span>
+                            </a>
+                        </li>
                         
-                            <li class="sub-menu">
-                                    <a href="/templates/download.html">
-                                        <i class="fa fa-th"></i>
-                                        <span>下载数据</span>
-                                    </a>
-                            </li>
+                        <li class="sub-menu">
+                            <a href="/templates/chartjs.html">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>统计概况</span>
+                            </a>
+                        </li>
 
-                            <li class="sub-menu">
-                                <a class="active" href="/templates/chartjs.html">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    <span>统计概况</span>
-                                </a>
-                            </li>
-    
-                            <li class="sub-menu">
-                                  <a href="/templates/login.html">
-                                      <i class="fa fa-cogs"></i>
-                                      <span>账户信息</span>
-                                  </a>
-                              </li>
-    
-                            <li class="sub-menu">
-                                  <a href="/templates/lock_screen.html">
-                                      <i class="fa fa-desktop"></i>
-                                      <span>锁定屏幕</span>
-                                  </a>
-                            </li>
+                        <li class="sub-menu">
+                              <a href="/templates/login.html">
+                                  <i class="fa fa-cogs"></i>
+                                  <span>账户信息</span>
+                              </a>
+                          </li>
+
+                        <li class="sub-menu">
+                              <a href="/templates/lock_screen.html">
+                                  <i class="fa fa-desktop"></i>
+                                  <span>锁定屏幕</span>
+                              </a>
+                        </li>
 
               </ul>
               <!-- sidebar menu end-->
@@ -184,70 +192,46 @@
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper">
-          <h3><i class="fa fa-angle-right"></i> 统计概况（待完善数据对接）</h3>
-              <!-- page start-->
-              <div class="tab-pane" id="chartjs">
-                  <div class="row mt">
-                        <div class="col-lg-6">
-                                <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Pie</h4>
-                                    <div class="panel-body text-center">
-                                        <canvas id="pie" height="300" width="400"></canvas>
+            <section class="wrapper site-min-height">
+                <div style="padding-left:5%;padding-top:20px;padding-right:5%">
+  
+                <div class="row" id="vm">
+                    <div style="padding-left:20px;padding-top:10px">
+                        <h3>下载数据</h3>
+                        <br>
+                        <p>目前支持Excel文件的下载</p>
+                        <br>
+                    </div>
+                    <div class="col-lg-9 main-chart">
+                    
+                        <div class="row mtbox">
+                            <div class="col-md-2 col-sm-2 box0">
+                                <div class="box1">
+                                    <div style="clear:both;margin:0 auto;">
+                                        <button v-on:click="download_xls" style="width:60px;height:60px;background:url(/templates/assets/img/download_xls.png);background-size:cover;padding:15px;border-style:none"></button>
                                     </div>
+                                    <h3>Excel</h3>
                                 </div>
-                        </div>
-                        <div class="col-lg-6">
-                                <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Bar</h4>
-                                    <div class="panel-body text-center">
-                                        <canvas id="bar" height="300" width="400"></canvas>
-                                    </div>
-                                </div>
-                        </div>
-                  </div>
-                  <div class="row mt">
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Radar</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="radar" height="300" width="400"></canvas>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="col-lg-6">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
-                                <div class="panel-body text-center">
-                                    <canvas id="doughnut" height="300" width="400"></canvas>
-                                </div>
+                                    <p>存储为Excel文件</p>
                             </div>
-                      </div>
-                  </div>
-                  <div class="row mt">
-                        <div class="col-lg-6">
-                                <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Polar Area</h4>
-                                    <div class="panel-body text-center">
-                                        <canvas id="polarArea" height="300" width="400"></canvas>
+                            <div class="col-md-2 col-sm-2 box0">
+                                <div class="box1">
+                                    <div style="clear:both;margin:0 auto;">
+                                        <button style="width:60px;height:60px;background:url(/templates/assets/img/download_pdf.png);background-size:cover;padding:15px;border-style:none"></button>
                                     </div>
+                                    <h3>PDF</h3>
                                 </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                                <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Line</h4>
-                                    <div class="panel-body text-center">
-                                        <canvas id="line" height="300" width="400"></canvas>
-                                    </div>
-                                </div>
-                        </div>
-                  </div>
-              </div>
-              <!-- page end-->
-          </section>          
-      </section><!-- /MAIN CONTENT -->
+                                    <p>存储为PDF文件</p>
+                            </div>
+                        </div><!-- /row mt -->	
+                    
+                    </div><!-- /col-lg-9 END SECTION MIDDLE -->
+   
+                </div><!--/row -->
+            </div>
+            </section>
+        </section>
+        <!--main content end-->
 
       <!--main content end-->
       <!--footer start-->
@@ -264,27 +248,76 @@
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery-1.8.3.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.sparkline.js"></script>
 
 
     <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
+    
+    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
 
     <!--script for this page-->
-    <script src="assets/js/chart-master/Chart.js"></script>
-    <script src="assets/js/chartjs-conf.js"></script>
-    
-  <script>
-      //custom select box
+    <script src="assets/js/sparkline-chart.js"></script>    
+	<script src="assets/js/zabuto_calendar.js"></script>
+	
+	<script type="application/javascript">
+        var vm = new Vue({
+                el: '#vm',
+                methods:{
+                    download_xls1: function(event) {
+                        event.preventDefault();
+                        this.$http.get('/downloadExcel',data,{emulateJSON:true}).then(function(res){
+                            
+                        },function(res){
+                            console.log(res.status);
+                        });
+                    },
+                    getBlob: function(url) {
+                        return new Promise(res => {
+                            const xhr = new XMLHttpRequest();
+                            xhr.open('GET', url, true);
+                            xhr.responseType = 'blob';
+                            xhr.onload = () => {
+                                if (xhr.status === 200) {
+                                    res(xhr.response);
+                                }
+                            };
+                            xhr.send();
+                        });
+                    },
+                    saveAs: function(blob, filename) {
+                        if (window.navigator.msSaveOrOpenBlob) {
+                            // Internet Explorer 10 的 msSaveBlob 和 msSaveOrOpenBlob 方法允许用户在客户端上保存文件
+                            navigator.msSaveBlob(blob, filename);
+                        } else {
+                            const url_object = window.URL || window.webkitURL || window;
+                            const save_link = document.createElement('a');
+                            const click_event = new MouseEvent('click');
+                            save_link.href = url_object.createObjectURL(blob);
+                            save_link.download = filename;
+                            save_link.dispatchEvent(click_event);
+                            url_object.revokeObjectURL(save_link.href);
+                        }
+                    },
+                    download: function(url, filename) {
+                        this.getBlob(url).then(blob => {
+                            this.saveAs(blob, filename);
+                        });
+                    },
+                    download_xls: function(event) {
+                        console.log("ajaxDownloadSynchronized");
+                        this.download('/downloadExcel', 'data.xls');
+                    }
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
+                }
+            });
+    </script>
 
   </body>
 </html>

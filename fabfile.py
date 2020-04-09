@@ -22,10 +22,19 @@ env.user = server_info["user"]
 env.sudo_user = server_info["user"]
 env.password = server_info["passwd"]
 
-app_Name = "Test"
-version = "1"
-app_dir = "/srv/MData_all/Test"
-app_dir_www = "/srv/MData_all/Test/www"
+app_info_text = open("app_info.json")
+jsonData = app_info_text.read()
+app_info = json.loads(jsonData)
+
+app_Name = app_info["app_name"]
+version = app_info["version"]
+app_dir = app_info["app_dir"]
+app_dir_www = app_dir + "/www"
+
+# app_Name = "Test"
+# version = "1"
+# app_dir = "/srv/MData_all/Test"
+# app_dir_www = "/srv/MData_all/Test/www"
 
 _REMOTE_BASE_DIR = '/home/ubuntu/files/Web'
 _TAR_FILE = "webfiles.tar.gz"

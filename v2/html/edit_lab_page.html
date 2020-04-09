@@ -35,68 +35,8 @@
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <ul class="sidebar-menu" id="nav-accordion">
-                <li class="mt">
-                    <a href="/list">
-                        <i class="fa fa-tasks"></i>
-                        <span>病例列表</span>
-                    </a>
-                </li>
+                {% raw side_menu %}
             
-                <li class="sub-menu">
-                    <a href="/base?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>基本信息</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/lab?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>检验报告</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/pathology?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>病理报告</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/surgery?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>手术记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/chemotherapy?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>化疗记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/radiotherapy?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>放疗记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/follow_up?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>随访记录</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/upload?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>上传图片</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="/show?patient_id={{patient_id}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>查阅图片</span>
-                    </a>
-                </li>
-        
               </ul>
           </div>
       </aside>
@@ -126,6 +66,7 @@
                     </div></div>
                 <div class="form-part-3">
                     <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
                 </div>    
             </form>
         
@@ -171,7 +112,7 @@
             },
             methods:{
                 init:function(){
-                    this.$http.get('/api/lab?patient_id={{patient_id}}').then(function(res){
+                    this.$http.get('/api/lab?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
                         this.patient_id=res.data.patient_id;
                         this.CEA=res.data.CEA;
                         this.CA199=res.data.CA199;
@@ -188,8 +129,15 @@
                         CEA: this.CEA,
                         CA199: this.CA199
                     };
-                    this.$http.post('/lab',data,{emulateJSON:true}).then(function(res){
-                        document.write(res.body);    
+                    this.$http.post('/lab?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
+                        window.location.href="/lab?patient_id={{patient_id}}&page_index={{page_index}}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=lab').then(function(res){
+                        window.location.href="{% raw page_previous %}";
                     },function(res){
                         console.log(res.status);
                     });

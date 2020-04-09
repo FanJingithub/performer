@@ -11,6 +11,11 @@ class api_chemotherapyHandler(tornado.web.RequestHandler):
     def get(self):
         print('----------------------------Get api-chemotherapy----------------------')
         self.patient_id = self.get_argument("patient_id", "")
+        try:
+            page_index = self.get_argument("page_index", "0")
+        except:
+            page_index = "0"
+
         conn = MySQLdb.connect( host   = 'localhost',
                                 user   = 'root',
                                 passwd = '1',
@@ -19,7 +24,7 @@ class api_chemotherapyHandler(tornado.web.RequestHandler):
         conn.autocommit(1)
         # Get the data from the database
         self.cur = conn.cursor()
-        self.cur.execute('''SELECT patient_id,chemo_way,chemo_way_other,last_chemo,chemo_time_0,chemo_time_1,chemo_time_2,chemo_way_0,chemo_way_1,chemo_way_2,desc_0,desc_1,desc_2 FROM chemotherapy WHERE patient_id='{0}' '''.format(self.patient_id))
+        self.cur.execute('''SELECT patient_id,chemo_way,chemo_way_other,last_chemo,chemo_time_0,chemo_time_1,chemo_time_2,chemo_way_0,chemo_way_1,chemo_way_2,desc_0,desc_1,desc_2 FROM chemotherapy_{0} WHERE patient_id='{1}' '''.format(page_index,self.patient_id))
         res = [self.patient_id, "", "", "", "", "", "", "", "", "", "", "", ""]
         for row in self.cur:
             res = row

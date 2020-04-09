@@ -138,42 +138,21 @@
               	  <h5 class="centered">研究管理员</h5>
               	  	
                         <li class="mt">
-                            <a class="active" href="/index">
+                            <a class="active" href="/templates/home/index.html">
                                 <i class="fa fa-dashboard"></i>
-                                <span>研究主页</span>
-                            </a>
-                        </li>
-                        
-                        <li class="sub-menu">
-                            <a href="/list">
-                                <i class="fa fa-tasks"></i>
-                                <span>病例列表</span>
+                                <span>系统主页</span>
                             </a>
                         </li>
 
                         <li class="sub-menu">
-                                <a href="/templates/download.html">
-                                    <i class="fa fa-th"></i>
-                                    <span>下载数据</span>
-                                </a>
-                        </li>
-                    
-                        <li class="sub-menu">
-                            <a href="/templates/chartjs.html">
-                                <i class="fa fa-bar-chart-o"></i>
-                                <span>统计概况</span>
-                            </a>
-                        </li>
-
-                        <li class="sub-menu">
-                              <a href="/templates/login.html">
+                              <a href="/templates/home/login.html">
                                   <i class="fa fa-cogs"></i>
                                   <span>账户信息</span>
                               </a>
                           </li>
 
                         <li class="sub-menu">
-                              <a href="/templates/lock_screen.html">
+                              <a href="/templates/home/lock_screen.html">
                                   <i class="fa fa-desktop"></i>
                                   <span>锁定屏幕</span>
                               </a>
@@ -195,114 +174,74 @@
   
                 <div class="row">
                     <div style="padding-left:20px;padding-top:10px">
-                        <h3>研究概述</h3>
+                        <h3>科研数据管理系统</h3>
                         <br>
-                        <p>本研究将评估新肠癌患者新辅助放化疗的敏感性...</p>
+                        <p>本数据库系统支持多中心研究在线数据录入（包括前瞻性研究CRF表、回顾性数据收集等），可以活页夹式动态增删数据表，以及支持导出至本地Excel文件用于统计分析</p>
+                        <p>本数据库系统同时支持电脑和各类手机登录</p>
                         <br>
                     </div>
                     <div class="col-lg-9 main-chart">
-                    
+                        <h4>我的研究</h4>
                         <div class="row mtbox">
                             <div class="col-md-2 col-sm-2 box0">
-                                <div class="box1" href="/list">
-                                    <span class="li_news"></span>
-                                    <h3>{{num_tot}}</h3>
+                                <div class="box1">
+                                    <div style="clear:both;margin:0 auto;">
+                                        <a href="http://123.206.137.251:92/list">
+                                            <span class="li_news"></span>
+                                        </a>
+                                    </div>
+                                    <h3>示例</h3>
                                 </div>
-                                    <p>病例列表中共有{{num_tot}}个病例</p>
+                                    <p>数据库示例</p>
                             </div>
                             <div class="col-md-2 col-sm-2 box0">
                                 <div class="box1">
-                                    <span class="li_data"></span>
-                                    <h3>OK!</h3>
+                                    <div style="clear:both;margin:0 auto;">
+                                        <a href="http://123.206.137.251:92/list">
+                                            <span class="li_news"></span>
+                                        </a>
+                                    </div>
+                                    <h3>研究1</h3>
                                 </div>
-                                    <p>数据库状态良好</p>
+                                    <p>查看研究1的数据</p>
                             </div>
-                            <div class="col-md-2 col-sm-2 box0">
-                                    <div class="box1">
-                                        <span class="li_stack"></span>
-                                        <h3>3</h3>
-                                    </div>
-                                        <p>您有3个任务待完成</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2 box0">
-                                    <div class="box1">
-                                        <span class="li_cloud"></span>
-                                        <h3>+2</h3>
-                                    </div>
-                                        <p>您有2条新消息</p>
-                            </div>
-                        
-                        </div><!-- /row mt -->	
-                    
+                        </div><!-- /row mt -->
+
                         
                         <div class="row mt">
-                        <div style="padding-left:10px;padding-right:10px">
-                                <div class="col-md-4 mb">
-                                        <div class="darkblue-panel pn">
-                                            <div class="darkblue-header">
-                                                <h5>入组完成情况</h5>
-                                            </div>
-                                          <canvas id="serverstatus02" height="120" width="120"></canvas>
-                                          <script>
-                                              var doughnutData = [
-                                                      {
-                                                          value: parseInt("{{percent_0}}"),
-                                                          color:"#68dff0"
-                                                      },
-                                                      {
-                                                          value : parseInt("{{percent_1}}"),
-                                                          color : "#444c57"
-                                                      }
-                                                  ];
-                                                  var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
-                                          </script>
-                                          <p>April 7, 2020</p>
-                                          <footer>
-                                              <div class="pull-left">
-                                                  <h5><i class="fa fa-hdd-o"></i> {{num_tot}} 例</h5>
-                                              </div>
-                                              <div class="pull-right">
-                                                  <h5>{{percent_0}}% Completed</h5>
-                                              </div>
-                                          </footer>
-                                        </div><!-- /darkblue panel -->
-                                  </div><!-- /col-md-4 -->
-                        </div>
-  
-                        <div style="padding-left:10px;padding-right:10px">
-                                <div class="col-md-4 col-sm-4 mb">
-                                        <div class="darkblue-panel pn">
-                                            <div class="darkblue-header">
-                                                <h5>入组进度</h5>
-                                            </div>
-                                            <div class="chart mt">
-                                                <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[{{num_1}},{{num_2}},{{num_3}},{{num_4}},{{num_5}},{{num_6}}]"></div>
-                                            </div>
-                                            <p class="mt"><b>{{num_tot}} 例</b><br/>近期入组</p>
+                            <h4>创建新的研究</h4>
+                            <p>注意：表单布局设计好后，请将生成的json文件发送给系统管理员进行系统配置</p>
+                            <div class="col-md-2 col-sm-2 box0">
+                                <div class="box1">
+                                    <div style="clear:both;margin:0 auto;">
+                                        <a href="http://123.206.137.251:92/hello">
+                                            <button style="width:60px;height:60px;background:url(/templates/assets/img/add_research.png);background-size:cover;padding:15px;border-style:none"></button>
+                                        </a>
                                         </div>
-                                    </div><!-- /col-md-4 -->
-                        </div>
-                          
-                       </div><!-- /row -->
+                                        <h3>新增研究</h3>
+                                    </div>
+                                    <p>创建新的研究</p>
+                                </div>
+                           </div><!-- /row -->
+                    
                     </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
                     <div class="col-lg-3 ds">
-                         <!-- CALENDAR-->
-                         <div id="calendar" class="mb">
-                            <div class="panel green-panel no-margin">
-                                <div class="panel-body">
-                                    <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
-                                        <div class="arrow"></div>
-                                        <h3 class="popover-title" style="disadding: none;"></h3>
-                                        <div id="date-popover-content" class="popover-content"></div>
-                                    </div>
-                                    <div id="my-calendar"></div>
-                                </div>
-                            </div>
-                        </div><!-- / calendar -->
-                      
-                  </div><!-- /col-lg-3 -->
-   
+                        <!-- CALENDAR-->
+                        <div id="calendar" class="mb">
+                           <div class="panel green-panel no-margin">
+                               <div class="panel-body">
+                                   <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
+                                       <div class="arrow"></div>
+                                       <h3 class="popover-title" style="disadding: none;"></h3>
+                                       <div id="date-popover-content" class="popover-content"></div>
+                                   </div>
+                                   <div id="my-calendar"></div>
+                               </div>
+                           </div>
+                       </div><!-- / calendar -->
+                 </div><!-- /col-lg-3 -->
+
                 </div><!--/row -->
             </div>
             </section>
