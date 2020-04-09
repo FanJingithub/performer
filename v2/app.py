@@ -223,7 +223,192 @@ class uploadHandler(tornado.web.RequestHandler):
         self.patient_id = self.get_argument("patient_id", "")
         print(self.patient_id)
 
-        self.render("templates/show.html", patient_id=self.patient_id)
+        # Get the patient's data status from the database
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = 'root',
+                                passwd = '1',
+                                db     = 'Test',
+                                charset= 'utf8')
+        conn.autocommit(1)
+
+        self.cur = conn.cursor()
+        
+        side_menu = '''
+            <li class="mt">
+		        <a href="/list">
+                        <i class="fa fa-tasks"></i>
+                        <span>病例列表</span>
+                    </a>
+            </li>
+            '''
+        self.cur.execute('''SELECT base,lab,pathology,surgery,chemotherapy,radiotherapy,follow_up FROM data_status WHERE patient_id='{0}' '''.format(self.patient_id))
+        for row in self.cur:
+            base_page_status = row[0]
+            lab_page_status = row[1]
+            pathology_page_status = row[2]
+            surgery_page_status = row[3]
+            chemotherapy_page_status = row[4]
+            radiotherapy_page_status = row[5]
+            follow_up_page_status = row[6]
+        self.cur.close()
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>基本信息</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(base_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/base?patient_id={1}&page_index={2}">基本信息_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/base?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(base_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>检验报告</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(lab_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/lab?patient_id={1}&page_index={2}">检验报告_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/lab?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(lab_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>病理报告</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(pathology_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/pathology?patient_id={1}&page_index={2}">病理报告_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/pathology?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(pathology_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>手术记录</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(surgery_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/surgery?patient_id={1}&page_index={2}">手术记录_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/surgery?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(surgery_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>化疗记录</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(chemotherapy_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/chemotherapy?patient_id={1}&page_index={2}">化疗记录_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/chemotherapy?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(chemotherapy_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>放疗记录</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(radiotherapy_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/radiotherapy?patient_id={1}&page_index={2}">放疗记录_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/radiotherapy?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(radiotherapy_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>随访记录</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(follow_up_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/follow_up?patient_id={1}&page_index={2}">随访记录_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/follow_up?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(follow_up_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                    <a href="/upload?patient_id={0}">
+                    <i class="fa fa-tasks"></i>
+                    <span>上传图片</span>
+                </a>
+            </li>
+
+            <li class="sub-menu">
+                    <a href="/show?patient_id={0}">
+                    <i class="fa fa-tasks"></i>
+                    <span>查阅图片</span>
+                </a>
+            </li>
+        '''.format(self.patient_id)
+        
+        self.render("templates/show.html", side_menu=side_menu, patient_id=self.patient_id)
 
         try:
             print("start---------upload")
@@ -242,15 +427,6 @@ class uploadHandler(tornado.web.RequestHandler):
                     #print(img['body'])
             print("---------upload -------done")
 
-            # Get the patient's data status from the database
-            conn = MySQLdb.connect( host   = 'localhost',
-                                    user   = 'root',
-                                    passwd = '1',
-                                    db     = 'Test',
-                                    charset= 'utf8')
-            conn.autocommit(1)
-
-            self.cur = conn.cursor()
             self.cur.execute("SELECT base FROM data_status WHERE patient_id='" + self.patient_id + "'")
             self.cur.close()
 

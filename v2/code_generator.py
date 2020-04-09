@@ -569,7 +569,7 @@ def generateHTML(editable):
       <footer class="site-footer">
           <div class="text-center">
               2020 - Fan
-              <a href="gallery.html#" class="go-top">
+              <a href="#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -1065,7 +1065,17 @@ class uploadHandler(tornado.web.RequestHandler):
         self.patient_id = self.get_argument("patient_id", "")
         print(self.patient_id)
 
-        self.render("templates/show.html", patient_id=self.patient_id)
+        # Get the patient's data status from the database
+        conn = MySQLdb.connect( host   = 'localhost',
+                                user   = '{0}',
+                                passwd = '{1}',
+                                db     = '{2}',
+                                charset= 'utf8')
+        conn.autocommit(1)
+
+        self.cur = conn.cursor()
+        {3}
+        self.render("templates/show.html", side_menu=side_menu, patient_id=self.patient_id)
 
         try:
             print("start---------upload")
@@ -1084,15 +1094,6 @@ class uploadHandler(tornado.web.RequestHandler):
                     #print(img['body'])
             print("---------upload -------done")
 
-            # Get the patient's data status from the database
-            conn = MySQLdb.connect( host   = 'localhost',
-                                    user   = '{0}',
-                                    passwd = '{1}',
-                                    db     = '{2}',
-                                    charset= 'utf8')
-            conn.autocommit(1)
-
-            self.cur = conn.cursor()
             self.cur.execute("SELECT base FROM data_status WHERE patient_id='" + self.patient_id + "'")
             self.cur.close()
 
