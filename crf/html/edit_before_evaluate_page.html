@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <title>数据库系统</title>
+
+        <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/templates/assets/js/jquery.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.js"></script>
+
+    <link rel="stylesheet" href="css/style_2036.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+
+  <body>
+  <section id="container" >
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <a href="#" class="logo"><b>数据库系统</b></a>
+            <div class="top-menu">
+            </div>
+        </header>
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <ul class="sidebar-menu" id="nav-accordion">
+                {% raw side_menu %}
+            
+              </ul>
+          </div>
+      </aside>
+
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+                <h3><i class="fa fa-angle-right"></i>治疗前评价</h3>
+                <hr>
+            
+                <form id="vm" v-on:submit="submit">
+                    <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                    <div class="form-part">
+                    <div class="block">
+                        <h3>靶病灶</h3>
+                        <div>
+                            <label class="form-label">评价日期: </label>
+                            <el-date-picker v-model="target_evaluate_date" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">部位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">测量方法</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">长径</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site1_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method1_0" ></td>
+                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist_0" ></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site1_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method1_1" ></td>
+                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist_1" ></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site1_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method1_2" ></td>
+                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist_2" ></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site1_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method1_3" ></td>
+                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist_3" ></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site1_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method1_4" ></td>
+                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist_4" ></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="block">
+                        <h3>非靶病灶</h3>
+                        <div>
+                            <label class="form-label">评价日期: </label>
+                            <el-date-picker v-model="non_target_evaluate_date" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">部位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">测量方法</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">状态</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">可评估病灶</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site2_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method2_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="status_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="is_evaluable_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="is_evaluable_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site2_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method2_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="status_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="is_evaluable_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="is_evaluable_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site2_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method2_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="status_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="is_evaluable_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="is_evaluable_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site2_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method2_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="status_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="is_evaluable_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="is_evaluable_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site2_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method2_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="status_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="is_evaluable_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="is_evaluable_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="site2_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method2_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="status_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="is_evaluable_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="is_evaluable_5" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div></div>
+                <div class="form-part-3">
+                    <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
+                </div>    
+            </form>
+        
+            </section>
+      </section>
+
+      <footer class="site-footer">
+          <div class="text-center">
+              2020 - Fan
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--common script for all pages-->
+        <script src="/templates/assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script type="text/javascript">
+        $(function() {
+            jQuery(".fancybox").fancybox();
+        });
+    </script>
+    <script>
+    var vm = new Vue({
+            el: '#vm',
+            data: {
+                    patient_id: "{{patient_id}}",
+                    target_evaluate_date: new Date(parseInt("{{target_evaluate_date}}")*1000),
+                    site1_0: "{{site1_0}}",
+                    site1_1: "{{site1_1}}",
+                    site1_2: "{{site1_2}}",
+                    site1_3: "{{site1_3}}",
+                    site1_4: "{{site1_4}}",
+                    method1_0: "{{method1_0}}",
+                    method1_1: "{{method1_1}}",
+                    method1_2: "{{method1_2}}",
+                    method1_3: "{{method1_3}}",
+                    method1_4: "{{method1_4}}",
+                    long_dist_0: "{{long_dist_0}}",
+                    long_dist_1: "{{long_dist_1}}",
+                    long_dist_2: "{{long_dist_2}}",
+                    long_dist_3: "{{long_dist_3}}",
+                    long_dist_4: "{{long_dist_4}}",
+                    non_target_evaluate_date: new Date(parseInt("{{non_target_evaluate_date}}")*1000),
+                    site2_0: "{{site2_0}}",
+                    site2_1: "{{site2_1}}",
+                    site2_2: "{{site2_2}}",
+                    site2_3: "{{site2_3}}",
+                    site2_4: "{{site2_4}}",
+                    site2_5: "{{site2_5}}",
+                    method2_0: "{{method2_0}}",
+                    method2_1: "{{method2_1}}",
+                    method2_2: "{{method2_2}}",
+                    method2_3: "{{method2_3}}",
+                    method2_4: "{{method2_4}}",
+                    method2_5: "{{method2_5}}",
+                    status_0: "{{status_0}}",
+                    status_1: "{{status_1}}",
+                    status_2: "{{status_2}}",
+                    status_3: "{{status_3}}",
+                    status_4: "{{status_4}}",
+                    status_5: "{{status_5}}",
+                    is_evaluable_0: "{{is_evaluable_0}}",
+                    is_evaluable_1: "{{is_evaluable_1}}",
+                    is_evaluable_2: "{{is_evaluable_2}}",
+                    is_evaluable_3: "{{is_evaluable_3}}",
+                    is_evaluable_4: "{{is_evaluable_4}}",
+                    is_evaluable_5: "{{is_evaluable_5}}"
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                    this.$http.get('/api/before_evaluate?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.target_evaluate_date=new Date(parseInt(res.data.target_evaluate_date)*1000);
+                        if (isNaN(this.target_evaluate_date.getTime())) this.target_evaluate_date="";
+                        this.site1_0=res.data.site1_0;
+                        this.site1_1=res.data.site1_1;
+                        this.site1_2=res.data.site1_2;
+                        this.site1_3=res.data.site1_3;
+                        this.site1_4=res.data.site1_4;
+                        this.method1_0=res.data.method1_0;
+                        this.method1_1=res.data.method1_1;
+                        this.method1_2=res.data.method1_2;
+                        this.method1_3=res.data.method1_3;
+                        this.method1_4=res.data.method1_4;
+                        this.long_dist_0=res.data.long_dist_0;
+                        this.long_dist_1=res.data.long_dist_1;
+                        this.long_dist_2=res.data.long_dist_2;
+                        this.long_dist_3=res.data.long_dist_3;
+                        this.long_dist_4=res.data.long_dist_4;
+                        this.non_target_evaluate_date=new Date(parseInt(res.data.non_target_evaluate_date)*1000);
+                        if (isNaN(this.non_target_evaluate_date.getTime())) this.non_target_evaluate_date="";
+                        this.site2_0=res.data.site2_0;
+                        this.site2_1=res.data.site2_1;
+                        this.site2_2=res.data.site2_2;
+                        this.site2_3=res.data.site2_3;
+                        this.site2_4=res.data.site2_4;
+                        this.site2_5=res.data.site2_5;
+                        this.method2_0=res.data.method2_0;
+                        this.method2_1=res.data.method2_1;
+                        this.method2_2=res.data.method2_2;
+                        this.method2_3=res.data.method2_3;
+                        this.method2_4=res.data.method2_4;
+                        this.method2_5=res.data.method2_5;
+                        this.status_0=res.data.status_0;
+                        this.status_1=res.data.status_1;
+                        this.status_2=res.data.status_2;
+                        this.status_3=res.data.status_3;
+                        this.status_4=res.data.status_4;
+                        this.status_5=res.data.status_5;
+                        this.is_evaluable_0=res.data.is_evaluable_0;
+                        this.is_evaluable_1=res.data.is_evaluable_1;
+                        this.is_evaluable_2=res.data.is_evaluable_2;
+                        this.is_evaluable_3=res.data.is_evaluable_3;
+                        this.is_evaluable_4=res.data.is_evaluable_4;
+                        this.is_evaluable_5=res.data.is_evaluable_5;
+                    },function(){
+                        console.log('error');
+                    });
+                },
+                submit: function(event) {
+                    event.preventDefault();
+                    if (this.target_evaluate_date!="") this.target_evaluate_date=this.target_evaluate_date.getTime()/1000;
+                    if (this.non_target_evaluate_date!="") this.non_target_evaluate_date=this.non_target_evaluate_date.getTime()/1000;
+                    var
+                    $form = $('#vm'),
+                    data = {
+                        patient_id: this.patient_id,
+                        target_evaluate_date: this.target_evaluate_date,
+                        site1_0: this.site1_0,
+                        site1_1: this.site1_1,
+                        site1_2: this.site1_2,
+                        site1_3: this.site1_3,
+                        site1_4: this.site1_4,
+                        method1_0: this.method1_0,
+                        method1_1: this.method1_1,
+                        method1_2: this.method1_2,
+                        method1_3: this.method1_3,
+                        method1_4: this.method1_4,
+                        long_dist_0: this.long_dist_0,
+                        long_dist_1: this.long_dist_1,
+                        long_dist_2: this.long_dist_2,
+                        long_dist_3: this.long_dist_3,
+                        long_dist_4: this.long_dist_4,
+                        non_target_evaluate_date: this.non_target_evaluate_date,
+                        site2_0: this.site2_0,
+                        site2_1: this.site2_1,
+                        site2_2: this.site2_2,
+                        site2_3: this.site2_3,
+                        site2_4: this.site2_4,
+                        site2_5: this.site2_5,
+                        method2_0: this.method2_0,
+                        method2_1: this.method2_1,
+                        method2_2: this.method2_2,
+                        method2_3: this.method2_3,
+                        method2_4: this.method2_4,
+                        method2_5: this.method2_5,
+                        status_0: this.status_0,
+                        status_1: this.status_1,
+                        status_2: this.status_2,
+                        status_3: this.status_3,
+                        status_4: this.status_4,
+                        status_5: this.status_5,
+                        is_evaluable_0: this.is_evaluable_0,
+                        is_evaluable_1: this.is_evaluable_1,
+                        is_evaluable_2: this.is_evaluable_2,
+                        is_evaluable_3: this.is_evaluable_3,
+                        is_evaluable_4: this.is_evaluable_4,
+                        is_evaluable_5: this.is_evaluable_5
+                    };
+                    this.$http.post('/before_evaluate?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
+                        window.location.href="/before_evaluate?patient_id={{patient_id}}&page_index={{page_index}}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=before_evaluate').then(function(res){
+                        window.location.href="{% raw page_previous %}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

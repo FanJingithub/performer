@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <title>数据库系统</title>
+
+        <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/templates/assets/js/jquery.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.js"></script>
+
+    <link rel="stylesheet" href="css/style_2036.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+
+  <body>
+  <section id="container" >
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <a href="#" class="logo"><b>数据库系统</b></a>
+            <div class="top-menu">
+            </div>
+        </header>
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <ul class="sidebar-menu" id="nav-accordion">
+                {% raw side_menu %}
+            
+              </ul>
+          </div>
+      </aside>
+
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+                <h3><i class="fa fa-angle-right"></i>体格检查及病史</h3>
+                <hr>
+            
+                <form id="vm" v-on:submit="submit">
+                    <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                    <div class="form-part">
+                    <div class="block">
+                        <h3>体格检查</h3>
+                        <div>
+                            <label class="form-label">体格检查(肛指检查):</label>
+                            <input type="radio" id="normal" value="normal" v-model="physical_exam_1" disabled>
+                            <label for="normal">正常&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="physical_exam_1" disabled>
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" class="form-text" v-model="physical_exam_1_other"  disabled><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">距肛距离: </label>
+                            <input class="form-number" type="number" v-model.number="annal_dist" disabled>
+                            <label>&nbsp;cm</label>
+                            <br/><br/>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <h3>既往病史</h3>
+                        <div>
+                            <label class="form-label">慢性疾病史:</label>
+                            <input type="radio" id="no" value="no" v-model="manxing" disabled>
+                            <label for="no">无&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="manxing" disabled>
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" class="form-text" v-model="manxing_other"  disabled><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">肿瘤家族史:</label>
+                            <input type="radio" id="no" value="no" v-model="family_tumor" disabled>
+                            <label for="no">无&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="family_tumor" disabled>
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" class="form-text" v-model="family_tumor_other"  disabled><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">自身免疫性疾病史:</label>
+                            <input type="radio" id="no" value="no" v-model="self_immune" disabled>
+                            <label for="no">无&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="self_immune" disabled>
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" class="form-text" v-model="self_immune_other"  disabled><br/><br/>
+                        </div>
+                    </div></div>
+                <div class="form-part-3">
+                    <button class="submit" type="button" v-on:click="edit">编辑</button>
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
+                </div>    
+            </form>
+        
+            </section>
+      </section>
+
+      <footer class="site-footer">
+          <div class="text-center">
+              2020 - Fan
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--common script for all pages-->
+        <script src="/templates/assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script type="text/javascript">
+        $(function() {
+            jQuery(".fancybox").fancybox();
+        });
+    </script>
+    <script>
+    var vm = new Vue({
+            el: '#vm',
+            data: {
+                    patient_id: "{{patient_id}}",
+                    physical_exam_1: "{{physical_exam_1}}",
+                    physical_exam_1_other: "{{physical_exam_1_other}}",
+                    annal_dist: "{{annal_dist}}",
+                    manxing: "{{manxing}}",
+                    manxing_other: "{{manxing_other}}",
+                    family_tumor: "{{family_tumor}}",
+                    family_tumor_other: "{{family_tumor_other}}",
+                    self_immune: "{{self_immune}}",
+                    self_immune_other: "{{self_immune_other}}"
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                    if (this.physical_exam_1!="other") this.physical_exam_1_other = "";
+                    if (this.manxing!="other") this.manxing_other = "";
+                    if (this.family_tumor!="other") this.family_tumor_other = "";
+                    if (this.self_immune!="other") this.self_immune_other = "";
+                },
+                submit:function(){
+                    return 0;
+                },
+                edit:function(){
+                    window.location.href="/physical_exam?patient_id={{patient_id}}&edit=1";
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=physical_exam').then(function(res){
+                        window.location.href="{% raw page_previous %}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

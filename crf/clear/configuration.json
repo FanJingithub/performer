@@ -1,0 +1,31 @@
+{
+    "count":6,
+    "elements":[
+        {
+            "label":"基本信息",
+            "name":"base"
+        },
+        {
+            "label":"体格检查",
+            "name":"physical_exam"
+        },
+        {
+            "label":"检验报告",
+            "name":"lab"
+        },
+        {
+            "label":"特殊检查",
+            "name":"special_exam"
+        },
+        {
+            "label":"治疗前评估",
+            "name":"before_evaluate"
+        },
+        {
+            "label":"治疗后评估",
+            "name":"after_evaluate"
+        }
+    ],
+    "label":"CRF Data System",
+    "name":"CRF Record"
+}

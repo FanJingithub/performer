@@ -1,0 +1,71 @@
+{
+    "blocks":[
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"label",
+                    "label":"ID",
+                    "name":"patient_id",
+                    "value":""
+                },
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result2",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"5"
+                }
+            ],
+            "label":"血常规",
+            "name":"blood"
+        }
+    ],
+    "class":"form",
+    "label":"实验室检查",
+    "name":"lab"
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <title>数据库系统</title>
+
+        <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/templates/assets/js/jquery.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.js"></script>
+
+    <link rel="stylesheet" href="css/style_2036.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+
+  <body>
+  <section id="container" >
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <a href="#" class="logo"><b>数据库系统</b></a>
+            <div class="top-menu">
+            </div>
+        </header>
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <ul class="sidebar-menu" id="nav-accordion">
+                {% raw side_menu %}
+            
+              </ul>
+          </div>
+      </aside>
+
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+                <h3><i class="fa fa-angle-right"></i>实验室检查</h3>
+                <hr>
+            
+                <form id="vm" v-on:submit="submit">
+                    <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                    <div class="form-part">
+                    <div class="block">
+                        <h3>血常规</h3>
+                        <div>
+                            <label class="form-label">采样日期: </label>
+                            <el-date-picker v-model="exam_date" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查项目</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查结果</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">单位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">是否有临床意义</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div></div>
+                <div class="form-part-3">
+                    <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
+                </div>    
+            </form>
+        
+            </section>
+      </section>
+
+      <footer class="site-footer">
+          <div class="text-center">
+              2020 - Fan
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--common script for all pages-->
+        <script src="/templates/assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script type="text/javascript">
+        $(function() {
+            jQuery(".fancybox").fancybox();
+        });
+    </script>
+    <script>
+    var vm = new Vue({
+            el: '#vm',
+            data: {
+                    patient_id: "{{patient_id}}",
+                    exam_date: new Date(parseInt("{{exam_date}}")*1000),
+                    name_0: "{{name_0}}",
+                    name_1: "{{name_1}}",
+                    name_2: "{{name_2}}",
+                    name_3: "{{name_3}}",
+                    name_4: "{{name_4}}",
+                    result2_0: "{{result2_0}}",
+                    result2_1: "{{result2_1}}",
+                    result2_2: "{{result2_2}}",
+                    result2_3: "{{result2_3}}",
+                    result2_4: "{{result2_4}}",
+                    unit_0: "{{unit_0}}",
+                    unit_1: "{{unit_1}}",
+                    unit_2: "{{unit_2}}",
+                    unit_3: "{{unit_3}}",
+                    unit_4: "{{unit_4}}",
+                    valuable_0: "{{valuable_0}}",
+                    valuable_1: "{{valuable_1}}",
+                    valuable_2: "{{valuable_2}}",
+                    valuable_3: "{{valuable_3}}",
+                    valuable_4: "{{valuable_4}}"
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                    this.$http.get('/api/lab?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.exam_date=new Date(parseInt(res.data.exam_date)*1000);
+                        if (isNaN(this.exam_date.getTime())) this.exam_date="";
+                        this.name_0=res.data.name_0;
+                        this.name_1=res.data.name_1;
+                        this.name_2=res.data.name_2;
+                        this.name_3=res.data.name_3;
+                        this.name_4=res.data.name_4;
+                        this.result2_0=res.data.result2_0;
+                        this.result2_1=res.data.result2_1;
+                        this.result2_2=res.data.result2_2;
+                        this.result2_3=res.data.result2_3;
+                        this.result2_4=res.data.result2_4;
+                        this.unit_0=res.data.unit_0;
+                        this.unit_1=res.data.unit_1;
+                        this.unit_2=res.data.unit_2;
+                        this.unit_3=res.data.unit_3;
+                        this.unit_4=res.data.unit_4;
+                        this.valuable_0=res.data.valuable_0;
+                        this.valuable_1=res.data.valuable_1;
+                        this.valuable_2=res.data.valuable_2;
+                        this.valuable_3=res.data.valuable_3;
+                        this.valuable_4=res.data.valuable_4;
+                    },function(){
+                        console.log('error');
+                    });
+                },
+                submit: function(event) {
+                    event.preventDefault();
+                    if (this.exam_date!="") this.exam_date=this.exam_date.getTime()/1000;
+                    var
+                    $form = $('#vm'),
+                    data = {
+                        patient_id: this.patient_id,
+                        exam_date: this.exam_date,
+                        name_0: this.name_0,
+                        name_1: this.name_1,
+                        name_2: this.name_2,
+                        name_3: this.name_3,
+                        name_4: this.name_4,
+                        result2_0: this.result2_0,
+                        result2_1: this.result2_1,
+                        result2_2: this.result2_2,
+                        result2_3: this.result2_3,
+                        result2_4: this.result2_4,
+                        unit_0: this.unit_0,
+                        unit_1: this.unit_1,
+                        unit_2: this.unit_2,
+                        unit_3: this.unit_3,
+                        unit_4: this.unit_4,
+                        valuable_0: this.valuable_0,
+                        valuable_1: this.valuable_1,
+                        valuable_2: this.valuable_2,
+                        valuable_3: this.valuable_3,
+                        valuable_4: this.valuable_4
+                    };
+                    this.$http.post('/lab?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
+                        window.location.href="/lab?patient_id={{patient_id}}&page_index={{page_index}}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=lab').then(function(res){
+                        window.location.href="{% raw page_previous %}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
