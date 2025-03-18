@@ -22,10 +22,11 @@ app_Name = "CRF"
 port_in = "92"
 port_out = "6012"
 app_dir = "/srv/MData_all/CRF"
-remote_base_dir = '/home/ubuntu/files/Web'
+remote_base_dir = '/home/ubuntu/web/'
+base_version = 'crf'
 needPic = "1"
 clear = "clear/"
-maxPage = 10
+maxPage = 50
 
 app_info = {"app_name":app_Name, "version":version, "app_dir":app_dir}
 app_info_text = json.dumps(app_info,sort_keys=True, indent=4, separators=(',', ': '))
@@ -512,12 +513,10 @@ def generateHTML(editable):
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="{0}" {1}></td>'''.format(element["content"][j]["name"]+"_"+str(k),disabled)
                         elif (element["content"][j]["class"]=="number"):
                             newRow = newRow + '''
-                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model.number=="{0}" {1}></td>'''.format(element["content"][j]["name"]+"_"+str(k),disabled)
+                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="{0}" {1}></td>'''.format(element["content"][j]["name"]+"_"+str(k),disabled)
                         elif (element["content"][j]["class"]=="radio"):
                             newRow = newRow + '''
                                 <td style="text-align: center">'''
-                            print("============")
-                            print(element["content"])
                             for jj in range(len(element["content"][j]["options"])):
                                 newOption = '''
                                     <input type="radio" id="{0}" value="{0}" v-model="{2}" {3}>
@@ -927,8 +926,6 @@ class api_'''
 def generateSQL_Handler():
     code = '''use {0};
 
-grant select, insert, update, delete on {0}.* to '{1}'@'localhost' identified by '{2}';
-
 '''.format(database,username,password)
     for iii in range(maxPage):
         code = code + "drop table if exists " + configName + "_" + str(iii)+ ";\n\n"
@@ -940,18 +937,18 @@ grant select, insert, update, delete on {0}.* to '{1}'@'localhost' identified by
             for i in range(len(block["elements"])):
                 element = block["elements"][i]
                 if (element["class"]!="table"):
-                    code = code + "`" + element["name"] + "`  varchar(20) default ''"
+                    code = code + "`" + element["name"] + "`  varchar(256) default ''"
                     code = code + ''',
     '''
                     if (element["class"]=="radio" and int(element["other"])==1):
-                        code = code + "`" + element["name"] + "_other`  varchar(50) default ''"
+                        code = code + "`" + element["name"] + "_other`  varchar(256) default ''"
                         code = code + ''',
     '''
 
                 else:
                     for j in range(len(element["content"])):
                         for k in range(int(element["row"])):
-                            code = code + "`" + element["content"][j]["name"] + "_" +str(k)  + "`  varchar(20) default ''"
+                            code = code + "`" + element["content"][j]["name"] + "_" +str(k)  + "`  varchar(256) default ''"
                             code = code + ''',
     '''
         code = code + '''primary key(patient_id)
@@ -968,18 +965,16 @@ grant select, insert, update, delete on {0}.* to '{1}'@'localhost' identified by
 def generateSQL_dataStatus():
     code = '''use {2};
 
-grant select, insert, update, delete on {2}.* to '{0}'@'localhost' identified by '{1}';
-
 '''.format(username,password,database)
 
     code = code + "drop table if exists data_status;\n\n"
     code = code + "create table data_status ("
     code = code + '''
-    `patient_id`  varchar(12)  default '',
+    `patient_id`  varchar(64)  default '',
     '''
     for i in range(len(config_main["elements"])):
         element = config_main["elements"][i]
-        code = code + "`" + element["name"] + '''`  varchar(20) default "0"'''
+        code = code + "`" + element["name"] + '''`  varchar(256) default "0"'''
         if (i<len(config_main["elements"])-1):
             code = code + ''',
     '''
@@ -1471,14 +1466,14 @@ sudo -S mkdir {0} << EOF
 {1}
 EOF
 
-sudo -S cp -R {2}/v2 {0}/www << EOF
+sudo -S cp -R {2}/{3} {0}/www << EOF
 {1}
 EOF
 
 sudo chmod 777 -R {0} << EOF
 {1}
 EOF
-    '''.format(app_dir, password_remote, remote_base_dir)
+    '''.format(app_dir, password_remote, remote_base_dir, base_version)
 
     fileName = "shell/clear.sh"
     with open(fileName,"w") as coder:

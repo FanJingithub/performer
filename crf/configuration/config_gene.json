@@ -1,0 +1,1 @@
+{"class":"form","name":"gene","label":"基因检测","blocks":[{"class":"block","name":"gene_result","label":"基因检测结果","elements":[{"class":"text","name":"gene_result","label":"基因检测结果描述","value":""}]}]}

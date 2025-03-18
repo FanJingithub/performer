@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <title>数据库系统</title>
+
+        <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/templates/assets/js/jquery.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.js"></script>
+
+    <link rel="stylesheet" href="css/style_2036.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+
+  <body>
+  <section id="container" >
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <a href="#" class="logo"><b>数据库系统</b></a>
+            <div class="top-menu">
+            </div>
+        </header>
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <ul class="sidebar-menu" id="nav-accordion">
+                {% raw side_menu %}
+            
+              </ul>
+          </div>
+      </aside>
+
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+                <h3><i class="fa fa-angle-right"></i>肠镜病理检查</h3>
+                <hr>
+            
+                <form id="vm" v-on:submit="submit">
+                    <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                    <div class="form-part">
+                    <div class="block">
+                        <h3>肠镜病理检查结果</h3>
+                        <div>
+                            <label class="form-label">首次病理学确诊日期: </label>
+                            <el-date-picker v-model="first_path_diagnose_date" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">病理类型:</label>
+                            <input type="radio" id="adenocarcinoma" value="adenocarcinoma" v-model="pathology_type" >
+                            <label for="adenocarcinoma">普通腺癌&nbsp;&nbsp;</label>
+                            <input type="radio" id="signet_ring_cell" value="signet_ring_cell" v-model="pathology_type" >
+                            <label for="signet_ring_cell">印戒细胞癌&nbsp;&nbsp;</label>
+                            <input type="radio" id="mucinous_adenocarcinoma" value="mucinous_adenocarcinoma" v-model="pathology_type" >
+                            <label for="mucinous_adenocarcinoma">粘液腺癌&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="pathology_type" >
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" class="form-text" v-model="pathology_type_other"  ><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">分化程度:</label>
+                            <input type="radio" id="high" value="high" v-model="degree_of_differentiation" >
+                            <label for="high">高&nbsp;&nbsp;</label>
+                            <input type="radio" id="median" value="median" v-model="degree_of_differentiation" >
+                            <label for="median">中&nbsp;&nbsp;</label>
+                            <input type="radio" id="low" value="low" v-model="degree_of_differentiation" >
+                            <label for="low">低&nbsp;&nbsp;</label>
+                            <input type="radio" id="undifferentiated" value="undifferentiated" v-model="degree_of_differentiation" >
+                            <label for="undifferentiated">未分化&nbsp;&nbsp;</label>
+                            <input type="radio" id="unknown" value="unknown" v-model="degree_of_differentiation" >
+                            <label for="unknown">不详&nbsp;&nbsp;</label><br/><br/>
+                        </div>
+                    </div></div>
+                <div class="form-part-3">
+                    <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
+                </div>    
+            </form>
+        
+            </section>
+      </section>
+
+      <footer class="site-footer">
+          <div class="text-center">
+              2020 - Fan
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--common script for all pages-->
+        <script src="/templates/assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script type="text/javascript">
+        $(function() {
+            jQuery(".fancybox").fancybox();
+        });
+    </script>
+    <script>
+    var vm = new Vue({
+            el: '#vm',
+            data: {
+                    patient_id: "{{patient_id}}",
+                    first_path_diagnose_date: new Date(parseInt("{{first_path_diagnose_date}}")*1000),
+                    pathology_type: "{{pathology_type}}",
+                    pathology_type_other: "{{pathology_type_other}}",
+                    degree_of_differentiation: "{{degree_of_differentiation}}"
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                    this.$http.get('/api/colonoscopy_pathology?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.first_path_diagnose_date=new Date(parseInt(res.data.first_path_diagnose_date)*1000);
+                        if (isNaN(this.first_path_diagnose_date.getTime())) this.first_path_diagnose_date="";
+                        this.pathology_type=res.data.pathology_type;
+                        this.pathology_type_other=res.data.pathology_type_other;
+                        this.degree_of_differentiation=res.data.degree_of_differentiation;
+                        if (this.pathology_type!="other") this.pathology_type_other = "";
+                    },function(){
+                        console.log('error');
+                    });
+                },
+                submit: function(event) {
+                    event.preventDefault();
+                    if (this.first_path_diagnose_date!="") this.first_path_diagnose_date=this.first_path_diagnose_date.getTime()/1000;
+                    var
+                    $form = $('#vm'),
+                    data = {
+                        patient_id: this.patient_id,
+                        first_path_diagnose_date: this.first_path_diagnose_date,
+                        pathology_type: this.pathology_type,
+                        pathology_type_other: this.pathology_type_other,
+                        degree_of_differentiation: this.degree_of_differentiation
+                    };
+                    this.$http.post('/colonoscopy_pathology?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
+                        window.location.href="/colonoscopy_pathology?patient_id={{patient_id}}&page_index={{page_index}}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=colonoscopy_pathology').then(function(res){
+                        window.location.href="{% raw page_previous %}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

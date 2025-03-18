@@ -1,1 +1,413 @@
-{"class":"form","name":"lab","label":"实验室检查","blocks":[{"class":"block","name":"blood","label":"血常规","elements":[{"class":"time","name":"exam_date","label":"采样日期","value":""},{"class":"table","name":"result","label":"检查结果","row":"5","col":"4","content":[{"class":"text","name":"name","label":"检查项目","value":""},{"class":"text","name":"result2","label":"检查结果","value":""},{"class":"text","name":"unit","label":"单位","value":""},{"class":"radio","name":"valuable","label":"是否有临床意义","value":""}],"explain":""}]}]}
+{
+    "blocks":[
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date1",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name0",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result0",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit0",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable0",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"8"
+                }
+            ],
+            "label":"血常规",
+            "name":"blood"
+        },
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date2",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name1",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result1",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit1",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable1",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"16"
+                }
+            ],
+            "label":"肝肾功能",
+            "name":"liver_kidney_function"
+        },
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date3",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name2",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result2",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit2",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable2",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"8"
+                }
+            ],
+            "label":"电解质",
+            "name":"electrolyte"
+        },
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date4",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name3",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result3",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit3",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable3",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"8"
+                }
+            ],
+            "label":"肿瘤指标",
+            "name":"tumor_marker"
+        },
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date5",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name4",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result4",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit4",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable4",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"10"
+                }
+            ],
+            "label":"甲状腺功能",
+            "name":"thyroid_function"
+        },
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date6",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name5",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result5",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit5",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable5",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"10"
+                }
+            ],
+            "label":"垂体肾上腺轴",
+            "name":"pituitary_adrenal_axis"
+        },
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"time",
+                    "label":"采样日期",
+                    "name":"exam_date7",
+                    "value":""
+                },
+                {
+                    "class":"table",
+                    "col":"4",
+                    "content":[
+                        {
+                            "class":"text",
+                            "label":"检查项目",
+                            "name":"name6",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"检查结果",
+                            "name":"result6",
+                            "value":""
+                        },
+                        {
+                            "class":"text",
+                            "label":"单位",
+                            "name":"unit6",
+                            "value":""
+                        },
+                        {
+                            "class":"radio",
+                            "label":"是否有临床意义",
+                            "name":"valuable6",
+                            "value":"",
+                            "count": 2,
+                            "options": [
+                                {
+                                    "value": "yes",
+                                    "label": "是"
+                                },
+                                {
+                                    "value": "not",
+                                    "label": "否"
+                                }
+                            ]
+                        }
+                    ],
+                    "explain":"",
+                    "label":"检查结果",
+                    "name":"result",
+                    "row":"6"
+                }
+            ],
+            "label":"心肌酶谱",
+            "name":"cardiac_enzyme"
+        }
+    ],
+    "class":"form",
+    "label":"实验室检查",
+    "name":"lab"
+}

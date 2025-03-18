@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <title>数据库系统</title>
+
+        <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/templates/assets/js/jquery.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.js"></script>
+
+    <link rel="stylesheet" href="css/style_2036.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+
+  <body>
+  <section id="container" >
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <a href="#" class="logo"><b>数据库系统</b></a>
+            <div class="top-menu">
+            </div>
+        </header>
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <ul class="sidebar-menu" id="nav-accordion">
+                {% raw side_menu %}
+            
+              </ul>
+          </div>
+      </aside>
+
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+                <h3><i class="fa fa-angle-right"></i>治疗记录</h3>
+                <hr>
+            
+                <form id="vm" v-on:submit="submit">
+                    <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                    <div class="form-part">
+                    <div class="block">
+                        <h3>治疗记录</h3>
+                        <div>
+                            <label class="form-label">分组:</label>
+                            <input type="radio" id="group_a" value="group_a" v-model="group" >
+                            <label for="group_a">治疗组A(左半野生)，化疗+免疫+靶向&nbsp;&nbsp;</label>
+                            <input type="radio" id="group_b" value="group_b" v-model="group" >
+                            <label for="group_b">治疗组B(左半野生)，放化疗+免疫+靶向&nbsp;&nbsp;</label>
+                            <input type="radio" id="group_c" value="group_c" v-model="group" >
+                            <label for="group_c">治疗组C(右半或RAS突变)，化疗+免疫+靶向&nbsp;&nbsp;</label>
+                            <input type="radio" id="group_d" value="group_d" v-model="group" >
+                            <label for="group_d">治疗组D(右半或RAS突变)，放化疗+免疫+靶向&nbsp;&nbsp;</label><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">首次治疗时间: </label>
+                            <el-date-picker v-model="treat_start_time" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">末次治疗时间: </label>
+                            <el-date-picker v-model="treat_end_time" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">一共完成化疗次数: </label>
+                            <input class="form-number" type="number" v-model.number="treat_count" >
+                            <label>&nbsp;次</label>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">化疗终止原因:</label>
+                            <input type="radio" id="reason_1" value="reason_1" v-model="stop_reason" >
+                            <label for="reason_1">受试者出现病情进展&nbsp;&nbsp;</label>
+                            <input type="radio" id="reason_2" value="reason_2" v-model="stop_reason" >
+                            <label for="reason_2">出现受试者无法接受的不良反应&nbsp;&nbsp;</label>
+                            <input type="radio" id="reason_3" value="reason_3" v-model="stop_reason" >
+                            <label for="reason_3">研究者认为受试者有必要停止试验&nbsp;&nbsp;</label>
+                            <input type="radio" id="reason_4" value="reason_4" v-model="stop_reason" >
+                            <label for="reason_4">受试者主动要求退出试验&nbsp;&nbsp;</label>
+                            <input type="radio" id="reason_5" value="reason_5" v-model="stop_reason" >
+                            <label for="reason_5">违法本研究方案规定的受试者&nbsp;&nbsp;</label>
+                            <input type="radio" id="reason_6" value="reason_6" v-model="stop_reason" >
+                            <label for="reason_6">受试者在未完成全部治疗前不再接受用药或检测而失访&nbsp;&nbsp;</label>
+                            <input type="radio" id="reason_7" value="reason_7" v-model="stop_reason" >
+                            <label for="reason_7">死亡&nbsp;&nbsp;</label><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">病情进展日期(如果出现进展): </label>
+                            <el-date-picker v-model="progress_time" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">死亡日期(如果死亡): </label>
+                            <el-date-picker v-model="dead_time" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                    </div></div>
+                <div class="form-part-3">
+                    <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
+                </div>    
+            </form>
+        
+            </section>
+      </section>
+
+      <footer class="site-footer">
+          <div class="text-center">
+              2020 - Fan
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--common script for all pages-->
+        <script src="/templates/assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script type="text/javascript">
+        $(function() {
+            jQuery(".fancybox").fancybox();
+        });
+    </script>
+    <script>
+    var vm = new Vue({
+            el: '#vm',
+            data: {
+                    patient_id: "{{patient_id}}",
+                    group: "{{group}}",
+                    treat_start_time: new Date(parseInt("{{treat_start_time}}")*1000),
+                    treat_end_time: new Date(parseInt("{{treat_end_time}}")*1000),
+                    treat_count: "{{treat_count}}",
+                    stop_reason: "{{stop_reason}}",
+                    progress_time: new Date(parseInt("{{progress_time}}")*1000),
+                    dead_time: new Date(parseInt("{{dead_time}}")*1000)
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                    this.$http.get('/api/treatment?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.group=res.data.group;
+                        this.treat_start_time=new Date(parseInt(res.data.treat_start_time)*1000);
+                        if (isNaN(this.treat_start_time.getTime())) this.treat_start_time="";
+                        this.treat_end_time=new Date(parseInt(res.data.treat_end_time)*1000);
+                        if (isNaN(this.treat_end_time.getTime())) this.treat_end_time="";
+                        this.treat_count=res.data.treat_count;
+                        this.stop_reason=res.data.stop_reason;
+                        this.progress_time=new Date(parseInt(res.data.progress_time)*1000);
+                        if (isNaN(this.progress_time.getTime())) this.progress_time="";
+                        this.dead_time=new Date(parseInt(res.data.dead_time)*1000);
+                        if (isNaN(this.dead_time.getTime())) this.dead_time="";
+                    },function(){
+                        console.log('error');
+                    });
+                },
+                submit: function(event) {
+                    event.preventDefault();
+                    if (this.treat_start_time!="") this.treat_start_time=this.treat_start_time.getTime()/1000;
+                    if (this.treat_end_time!="") this.treat_end_time=this.treat_end_time.getTime()/1000;
+                    if (this.progress_time!="") this.progress_time=this.progress_time.getTime()/1000;
+                    if (this.dead_time!="") this.dead_time=this.dead_time.getTime()/1000;
+                    var
+                    $form = $('#vm'),
+                    data = {
+                        patient_id: this.patient_id,
+                        group: this.group,
+                        treat_start_time: this.treat_start_time,
+                        treat_end_time: this.treat_end_time,
+                        treat_count: this.treat_count,
+                        stop_reason: this.stop_reason,
+                        progress_time: this.progress_time,
+                        dead_time: this.dead_time
+                    };
+                    this.$http.post('/treatment?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
+                        window.location.href="/treatment?patient_id={{patient_id}}&page_index={{page_index}}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=treatment').then(function(res){
+                        window.location.href="{% raw page_previous %}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

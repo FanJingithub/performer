@@ -1,7 +1,7 @@
 {
     "label": "CRF Data System",
     "name": "CRF Record",
-    "count":6,
+    "count":15,
     "elements": [
         {
             "label": "基本信息",
@@ -24,13 +24,58 @@
         },
 
         {
+            "label": "影像学及肠镜",
+            "name": "radiology_colonoscopy"
+        },
+
+        {
+            "label": "肠镜病理检查结果",
+            "name": "colonoscopy_pathology"
+        },
+
+        {
+            "label": "MSI/MMR状态",
+            "name": "msi_mmr"
+        },
+
+        {
+            "label": "基因检测",
+            "name": "gene"
+        },
+
+        {
+            "label": "临床分期",
+            "name": "clinical_stage"
+        },
+
+        {
             "label": "治疗前评估",
             "name": "before_evaluate"
         },
 
         {
+            "label": "治疗",
+            "name": "treatment"
+        },
+
+        {
             "label": "治疗后评估",
             "name": "after_evaluate"
+        },
+
+        {
+            "label": "不良事件评价",
+            "name": "adverse_event"
+        },
+
+        {
+            "label": "伴随用药记录",
+            "name": "concomitant_medication"
+        },
+
+        {
+            "label": "随访评价",
+            "name": "follow_up"
         }
     ]
 }

@@ -53,7 +53,7 @@
                         <h3>血常规</h3>
                         <div>
                             <label class="form-label">采样日期: </label>
-                            <el-date-picker v-model="exam_date" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <el-date-picker v-model="exam_date0" type="date" placeholder="Pick a day" ></el-date-picker>
                             <br/><br/>
                         </div>
                         <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
@@ -72,57 +72,872 @@
                                 background-color:#e9faff;">是否有临床意义</td>
                             </tr>
                             <tr>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_5" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_6" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_6" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_6" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name0_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result0_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit0_7" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable0_7" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable0_7" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="block">
+                        <h3>肝肾功能</h3>
+                        <div>
+                            <label class="form-label">采样日期: </label>
+                            <el-date-picker v-model="exam_date1" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查项目</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查结果</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">单位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">是否有临床意义</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_5" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_6" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_6" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_6" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_7" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_7" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_7" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_8" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_8" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_8" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_8" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_8" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_9" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_9" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_9" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_9" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_9" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_10" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_10" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_10" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_10" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_10" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_11" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_11" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_11" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_11" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_11" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_12" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_12" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_12" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_12" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_12" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_13" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_13" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_13" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_13" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_13" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_14" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_14" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_14" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_14" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_14" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name1_15" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result1_15" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit1_15" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable1_15" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable1_15" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="block">
+                        <h3>电解质</h3>
+                        <div>
+                            <label class="form-label">采样日期: </label>
+                            <el-date-picker v-model="exam_date2" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查项目</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查结果</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">单位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">是否有临床意义</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_0" ></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_0" ></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_0" ></td>
                                 <td style="text-align: center">
-                                    <input type="radio" id="yes" value="yes" v-model="valuable_0" >
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_0" >
                                     <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
-                                    <input type="radio" id="not" value="not" v-model="valuable_0" >
+                                    <input type="radio" id="not" value="not" v-model="valuable2_0" >
                                     <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_1" ></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_1" ></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_1" ></td>
                                 <td style="text-align: center">
-                                    <input type="radio" id="yes" value="yes" v-model="valuable_1" >
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_1" >
                                     <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
-                                    <input type="radio" id="not" value="not" v-model="valuable_1" >
+                                    <input type="radio" id="not" value="not" v-model="valuable2_1" >
                                     <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_2" ></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_2" ></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_2" ></td>
                                 <td style="text-align: center">
-                                    <input type="radio" id="yes" value="yes" v-model="valuable_2" >
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_2" >
                                     <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
-                                    <input type="radio" id="not" value="not" v-model="valuable_2" >
+                                    <input type="radio" id="not" value="not" v-model="valuable2_2" >
                                     <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_3" ></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_3" ></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_3" ></td>
                                 <td style="text-align: center">
-                                    <input type="radio" id="yes" value="yes" v-model="valuable_3" >
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_3" >
                                     <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
-                                    <input type="radio" id="not" value="not" v-model="valuable_3" >
+                                    <input type="radio" id="not" value="not" v-model="valuable2_3" >
                                     <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_4" ></td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_4" ></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_4" ></td>
                                 <td style="text-align: center">
-                                    <input type="radio" id="yes" value="yes" v-model="valuable_4" >
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_4" >
                                     <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
-                                    <input type="radio" id="not" value="not" v-model="valuable_4" >
+                                    <input type="radio" id="not" value="not" v-model="valuable2_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable2_5" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_6" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_6" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable2_6" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name2_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result2_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit2_7" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable2_7" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable2_7" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="block">
+                        <h3>肿瘤指标</h3>
+                        <div>
+                            <label class="form-label">采样日期: </label>
+                            <el-date-picker v-model="exam_date3" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查项目</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查结果</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">单位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">是否有临床意义</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_5" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_6" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_6" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_6" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name3_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result3_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit3_7" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable3_7" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable3_7" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="block">
+                        <h3>甲状腺功能</h3>
+                        <div>
+                            <label class="form-label">采样日期: </label>
+                            <el-date-picker v-model="exam_date4" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查项目</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查结果</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">单位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">是否有临床意义</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_5" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_6" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_6" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_6" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_7" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_7" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_7" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_8" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_8" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_8" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_8" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_8" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name4_9" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result4_9" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit4_9" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable4_9" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable4_9" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="block">
+                        <h3>垂体肾上腺轴</h3>
+                        <div>
+                            <label class="form-label">采样日期: </label>
+                            <el-date-picker v-model="exam_date5" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查项目</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查结果</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">单位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">是否有临床意义</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_5" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_6" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_6" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_6" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_6" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_7" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_7" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_7" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_7" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_8" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_8" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_8" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_8" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_8" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name5_9" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result5_9" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit5_9" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable5_9" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable5_9" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="block">
+                        <h3>心肌酶谱</h3>
+                        <div>
+                            <label class="form-label">采样日期: </label>
+                            <el-date-picker v-model="exam_date6" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="4" class="tabtop13" align="center">
+                            <tr>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查项目</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">检查结果</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">单位</td>
+                                <td width="30%" style="background:#e9faff !important; text-align:center;
+                                font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
+                                background-color:#e9faff;">是否有临床意义</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name6_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result6_0" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit6_0" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable6_0" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable6_0" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name6_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result6_1" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit6_1" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable6_1" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable6_1" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name6_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result6_2" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit6_2" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable6_2" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable6_2" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name6_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result6_3" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit6_3" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable6_3" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable6_3" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name6_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result6_4" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit6_4" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable6_4" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable6_4" >
+                                    <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="name6_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="result6_5" ></td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="unit6_5" ></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="yes" value="yes" v-model="valuable6_5" >
+                                    <label style="font-size:12px" for="yes">是&nbsp;&nbsp;</label>
+                                    <input type="radio" id="not" value="not" v-model="valuable6_5" >
                                     <label style="font-size:12px" for="not">否&nbsp;&nbsp;</label>
                                 </td>
                             </tr>
@@ -168,27 +983,277 @@
             el: '#vm',
             data: {
                     patient_id: "{{patient_id}}",
-                    exam_date: new Date(parseInt("{{exam_date}}")*1000),
-                    name_0: "{{name_0}}",
-                    name_1: "{{name_1}}",
-                    name_2: "{{name_2}}",
-                    name_3: "{{name_3}}",
-                    name_4: "{{name_4}}",
+                    exam_date0: new Date(parseInt("{{exam_date0}}")*1000),
+                    name0_0: "{{name0_0}}",
+                    name0_1: "{{name0_1}}",
+                    name0_2: "{{name0_2}}",
+                    name0_3: "{{name0_3}}",
+                    name0_4: "{{name0_4}}",
+                    name0_5: "{{name0_5}}",
+                    name0_6: "{{name0_6}}",
+                    name0_7: "{{name0_7}}",
+                    result0_0: "{{result0_0}}",
+                    result0_1: "{{result0_1}}",
+                    result0_2: "{{result0_2}}",
+                    result0_3: "{{result0_3}}",
+                    result0_4: "{{result0_4}}",
+                    result0_5: "{{result0_5}}",
+                    result0_6: "{{result0_6}}",
+                    result0_7: "{{result0_7}}",
+                    unit0_0: "{{unit0_0}}",
+                    unit0_1: "{{unit0_1}}",
+                    unit0_2: "{{unit0_2}}",
+                    unit0_3: "{{unit0_3}}",
+                    unit0_4: "{{unit0_4}}",
+                    unit0_5: "{{unit0_5}}",
+                    unit0_6: "{{unit0_6}}",
+                    unit0_7: "{{unit0_7}}",
+                    valuable0_0: "{{valuable0_0}}",
+                    valuable0_1: "{{valuable0_1}}",
+                    valuable0_2: "{{valuable0_2}}",
+                    valuable0_3: "{{valuable0_3}}",
+                    valuable0_4: "{{valuable0_4}}",
+                    valuable0_5: "{{valuable0_5}}",
+                    valuable0_6: "{{valuable0_6}}",
+                    valuable0_7: "{{valuable0_7}}",
+                    exam_date1: new Date(parseInt("{{exam_date1}}")*1000),
+                    name1_0: "{{name1_0}}",
+                    name1_1: "{{name1_1}}",
+                    name1_2: "{{name1_2}}",
+                    name1_3: "{{name1_3}}",
+                    name1_4: "{{name1_4}}",
+                    name1_5: "{{name1_5}}",
+                    name1_6: "{{name1_6}}",
+                    name1_7: "{{name1_7}}",
+                    name1_8: "{{name1_8}}",
+                    name1_9: "{{name1_9}}",
+                    name1_10: "{{name1_10}}",
+                    name1_11: "{{name1_11}}",
+                    name1_12: "{{name1_12}}",
+                    name1_13: "{{name1_13}}",
+                    name1_14: "{{name1_14}}",
+                    name1_15: "{{name1_15}}",
+                    result1_0: "{{result1_0}}",
+                    result1_1: "{{result1_1}}",
+                    result1_2: "{{result1_2}}",
+                    result1_3: "{{result1_3}}",
+                    result1_4: "{{result1_4}}",
+                    result1_5: "{{result1_5}}",
+                    result1_6: "{{result1_6}}",
+                    result1_7: "{{result1_7}}",
+                    result1_8: "{{result1_8}}",
+                    result1_9: "{{result1_9}}",
+                    result1_10: "{{result1_10}}",
+                    result1_11: "{{result1_11}}",
+                    result1_12: "{{result1_12}}",
+                    result1_13: "{{result1_13}}",
+                    result1_14: "{{result1_14}}",
+                    result1_15: "{{result1_15}}",
+                    unit1_0: "{{unit1_0}}",
+                    unit1_1: "{{unit1_1}}",
+                    unit1_2: "{{unit1_2}}",
+                    unit1_3: "{{unit1_3}}",
+                    unit1_4: "{{unit1_4}}",
+                    unit1_5: "{{unit1_5}}",
+                    unit1_6: "{{unit1_6}}",
+                    unit1_7: "{{unit1_7}}",
+                    unit1_8: "{{unit1_8}}",
+                    unit1_9: "{{unit1_9}}",
+                    unit1_10: "{{unit1_10}}",
+                    unit1_11: "{{unit1_11}}",
+                    unit1_12: "{{unit1_12}}",
+                    unit1_13: "{{unit1_13}}",
+                    unit1_14: "{{unit1_14}}",
+                    unit1_15: "{{unit1_15}}",
+                    valuable1_0: "{{valuable1_0}}",
+                    valuable1_1: "{{valuable1_1}}",
+                    valuable1_2: "{{valuable1_2}}",
+                    valuable1_3: "{{valuable1_3}}",
+                    valuable1_4: "{{valuable1_4}}",
+                    valuable1_5: "{{valuable1_5}}",
+                    valuable1_6: "{{valuable1_6}}",
+                    valuable1_7: "{{valuable1_7}}",
+                    valuable1_8: "{{valuable1_8}}",
+                    valuable1_9: "{{valuable1_9}}",
+                    valuable1_10: "{{valuable1_10}}",
+                    valuable1_11: "{{valuable1_11}}",
+                    valuable1_12: "{{valuable1_12}}",
+                    valuable1_13: "{{valuable1_13}}",
+                    valuable1_14: "{{valuable1_14}}",
+                    valuable1_15: "{{valuable1_15}}",
+                    exam_date2: new Date(parseInt("{{exam_date2}}")*1000),
+                    name2_0: "{{name2_0}}",
+                    name2_1: "{{name2_1}}",
+                    name2_2: "{{name2_2}}",
+                    name2_3: "{{name2_3}}",
+                    name2_4: "{{name2_4}}",
+                    name2_5: "{{name2_5}}",
+                    name2_6: "{{name2_6}}",
+                    name2_7: "{{name2_7}}",
                     result2_0: "{{result2_0}}",
                     result2_1: "{{result2_1}}",
                     result2_2: "{{result2_2}}",
                     result2_3: "{{result2_3}}",
                     result2_4: "{{result2_4}}",
-                    unit_0: "{{unit_0}}",
-                    unit_1: "{{unit_1}}",
-                    unit_2: "{{unit_2}}",
-                    unit_3: "{{unit_3}}",
-                    unit_4: "{{unit_4}}",
-                    valuable_0: "{{valuable_0}}",
-                    valuable_1: "{{valuable_1}}",
-                    valuable_2: "{{valuable_2}}",
-                    valuable_3: "{{valuable_3}}",
-                    valuable_4: "{{valuable_4}}"
+                    result2_5: "{{result2_5}}",
+                    result2_6: "{{result2_6}}",
+                    result2_7: "{{result2_7}}",
+                    unit2_0: "{{unit2_0}}",
+                    unit2_1: "{{unit2_1}}",
+                    unit2_2: "{{unit2_2}}",
+                    unit2_3: "{{unit2_3}}",
+                    unit2_4: "{{unit2_4}}",
+                    unit2_5: "{{unit2_5}}",
+                    unit2_6: "{{unit2_6}}",
+                    unit2_7: "{{unit2_7}}",
+                    valuable2_0: "{{valuable2_0}}",
+                    valuable2_1: "{{valuable2_1}}",
+                    valuable2_2: "{{valuable2_2}}",
+                    valuable2_3: "{{valuable2_3}}",
+                    valuable2_4: "{{valuable2_4}}",
+                    valuable2_5: "{{valuable2_5}}",
+                    valuable2_6: "{{valuable2_6}}",
+                    valuable2_7: "{{valuable2_7}}",
+                    exam_date3: new Date(parseInt("{{exam_date3}}")*1000),
+                    name3_0: "{{name3_0}}",
+                    name3_1: "{{name3_1}}",
+                    name3_2: "{{name3_2}}",
+                    name3_3: "{{name3_3}}",
+                    name3_4: "{{name3_4}}",
+                    name3_5: "{{name3_5}}",
+                    name3_6: "{{name3_6}}",
+                    name3_7: "{{name3_7}}",
+                    result3_0: "{{result3_0}}",
+                    result3_1: "{{result3_1}}",
+                    result3_2: "{{result3_2}}",
+                    result3_3: "{{result3_3}}",
+                    result3_4: "{{result3_4}}",
+                    result3_5: "{{result3_5}}",
+                    result3_6: "{{result3_6}}",
+                    result3_7: "{{result3_7}}",
+                    unit3_0: "{{unit3_0}}",
+                    unit3_1: "{{unit3_1}}",
+                    unit3_2: "{{unit3_2}}",
+                    unit3_3: "{{unit3_3}}",
+                    unit3_4: "{{unit3_4}}",
+                    unit3_5: "{{unit3_5}}",
+                    unit3_6: "{{unit3_6}}",
+                    unit3_7: "{{unit3_7}}",
+                    valuable3_0: "{{valuable3_0}}",
+                    valuable3_1: "{{valuable3_1}}",
+                    valuable3_2: "{{valuable3_2}}",
+                    valuable3_3: "{{valuable3_3}}",
+                    valuable3_4: "{{valuable3_4}}",
+                    valuable3_5: "{{valuable3_5}}",
+                    valuable3_6: "{{valuable3_6}}",
+                    valuable3_7: "{{valuable3_7}}",
+                    exam_date4: new Date(parseInt("{{exam_date4}}")*1000),
+                    name4_0: "{{name4_0}}",
+                    name4_1: "{{name4_1}}",
+                    name4_2: "{{name4_2}}",
+                    name4_3: "{{name4_3}}",
+                    name4_4: "{{name4_4}}",
+                    name4_5: "{{name4_5}}",
+                    name4_6: "{{name4_6}}",
+                    name4_7: "{{name4_7}}",
+                    name4_8: "{{name4_8}}",
+                    name4_9: "{{name4_9}}",
+                    result4_0: "{{result4_0}}",
+                    result4_1: "{{result4_1}}",
+                    result4_2: "{{result4_2}}",
+                    result4_3: "{{result4_3}}",
+                    result4_4: "{{result4_4}}",
+                    result4_5: "{{result4_5}}",
+                    result4_6: "{{result4_6}}",
+                    result4_7: "{{result4_7}}",
+                    result4_8: "{{result4_8}}",
+                    result4_9: "{{result4_9}}",
+                    unit4_0: "{{unit4_0}}",
+                    unit4_1: "{{unit4_1}}",
+                    unit4_2: "{{unit4_2}}",
+                    unit4_3: "{{unit4_3}}",
+                    unit4_4: "{{unit4_4}}",
+                    unit4_5: "{{unit4_5}}",
+                    unit4_6: "{{unit4_6}}",
+                    unit4_7: "{{unit4_7}}",
+                    unit4_8: "{{unit4_8}}",
+                    unit4_9: "{{unit4_9}}",
+                    valuable4_0: "{{valuable4_0}}",
+                    valuable4_1: "{{valuable4_1}}",
+                    valuable4_2: "{{valuable4_2}}",
+                    valuable4_3: "{{valuable4_3}}",
+                    valuable4_4: "{{valuable4_4}}",
+                    valuable4_5: "{{valuable4_5}}",
+                    valuable4_6: "{{valuable4_6}}",
+                    valuable4_7: "{{valuable4_7}}",
+                    valuable4_8: "{{valuable4_8}}",
+                    valuable4_9: "{{valuable4_9}}",
+                    exam_date5: new Date(parseInt("{{exam_date5}}")*1000),
+                    name5_0: "{{name5_0}}",
+                    name5_1: "{{name5_1}}",
+                    name5_2: "{{name5_2}}",
+                    name5_3: "{{name5_3}}",
+                    name5_4: "{{name5_4}}",
+                    name5_5: "{{name5_5}}",
+                    name5_6: "{{name5_6}}",
+                    name5_7: "{{name5_7}}",
+                    name5_8: "{{name5_8}}",
+                    name5_9: "{{name5_9}}",
+                    result5_0: "{{result5_0}}",
+                    result5_1: "{{result5_1}}",
+                    result5_2: "{{result5_2}}",
+                    result5_3: "{{result5_3}}",
+                    result5_4: "{{result5_4}}",
+                    result5_5: "{{result5_5}}",
+                    result5_6: "{{result5_6}}",
+                    result5_7: "{{result5_7}}",
+                    result5_8: "{{result5_8}}",
+                    result5_9: "{{result5_9}}",
+                    unit5_0: "{{unit5_0}}",
+                    unit5_1: "{{unit5_1}}",
+                    unit5_2: "{{unit5_2}}",
+                    unit5_3: "{{unit5_3}}",
+                    unit5_4: "{{unit5_4}}",
+                    unit5_5: "{{unit5_5}}",
+                    unit5_6: "{{unit5_6}}",
+                    unit5_7: "{{unit5_7}}",
+                    unit5_8: "{{unit5_8}}",
+                    unit5_9: "{{unit5_9}}",
+                    valuable5_0: "{{valuable5_0}}",
+                    valuable5_1: "{{valuable5_1}}",
+                    valuable5_2: "{{valuable5_2}}",
+                    valuable5_3: "{{valuable5_3}}",
+                    valuable5_4: "{{valuable5_4}}",
+                    valuable5_5: "{{valuable5_5}}",
+                    valuable5_6: "{{valuable5_6}}",
+                    valuable5_7: "{{valuable5_7}}",
+                    valuable5_8: "{{valuable5_8}}",
+                    valuable5_9: "{{valuable5_9}}",
+                    exam_date6: new Date(parseInt("{{exam_date6}}")*1000),
+                    name6_0: "{{name6_0}}",
+                    name6_1: "{{name6_1}}",
+                    name6_2: "{{name6_2}}",
+                    name6_3: "{{name6_3}}",
+                    name6_4: "{{name6_4}}",
+                    name6_5: "{{name6_5}}",
+                    result6_0: "{{result6_0}}",
+                    result6_1: "{{result6_1}}",
+                    result6_2: "{{result6_2}}",
+                    result6_3: "{{result6_3}}",
+                    result6_4: "{{result6_4}}",
+                    result6_5: "{{result6_5}}",
+                    unit6_0: "{{unit6_0}}",
+                    unit6_1: "{{unit6_1}}",
+                    unit6_2: "{{unit6_2}}",
+                    unit6_3: "{{unit6_3}}",
+                    unit6_4: "{{unit6_4}}",
+                    unit6_5: "{{unit6_5}}",
+                    valuable6_0: "{{valuable6_0}}",
+                    valuable6_1: "{{valuable6_1}}",
+                    valuable6_2: "{{valuable6_2}}",
+                    valuable6_3: "{{valuable6_3}}",
+                    valuable6_4: "{{valuable6_4}}",
+                    valuable6_5: "{{valuable6_5}}"
             },
             mounted(){
                 this.init()
@@ -197,60 +1262,572 @@
                 init:function(){
                     this.$http.get('/api/lab?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
                         this.patient_id=res.data.patient_id;
-                        this.exam_date=new Date(parseInt(res.data.exam_date)*1000);
-                        if (isNaN(this.exam_date.getTime())) this.exam_date="";
-                        this.name_0=res.data.name_0;
-                        this.name_1=res.data.name_1;
-                        this.name_2=res.data.name_2;
-                        this.name_3=res.data.name_3;
-                        this.name_4=res.data.name_4;
+                        this.exam_date0=new Date(parseInt(res.data.exam_date0)*1000);
+                        if (isNaN(this.exam_date0.getTime())) this.exam_date0="";
+                        this.name0_0=res.data.name0_0;
+                        this.name0_1=res.data.name0_1;
+                        this.name0_2=res.data.name0_2;
+                        this.name0_3=res.data.name0_3;
+                        this.name0_4=res.data.name0_4;
+                        this.name0_5=res.data.name0_5;
+                        this.name0_6=res.data.name0_6;
+                        this.name0_7=res.data.name0_7;
+                        this.result0_0=res.data.result0_0;
+                        this.result0_1=res.data.result0_1;
+                        this.result0_2=res.data.result0_2;
+                        this.result0_3=res.data.result0_3;
+                        this.result0_4=res.data.result0_4;
+                        this.result0_5=res.data.result0_5;
+                        this.result0_6=res.data.result0_6;
+                        this.result0_7=res.data.result0_7;
+                        this.unit0_0=res.data.unit0_0;
+                        this.unit0_1=res.data.unit0_1;
+                        this.unit0_2=res.data.unit0_2;
+                        this.unit0_3=res.data.unit0_3;
+                        this.unit0_4=res.data.unit0_4;
+                        this.unit0_5=res.data.unit0_5;
+                        this.unit0_6=res.data.unit0_6;
+                        this.unit0_7=res.data.unit0_7;
+                        this.valuable0_0=res.data.valuable0_0;
+                        this.valuable0_1=res.data.valuable0_1;
+                        this.valuable0_2=res.data.valuable0_2;
+                        this.valuable0_3=res.data.valuable0_3;
+                        this.valuable0_4=res.data.valuable0_4;
+                        this.valuable0_5=res.data.valuable0_5;
+                        this.valuable0_6=res.data.valuable0_6;
+                        this.valuable0_7=res.data.valuable0_7;
+                        this.exam_date1=new Date(parseInt(res.data.exam_date1)*1000);
+                        if (isNaN(this.exam_date1.getTime())) this.exam_date1="";
+                        this.name1_0=res.data.name1_0;
+                        this.name1_1=res.data.name1_1;
+                        this.name1_2=res.data.name1_2;
+                        this.name1_3=res.data.name1_3;
+                        this.name1_4=res.data.name1_4;
+                        this.name1_5=res.data.name1_5;
+                        this.name1_6=res.data.name1_6;
+                        this.name1_7=res.data.name1_7;
+                        this.name1_8=res.data.name1_8;
+                        this.name1_9=res.data.name1_9;
+                        this.name1_10=res.data.name1_10;
+                        this.name1_11=res.data.name1_11;
+                        this.name1_12=res.data.name1_12;
+                        this.name1_13=res.data.name1_13;
+                        this.name1_14=res.data.name1_14;
+                        this.name1_15=res.data.name1_15;
+                        this.result1_0=res.data.result1_0;
+                        this.result1_1=res.data.result1_1;
+                        this.result1_2=res.data.result1_2;
+                        this.result1_3=res.data.result1_3;
+                        this.result1_4=res.data.result1_4;
+                        this.result1_5=res.data.result1_5;
+                        this.result1_6=res.data.result1_6;
+                        this.result1_7=res.data.result1_7;
+                        this.result1_8=res.data.result1_8;
+                        this.result1_9=res.data.result1_9;
+                        this.result1_10=res.data.result1_10;
+                        this.result1_11=res.data.result1_11;
+                        this.result1_12=res.data.result1_12;
+                        this.result1_13=res.data.result1_13;
+                        this.result1_14=res.data.result1_14;
+                        this.result1_15=res.data.result1_15;
+                        this.unit1_0=res.data.unit1_0;
+                        this.unit1_1=res.data.unit1_1;
+                        this.unit1_2=res.data.unit1_2;
+                        this.unit1_3=res.data.unit1_3;
+                        this.unit1_4=res.data.unit1_4;
+                        this.unit1_5=res.data.unit1_5;
+                        this.unit1_6=res.data.unit1_6;
+                        this.unit1_7=res.data.unit1_7;
+                        this.unit1_8=res.data.unit1_8;
+                        this.unit1_9=res.data.unit1_9;
+                        this.unit1_10=res.data.unit1_10;
+                        this.unit1_11=res.data.unit1_11;
+                        this.unit1_12=res.data.unit1_12;
+                        this.unit1_13=res.data.unit1_13;
+                        this.unit1_14=res.data.unit1_14;
+                        this.unit1_15=res.data.unit1_15;
+                        this.valuable1_0=res.data.valuable1_0;
+                        this.valuable1_1=res.data.valuable1_1;
+                        this.valuable1_2=res.data.valuable1_2;
+                        this.valuable1_3=res.data.valuable1_3;
+                        this.valuable1_4=res.data.valuable1_4;
+                        this.valuable1_5=res.data.valuable1_5;
+                        this.valuable1_6=res.data.valuable1_6;
+                        this.valuable1_7=res.data.valuable1_7;
+                        this.valuable1_8=res.data.valuable1_8;
+                        this.valuable1_9=res.data.valuable1_9;
+                        this.valuable1_10=res.data.valuable1_10;
+                        this.valuable1_11=res.data.valuable1_11;
+                        this.valuable1_12=res.data.valuable1_12;
+                        this.valuable1_13=res.data.valuable1_13;
+                        this.valuable1_14=res.data.valuable1_14;
+                        this.valuable1_15=res.data.valuable1_15;
+                        this.exam_date2=new Date(parseInt(res.data.exam_date2)*1000);
+                        if (isNaN(this.exam_date2.getTime())) this.exam_date2="";
+                        this.name2_0=res.data.name2_0;
+                        this.name2_1=res.data.name2_1;
+                        this.name2_2=res.data.name2_2;
+                        this.name2_3=res.data.name2_3;
+                        this.name2_4=res.data.name2_4;
+                        this.name2_5=res.data.name2_5;
+                        this.name2_6=res.data.name2_6;
+                        this.name2_7=res.data.name2_7;
                         this.result2_0=res.data.result2_0;
                         this.result2_1=res.data.result2_1;
                         this.result2_2=res.data.result2_2;
                         this.result2_3=res.data.result2_3;
                         this.result2_4=res.data.result2_4;
-                        this.unit_0=res.data.unit_0;
-                        this.unit_1=res.data.unit_1;
-                        this.unit_2=res.data.unit_2;
-                        this.unit_3=res.data.unit_3;
-                        this.unit_4=res.data.unit_4;
-                        this.valuable_0=res.data.valuable_0;
-                        this.valuable_1=res.data.valuable_1;
-                        this.valuable_2=res.data.valuable_2;
-                        this.valuable_3=res.data.valuable_3;
-                        this.valuable_4=res.data.valuable_4;
+                        this.result2_5=res.data.result2_5;
+                        this.result2_6=res.data.result2_6;
+                        this.result2_7=res.data.result2_7;
+                        this.unit2_0=res.data.unit2_0;
+                        this.unit2_1=res.data.unit2_1;
+                        this.unit2_2=res.data.unit2_2;
+                        this.unit2_3=res.data.unit2_3;
+                        this.unit2_4=res.data.unit2_4;
+                        this.unit2_5=res.data.unit2_5;
+                        this.unit2_6=res.data.unit2_6;
+                        this.unit2_7=res.data.unit2_7;
+                        this.valuable2_0=res.data.valuable2_0;
+                        this.valuable2_1=res.data.valuable2_1;
+                        this.valuable2_2=res.data.valuable2_2;
+                        this.valuable2_3=res.data.valuable2_3;
+                        this.valuable2_4=res.data.valuable2_4;
+                        this.valuable2_5=res.data.valuable2_5;
+                        this.valuable2_6=res.data.valuable2_6;
+                        this.valuable2_7=res.data.valuable2_7;
+                        this.exam_date3=new Date(parseInt(res.data.exam_date3)*1000);
+                        if (isNaN(this.exam_date3.getTime())) this.exam_date3="";
+                        this.name3_0=res.data.name3_0;
+                        this.name3_1=res.data.name3_1;
+                        this.name3_2=res.data.name3_2;
+                        this.name3_3=res.data.name3_3;
+                        this.name3_4=res.data.name3_4;
+                        this.name3_5=res.data.name3_5;
+                        this.name3_6=res.data.name3_6;
+                        this.name3_7=res.data.name3_7;
+                        this.result3_0=res.data.result3_0;
+                        this.result3_1=res.data.result3_1;
+                        this.result3_2=res.data.result3_2;
+                        this.result3_3=res.data.result3_3;
+                        this.result3_4=res.data.result3_4;
+                        this.result3_5=res.data.result3_5;
+                        this.result3_6=res.data.result3_6;
+                        this.result3_7=res.data.result3_7;
+                        this.unit3_0=res.data.unit3_0;
+                        this.unit3_1=res.data.unit3_1;
+                        this.unit3_2=res.data.unit3_2;
+                        this.unit3_3=res.data.unit3_3;
+                        this.unit3_4=res.data.unit3_4;
+                        this.unit3_5=res.data.unit3_5;
+                        this.unit3_6=res.data.unit3_6;
+                        this.unit3_7=res.data.unit3_7;
+                        this.valuable3_0=res.data.valuable3_0;
+                        this.valuable3_1=res.data.valuable3_1;
+                        this.valuable3_2=res.data.valuable3_2;
+                        this.valuable3_3=res.data.valuable3_3;
+                        this.valuable3_4=res.data.valuable3_4;
+                        this.valuable3_5=res.data.valuable3_5;
+                        this.valuable3_6=res.data.valuable3_6;
+                        this.valuable3_7=res.data.valuable3_7;
+                        this.exam_date4=new Date(parseInt(res.data.exam_date4)*1000);
+                        if (isNaN(this.exam_date4.getTime())) this.exam_date4="";
+                        this.name4_0=res.data.name4_0;
+                        this.name4_1=res.data.name4_1;
+                        this.name4_2=res.data.name4_2;
+                        this.name4_3=res.data.name4_3;
+                        this.name4_4=res.data.name4_4;
+                        this.name4_5=res.data.name4_5;
+                        this.name4_6=res.data.name4_6;
+                        this.name4_7=res.data.name4_7;
+                        this.name4_8=res.data.name4_8;
+                        this.name4_9=res.data.name4_9;
+                        this.result4_0=res.data.result4_0;
+                        this.result4_1=res.data.result4_1;
+                        this.result4_2=res.data.result4_2;
+                        this.result4_3=res.data.result4_3;
+                        this.result4_4=res.data.result4_4;
+                        this.result4_5=res.data.result4_5;
+                        this.result4_6=res.data.result4_6;
+                        this.result4_7=res.data.result4_7;
+                        this.result4_8=res.data.result4_8;
+                        this.result4_9=res.data.result4_9;
+                        this.unit4_0=res.data.unit4_0;
+                        this.unit4_1=res.data.unit4_1;
+                        this.unit4_2=res.data.unit4_2;
+                        this.unit4_3=res.data.unit4_3;
+                        this.unit4_4=res.data.unit4_4;
+                        this.unit4_5=res.data.unit4_5;
+                        this.unit4_6=res.data.unit4_6;
+                        this.unit4_7=res.data.unit4_7;
+                        this.unit4_8=res.data.unit4_8;
+                        this.unit4_9=res.data.unit4_9;
+                        this.valuable4_0=res.data.valuable4_0;
+                        this.valuable4_1=res.data.valuable4_1;
+                        this.valuable4_2=res.data.valuable4_2;
+                        this.valuable4_3=res.data.valuable4_3;
+                        this.valuable4_4=res.data.valuable4_4;
+                        this.valuable4_5=res.data.valuable4_5;
+                        this.valuable4_6=res.data.valuable4_6;
+                        this.valuable4_7=res.data.valuable4_7;
+                        this.valuable4_8=res.data.valuable4_8;
+                        this.valuable4_9=res.data.valuable4_9;
+                        this.exam_date5=new Date(parseInt(res.data.exam_date5)*1000);
+                        if (isNaN(this.exam_date5.getTime())) this.exam_date5="";
+                        this.name5_0=res.data.name5_0;
+                        this.name5_1=res.data.name5_1;
+                        this.name5_2=res.data.name5_2;
+                        this.name5_3=res.data.name5_3;
+                        this.name5_4=res.data.name5_4;
+                        this.name5_5=res.data.name5_5;
+                        this.name5_6=res.data.name5_6;
+                        this.name5_7=res.data.name5_7;
+                        this.name5_8=res.data.name5_8;
+                        this.name5_9=res.data.name5_9;
+                        this.result5_0=res.data.result5_0;
+                        this.result5_1=res.data.result5_1;
+                        this.result5_2=res.data.result5_2;
+                        this.result5_3=res.data.result5_3;
+                        this.result5_4=res.data.result5_4;
+                        this.result5_5=res.data.result5_5;
+                        this.result5_6=res.data.result5_6;
+                        this.result5_7=res.data.result5_7;
+                        this.result5_8=res.data.result5_8;
+                        this.result5_9=res.data.result5_9;
+                        this.unit5_0=res.data.unit5_0;
+                        this.unit5_1=res.data.unit5_1;
+                        this.unit5_2=res.data.unit5_2;
+                        this.unit5_3=res.data.unit5_3;
+                        this.unit5_4=res.data.unit5_4;
+                        this.unit5_5=res.data.unit5_5;
+                        this.unit5_6=res.data.unit5_6;
+                        this.unit5_7=res.data.unit5_7;
+                        this.unit5_8=res.data.unit5_8;
+                        this.unit5_9=res.data.unit5_9;
+                        this.valuable5_0=res.data.valuable5_0;
+                        this.valuable5_1=res.data.valuable5_1;
+                        this.valuable5_2=res.data.valuable5_2;
+                        this.valuable5_3=res.data.valuable5_3;
+                        this.valuable5_4=res.data.valuable5_4;
+                        this.valuable5_5=res.data.valuable5_5;
+                        this.valuable5_6=res.data.valuable5_6;
+                        this.valuable5_7=res.data.valuable5_7;
+                        this.valuable5_8=res.data.valuable5_8;
+                        this.valuable5_9=res.data.valuable5_9;
+                        this.exam_date6=new Date(parseInt(res.data.exam_date6)*1000);
+                        if (isNaN(this.exam_date6.getTime())) this.exam_date6="";
+                        this.name6_0=res.data.name6_0;
+                        this.name6_1=res.data.name6_1;
+                        this.name6_2=res.data.name6_2;
+                        this.name6_3=res.data.name6_3;
+                        this.name6_4=res.data.name6_4;
+                        this.name6_5=res.data.name6_5;
+                        this.result6_0=res.data.result6_0;
+                        this.result6_1=res.data.result6_1;
+                        this.result6_2=res.data.result6_2;
+                        this.result6_3=res.data.result6_3;
+                        this.result6_4=res.data.result6_4;
+                        this.result6_5=res.data.result6_5;
+                        this.unit6_0=res.data.unit6_0;
+                        this.unit6_1=res.data.unit6_1;
+                        this.unit6_2=res.data.unit6_2;
+                        this.unit6_3=res.data.unit6_3;
+                        this.unit6_4=res.data.unit6_4;
+                        this.unit6_5=res.data.unit6_5;
+                        this.valuable6_0=res.data.valuable6_0;
+                        this.valuable6_1=res.data.valuable6_1;
+                        this.valuable6_2=res.data.valuable6_2;
+                        this.valuable6_3=res.data.valuable6_3;
+                        this.valuable6_4=res.data.valuable6_4;
+                        this.valuable6_5=res.data.valuable6_5;
                     },function(){
                         console.log('error');
                     });
                 },
                 submit: function(event) {
                     event.preventDefault();
-                    if (this.exam_date!="") this.exam_date=this.exam_date.getTime()/1000;
+                    if (this.exam_date0!="") this.exam_date0=this.exam_date0.getTime()/1000;
+                    if (this.exam_date1!="") this.exam_date1=this.exam_date1.getTime()/1000;
+                    if (this.exam_date2!="") this.exam_date2=this.exam_date2.getTime()/1000;
+                    if (this.exam_date3!="") this.exam_date3=this.exam_date3.getTime()/1000;
+                    if (this.exam_date4!="") this.exam_date4=this.exam_date4.getTime()/1000;
+                    if (this.exam_date5!="") this.exam_date5=this.exam_date5.getTime()/1000;
+                    if (this.exam_date6!="") this.exam_date6=this.exam_date6.getTime()/1000;
                     var
                     $form = $('#vm'),
                     data = {
                         patient_id: this.patient_id,
-                        exam_date: this.exam_date,
-                        name_0: this.name_0,
-                        name_1: this.name_1,
-                        name_2: this.name_2,
-                        name_3: this.name_3,
-                        name_4: this.name_4,
+                        exam_date0: this.exam_date0,
+                        name0_0: this.name0_0,
+                        name0_1: this.name0_1,
+                        name0_2: this.name0_2,
+                        name0_3: this.name0_3,
+                        name0_4: this.name0_4,
+                        name0_5: this.name0_5,
+                        name0_6: this.name0_6,
+                        name0_7: this.name0_7,
+                        result0_0: this.result0_0,
+                        result0_1: this.result0_1,
+                        result0_2: this.result0_2,
+                        result0_3: this.result0_3,
+                        result0_4: this.result0_4,
+                        result0_5: this.result0_5,
+                        result0_6: this.result0_6,
+                        result0_7: this.result0_7,
+                        unit0_0: this.unit0_0,
+                        unit0_1: this.unit0_1,
+                        unit0_2: this.unit0_2,
+                        unit0_3: this.unit0_3,
+                        unit0_4: this.unit0_4,
+                        unit0_5: this.unit0_5,
+                        unit0_6: this.unit0_6,
+                        unit0_7: this.unit0_7,
+                        valuable0_0: this.valuable0_0,
+                        valuable0_1: this.valuable0_1,
+                        valuable0_2: this.valuable0_2,
+                        valuable0_3: this.valuable0_3,
+                        valuable0_4: this.valuable0_4,
+                        valuable0_5: this.valuable0_5,
+                        valuable0_6: this.valuable0_6,
+                        valuable0_7: this.valuable0_7,
+                        exam_date1: this.exam_date1,
+                        name1_0: this.name1_0,
+                        name1_1: this.name1_1,
+                        name1_2: this.name1_2,
+                        name1_3: this.name1_3,
+                        name1_4: this.name1_4,
+                        name1_5: this.name1_5,
+                        name1_6: this.name1_6,
+                        name1_7: this.name1_7,
+                        name1_8: this.name1_8,
+                        name1_9: this.name1_9,
+                        name1_10: this.name1_10,
+                        name1_11: this.name1_11,
+                        name1_12: this.name1_12,
+                        name1_13: this.name1_13,
+                        name1_14: this.name1_14,
+                        name1_15: this.name1_15,
+                        result1_0: this.result1_0,
+                        result1_1: this.result1_1,
+                        result1_2: this.result1_2,
+                        result1_3: this.result1_3,
+                        result1_4: this.result1_4,
+                        result1_5: this.result1_5,
+                        result1_6: this.result1_6,
+                        result1_7: this.result1_7,
+                        result1_8: this.result1_8,
+                        result1_9: this.result1_9,
+                        result1_10: this.result1_10,
+                        result1_11: this.result1_11,
+                        result1_12: this.result1_12,
+                        result1_13: this.result1_13,
+                        result1_14: this.result1_14,
+                        result1_15: this.result1_15,
+                        unit1_0: this.unit1_0,
+                        unit1_1: this.unit1_1,
+                        unit1_2: this.unit1_2,
+                        unit1_3: this.unit1_3,
+                        unit1_4: this.unit1_4,
+                        unit1_5: this.unit1_5,
+                        unit1_6: this.unit1_6,
+                        unit1_7: this.unit1_7,
+                        unit1_8: this.unit1_8,
+                        unit1_9: this.unit1_9,
+                        unit1_10: this.unit1_10,
+                        unit1_11: this.unit1_11,
+                        unit1_12: this.unit1_12,
+                        unit1_13: this.unit1_13,
+                        unit1_14: this.unit1_14,
+                        unit1_15: this.unit1_15,
+                        valuable1_0: this.valuable1_0,
+                        valuable1_1: this.valuable1_1,
+                        valuable1_2: this.valuable1_2,
+                        valuable1_3: this.valuable1_3,
+                        valuable1_4: this.valuable1_4,
+                        valuable1_5: this.valuable1_5,
+                        valuable1_6: this.valuable1_6,
+                        valuable1_7: this.valuable1_7,
+                        valuable1_8: this.valuable1_8,
+                        valuable1_9: this.valuable1_9,
+                        valuable1_10: this.valuable1_10,
+                        valuable1_11: this.valuable1_11,
+                        valuable1_12: this.valuable1_12,
+                        valuable1_13: this.valuable1_13,
+                        valuable1_14: this.valuable1_14,
+                        valuable1_15: this.valuable1_15,
+                        exam_date2: this.exam_date2,
+                        name2_0: this.name2_0,
+                        name2_1: this.name2_1,
+                        name2_2: this.name2_2,
+                        name2_3: this.name2_3,
+                        name2_4: this.name2_4,
+                        name2_5: this.name2_5,
+                        name2_6: this.name2_6,
+                        name2_7: this.name2_7,
                         result2_0: this.result2_0,
                         result2_1: this.result2_1,
                         result2_2: this.result2_2,
                         result2_3: this.result2_3,
                         result2_4: this.result2_4,
-                        unit_0: this.unit_0,
-                        unit_1: this.unit_1,
-                        unit_2: this.unit_2,
-                        unit_3: this.unit_3,
-                        unit_4: this.unit_4,
-                        valuable_0: this.valuable_0,
-                        valuable_1: this.valuable_1,
-                        valuable_2: this.valuable_2,
-                        valuable_3: this.valuable_3,
-                        valuable_4: this.valuable_4
+                        result2_5: this.result2_5,
+                        result2_6: this.result2_6,
+                        result2_7: this.result2_7,
+                        unit2_0: this.unit2_0,
+                        unit2_1: this.unit2_1,
+                        unit2_2: this.unit2_2,
+                        unit2_3: this.unit2_3,
+                        unit2_4: this.unit2_4,
+                        unit2_5: this.unit2_5,
+                        unit2_6: this.unit2_6,
+                        unit2_7: this.unit2_7,
+                        valuable2_0: this.valuable2_0,
+                        valuable2_1: this.valuable2_1,
+                        valuable2_2: this.valuable2_2,
+                        valuable2_3: this.valuable2_3,
+                        valuable2_4: this.valuable2_4,
+                        valuable2_5: this.valuable2_5,
+                        valuable2_6: this.valuable2_6,
+                        valuable2_7: this.valuable2_7,
+                        exam_date3: this.exam_date3,
+                        name3_0: this.name3_0,
+                        name3_1: this.name3_1,
+                        name3_2: this.name3_2,
+                        name3_3: this.name3_3,
+                        name3_4: this.name3_4,
+                        name3_5: this.name3_5,
+                        name3_6: this.name3_6,
+                        name3_7: this.name3_7,
+                        result3_0: this.result3_0,
+                        result3_1: this.result3_1,
+                        result3_2: this.result3_2,
+                        result3_3: this.result3_3,
+                        result3_4: this.result3_4,
+                        result3_5: this.result3_5,
+                        result3_6: this.result3_6,
+                        result3_7: this.result3_7,
+                        unit3_0: this.unit3_0,
+                        unit3_1: this.unit3_1,
+                        unit3_2: this.unit3_2,
+                        unit3_3: this.unit3_3,
+                        unit3_4: this.unit3_4,
+                        unit3_5: this.unit3_5,
+                        unit3_6: this.unit3_6,
+                        unit3_7: this.unit3_7,
+                        valuable3_0: this.valuable3_0,
+                        valuable3_1: this.valuable3_1,
+                        valuable3_2: this.valuable3_2,
+                        valuable3_3: this.valuable3_3,
+                        valuable3_4: this.valuable3_4,
+                        valuable3_5: this.valuable3_5,
+                        valuable3_6: this.valuable3_6,
+                        valuable3_7: this.valuable3_7,
+                        exam_date4: this.exam_date4,
+                        name4_0: this.name4_0,
+                        name4_1: this.name4_1,
+                        name4_2: this.name4_2,
+                        name4_3: this.name4_3,
+                        name4_4: this.name4_4,
+                        name4_5: this.name4_5,
+                        name4_6: this.name4_6,
+                        name4_7: this.name4_7,
+                        name4_8: this.name4_8,
+                        name4_9: this.name4_9,
+                        result4_0: this.result4_0,
+                        result4_1: this.result4_1,
+                        result4_2: this.result4_2,
+                        result4_3: this.result4_3,
+                        result4_4: this.result4_4,
+                        result4_5: this.result4_5,
+                        result4_6: this.result4_6,
+                        result4_7: this.result4_7,
+                        result4_8: this.result4_8,
+                        result4_9: this.result4_9,
+                        unit4_0: this.unit4_0,
+                        unit4_1: this.unit4_1,
+                        unit4_2: this.unit4_2,
+                        unit4_3: this.unit4_3,
+                        unit4_4: this.unit4_4,
+                        unit4_5: this.unit4_5,
+                        unit4_6: this.unit4_6,
+                        unit4_7: this.unit4_7,
+                        unit4_8: this.unit4_8,
+                        unit4_9: this.unit4_9,
+                        valuable4_0: this.valuable4_0,
+                        valuable4_1: this.valuable4_1,
+                        valuable4_2: this.valuable4_2,
+                        valuable4_3: this.valuable4_3,
+                        valuable4_4: this.valuable4_4,
+                        valuable4_5: this.valuable4_5,
+                        valuable4_6: this.valuable4_6,
+                        valuable4_7: this.valuable4_7,
+                        valuable4_8: this.valuable4_8,
+                        valuable4_9: this.valuable4_9,
+                        exam_date5: this.exam_date5,
+                        name5_0: this.name5_0,
+                        name5_1: this.name5_1,
+                        name5_2: this.name5_2,
+                        name5_3: this.name5_3,
+                        name5_4: this.name5_4,
+                        name5_5: this.name5_5,
+                        name5_6: this.name5_6,
+                        name5_7: this.name5_7,
+                        name5_8: this.name5_8,
+                        name5_9: this.name5_9,
+                        result5_0: this.result5_0,
+                        result5_1: this.result5_1,
+                        result5_2: this.result5_2,
+                        result5_3: this.result5_3,
+                        result5_4: this.result5_4,
+                        result5_5: this.result5_5,
+                        result5_6: this.result5_6,
+                        result5_7: this.result5_7,
+                        result5_8: this.result5_8,
+                        result5_9: this.result5_9,
+                        unit5_0: this.unit5_0,
+                        unit5_1: this.unit5_1,
+                        unit5_2: this.unit5_2,
+                        unit5_3: this.unit5_3,
+                        unit5_4: this.unit5_4,
+                        unit5_5: this.unit5_5,
+                        unit5_6: this.unit5_6,
+                        unit5_7: this.unit5_7,
+                        unit5_8: this.unit5_8,
+                        unit5_9: this.unit5_9,
+                        valuable5_0: this.valuable5_0,
+                        valuable5_1: this.valuable5_1,
+                        valuable5_2: this.valuable5_2,
+                        valuable5_3: this.valuable5_3,
+                        valuable5_4: this.valuable5_4,
+                        valuable5_5: this.valuable5_5,
+                        valuable5_6: this.valuable5_6,
+                        valuable5_7: this.valuable5_7,
+                        valuable5_8: this.valuable5_8,
+                        valuable5_9: this.valuable5_9,
+                        exam_date6: this.exam_date6,
+                        name6_0: this.name6_0,
+                        name6_1: this.name6_1,
+                        name6_2: this.name6_2,
+                        name6_3: this.name6_3,
+                        name6_4: this.name6_4,
+                        name6_5: this.name6_5,
+                        result6_0: this.result6_0,
+                        result6_1: this.result6_1,
+                        result6_2: this.result6_2,
+                        result6_3: this.result6_3,
+                        result6_4: this.result6_4,
+                        result6_5: this.result6_5,
+                        unit6_0: this.unit6_0,
+                        unit6_1: this.unit6_1,
+                        unit6_2: this.unit6_2,
+                        unit6_3: this.unit6_3,
+                        unit6_4: this.unit6_4,
+                        unit6_5: this.unit6_5,
+                        valuable6_0: this.valuable6_0,
+                        valuable6_1: this.valuable6_1,
+                        valuable6_2: this.valuable6_2,
+                        valuable6_3: this.valuable6_3,
+                        valuable6_4: this.valuable6_4,
+                        valuable6_5: this.valuable6_5
                     };
                     this.$http.post('/lab?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
                         window.location.href="/lab?patient_id={{patient_id}}&page_index={{page_index}}";

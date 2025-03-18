@@ -1,0 +1,1 @@
+{"class":"form","name":"clinical_stage","label":"临床分期","blocks":[{"class":"block","name":"clinical_stage","label":"临床分期","elements":[{"class":"text","name":"c_t_stage","label":"cT","value":""},{"class":"text","name":"c_n_stage","label":"cN","value":""},{"class":"text","name":"c_m_stage","label":"cM","value":""},{"class":"text","name":"final_stage","label":"总分期","value":""}]}]}

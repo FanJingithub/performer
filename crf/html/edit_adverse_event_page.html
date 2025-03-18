@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <title>数据库系统</title>
+
+        <link href="/templates/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/templates/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="/templates/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="/templates/assets/css/style.css" rel="stylesheet">
+        <link href="/templates/assets/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/templates/assets/js/jquery.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.js"></script>
+
+    <link rel="stylesheet" href="css/style_2036.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+
+  <body>
+  <section id="container" >
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <a href="#" class="logo"><b>数据库系统</b></a>
+            <div class="top-menu">
+            </div>
+        </header>
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <ul class="sidebar-menu" id="nav-accordion">
+                {% raw side_menu %}
+            
+              </ul>
+          </div>
+      </aside>
+
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+                <h3><i class="fa fa-angle-right"></i>不良事件评价</h3>
+                <hr>
+            
+                <form id="vm" v-on:submit="submit">
+                    <input type="text" value="{{patient_id}}" v-model="patient_id" v-show="false"></input>
+                    <div class="form-part">
+                    <div class="block">
+                        <h3>不良事件记录</h3>
+                        <div>
+                            <label class="form-label">不良事件类型:</label>
+                            <input type="radio" id="ae1" value="ae1" v-model="adverse_type" >
+                            <label for="ae1">厌食&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae2" value="ae2" v-model="adverse_type" >
+                            <label for="ae2">恶心呕吐&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae3" value="ae3" v-model="adverse_type" >
+                            <label for="ae3">腹痛&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae4" value="ae4" v-model="adverse_type" >
+                            <label for="ae4">腹泻&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae5" value="ae5" v-model="adverse_type" >
+                            <label for="ae5">口腔黏膜炎&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae6" value="ae6" v-model="adverse_type" >
+                            <label for="ae6">疲乏&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae7" value="ae7" v-model="adverse_type" >
+                            <label for="ae7">脱发&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae8" value="ae8" v-model="adverse_type" >
+                            <label for="ae8">发热不伴感染&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae9" value="ae9" v-model="adverse_type" >
+                            <label for="ae9">感染&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae10" value="ae10" v-model="adverse_type" >
+                            <label for="ae10">感觉异常&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae11" value="ae11" v-model="adverse_type" >
+                            <label for="ae11">肢端麻木刺痛&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae12" value="ae12" v-model="adverse_type" >
+                            <label for="ae12">疼痛&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae13" value="ae13" v-model="adverse_type" >
+                            <label for="ae13">水肿&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae14" value="ae14" v-model="adverse_type" >
+                            <label for="ae14">静脉炎&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae15" value="ae15" v-model="adverse_type" >
+                            <label for="ae15">手足综合症&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae16" value="ae16" v-model="adverse_type" >
+                            <label for="ae16">心律失常&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae17" value="ae17" v-model="adverse_type" >
+                            <label for="ae17">血压异常&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae18" value="ae18" v-model="adverse_type" >
+                            <label for="ae18">过敏反应(除皮疹)&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae19" value="ae19" v-model="adverse_type" >
+                            <label for="ae19">皮疹&nbsp;&nbsp;</label>
+                            <input type="radio" id="ae20" value="ae20" v-model="adverse_type" >
+                            <label for="ae20">其他&nbsp;&nbsp;</label><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">发生日期: </label>
+                            <el-date-picker v-model="start_time" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">结束日期: </label>
+                            <el-date-picker v-model="end_time" type="date" placeholder="Pick a day" ></el-date-picker>
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">NCI-CTC分级: </label>
+                            <input class="form-text" v-model="nci_ctc" >
+                            <br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">采取措施:</label>
+                            <input type="radio" id="continue" value="continue" v-model="disposal" >
+                            <label for="continue">继续用药&nbsp;&nbsp;</label>
+                            <input type="radio" id="reduce" value="reduce" v-model="disposal" >
+                            <label for="reduce">减少用量&nbsp;&nbsp;</label>
+                            <input type="radio" id="pause" value="pause" v-model="disposal" >
+                            <label for="pause">暂停后继续用药&nbsp;&nbsp;</label>
+                            <input type="radio" id="stop" value="stop" v-model="disposal" >
+                            <label for="stop">停药&nbsp;&nbsp;</label>
+                            <input type="radio" value="other" v-model="disposal" >
+                            <label for="other">其他：&nbsp;</label>
+                            <input type="text" class="form-text" v-model="disposal_other"  ><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">转归:</label>
+                            <input type="radio" id="disappear" value="disappear" v-model="outcome" >
+                            <label for="disappear">消失&nbsp;&nbsp;</label>
+                            <input type="radio" id="improve" value="improve" v-model="outcome" >
+                            <label for="improve">改善&nbsp;&nbsp;</label>
+                            <input type="radio" id="no_improve" value="no_improve" v-model="outcome" >
+                            <label for="no_improve">无改善&nbsp;&nbsp;</label>
+                            <input type="radio" id="aggravate" value="aggravate" v-model="outcome" >
+                            <label for="aggravate">加重&nbsp;&nbsp;</label><br/><br/>
+                        </div>
+                        <div>
+                            <label class="form-label">与研究药物关系:</label>
+                            <input type="radio" id="must_related" value="must_related" v-model="drug_relation" >
+                            <label for="must_related">肯定有关&nbsp;&nbsp;</label>
+                            <input type="radio" id="maybe_related" value="maybe_related" v-model="drug_relation" >
+                            <label for="maybe_related">可能有关&nbsp;&nbsp;</label>
+                            <input type="radio" id="maybe_unrelated" value="maybe_unrelated" v-model="drug_relation" >
+                            <label for="maybe_unrelated">可能无关&nbsp;&nbsp;</label>
+                            <input type="radio" id="unrelated" value="unrelated" v-model="drug_relation" >
+                            <label for="unrelated">无关&nbsp;&nbsp;</label>
+                            <input type="radio" id="unknown" value="unknown" v-model="drug_relation" >
+                            <label for="unknown">无法评定&nbsp;&nbsp;</label><br/><br/>
+                        </div>
+                    </div></div>
+                <div class="form-part-3">
+                    <input type="submit" value="提交">
+                    <button class="remove" type="button" v-on:click="remove">删除</button>
+                </div>    
+            </form>
+        
+            </section>
+      </section>
+
+      <footer class="site-footer">
+          <div class="text-center">
+              2020 - Fan
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/templates/assets/js/fancybox/jquery.fancybox.js"></script>
+        <script src="/templates/assets/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/templates/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/templates/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/templates/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+    <!--common script for all pages-->
+        <script src="/templates/assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script type="text/javascript">
+        $(function() {
+            jQuery(".fancybox").fancybox();
+        });
+    </script>
+    <script>
+    var vm = new Vue({
+            el: '#vm',
+            data: {
+                    patient_id: "{{patient_id}}",
+                    adverse_type: "{{adverse_type}}",
+                    start_time: new Date(parseInt("{{start_time}}")*1000),
+                    end_time: new Date(parseInt("{{end_time}}")*1000),
+                    nci_ctc: "{{nci_ctc}}",
+                    disposal: "{{disposal}}",
+                    disposal_other: "{{disposal_other}}",
+                    outcome: "{{outcome}}",
+                    drug_relation: "{{drug_relation}}"
+            },
+            mounted(){
+                this.init()
+            },
+            methods:{
+                init:function(){
+                    this.$http.get('/api/adverse_event?patient_id={{patient_id}}&page_index={{page_index}}').then(function(res){
+                        this.patient_id=res.data.patient_id;
+                        this.adverse_type=res.data.adverse_type;
+                        this.start_time=new Date(parseInt(res.data.start_time)*1000);
+                        if (isNaN(this.start_time.getTime())) this.start_time="";
+                        this.end_time=new Date(parseInt(res.data.end_time)*1000);
+                        if (isNaN(this.end_time.getTime())) this.end_time="";
+                        this.nci_ctc=res.data.nci_ctc;
+                        this.disposal=res.data.disposal;
+                        this.disposal_other=res.data.disposal_other;
+                        this.outcome=res.data.outcome;
+                        this.drug_relation=res.data.drug_relation;
+                        if (this.disposal!="other") this.disposal_other = "";
+                    },function(){
+                        console.log('error');
+                    });
+                },
+                submit: function(event) {
+                    event.preventDefault();
+                    if (this.start_time!="") this.start_time=this.start_time.getTime()/1000;
+                    if (this.end_time!="") this.end_time=this.end_time.getTime()/1000;
+                    var
+                    $form = $('#vm'),
+                    data = {
+                        patient_id: this.patient_id,
+                        adverse_type: this.adverse_type,
+                        start_time: this.start_time,
+                        end_time: this.end_time,
+                        nci_ctc: this.nci_ctc,
+                        disposal: this.disposal,
+                        disposal_other: this.disposal_other,
+                        outcome: this.outcome,
+                        drug_relation: this.drug_relation
+                    };
+                    this.$http.post('/adverse_event?page_index={{page_index}}',data,{emulateJSON:true}).then(function(res){
+                        window.location.href="/adverse_event?patient_id={{patient_id}}&page_index={{page_index}}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                },
+                remove:function(){
+                    this.$http.get('/api/removePage?patient_id={{patient_id}}&page_index={{page_index}}&page_name=adverse_event').then(function(res){
+                        window.location.href="{% raw page_previous %}";
+                    },function(res){
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

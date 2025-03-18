@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello</title>
+</head>
+<body>
+
+    <div style="width:50%; margin:0 auto; margin-top:36px">
+        <label>表单名称：&nbsp;</label>
+        <input type="text" style="width:100px;height:20px" id="form_label">&nbsp;&nbsp;&nbsp;&nbsp;
+        <label>名称拼音：&nbsp;</label>
+        <input type="text" style="width:100px;height:20px" id="form_name"><br/><br/>
+        <label>模块个数：&nbsp;</label>
+        <input id="cc_block" type="number" style="width:36px;height:20px"/><br/><br/>
+        <div id="root"></div>
+        <div style="text-align:center;border-top:3px solid #99CCCC">
+            <br/>
+            <button type="button" style="width:80px;height:50px;background:#99CCCC; font-size:16px; " onclick="submit()">提交</button>
+        </div>
+    </div>
+
+    <script>
+        var count_block_now = 0;
+        var count_element_now = new Array(20);
+        var flag = new Array(20);
+        var flag_table = new Array(20);
+        var flag_unit = new Array(20);
+        var count_option_now = new Array(20);
+        var count_element_element_now = new Array(20);
+        var flag_element = new Array(20);
+        var flag_unit_element = new Array(20);
+        count_option_now_element = new Array(20);
+        for (ii=0;ii<20;ii++){
+            count_element_now[ii] = 0;
+            flag[ii] = new Array(100);
+            flag_table[ii] = new Array(100);
+            flag_unit[ii] = new Array(100);
+            count_option_now[ii] = new Array(100);
+            count_element_element_now[ii] = new Array(100);
+            flag_element[ii] = new Array(100);
+            flag_unit_element[ii] = new Array(100);
+            count_option_now_element[ii] = new Array(100);
+            for (i=0;i<100;i++) {
+                flag[ii][i]=0; flag_table[ii][i]=0; flag_unit[ii][i]=0; count_option_now[ii][i]=0;
+                count_element_element_now[ii][i]=0; 
+                flag_element[ii][i]=new Array(100); flag_unit_element[ii][i]=new Array(100);
+                count_option_now_element[ii][i] = new Array(100);
+                for (j=0;j<100;j++){
+                    flag_element[ii][i][j] = 0;
+                    flag_unit_element[ii][i][j] = 0;
+                    count_option_now_element[ii][i][j] = 0;
+                }
+            }
+        }
+        
+        document.getElementById("cc_block").addEventListener("change", function(event) {
+            count_block = document.getElementById("cc_block").value;
+            while(count_block_now<count_block){
+                count_block_now = count_block_now + 1;
+                var block = document.createElement("block_"+ count_block_now);
+                block.id = "block_" + count_block_now;
+                block.innerHTML = '<div style="border-top:3px solid #99CCCC"><br/>\
+                                    <label>模块'+ count_block_now +'&nbsp;&nbsp;</label>\
+                                    <label>名称：&nbsp;</label>\
+                                    <input type="text" style="width:100px;height:20px" id="block_label_'+ count_block_now+'">&nbsp;&nbsp;&nbsp;&nbsp;\
+                                    <label>名称拼音：&nbsp;</label>\
+                                    <input type="text" style="width:100px;height:20px" id="block_name_'+ count_block_now+'"><br/><br/>\
+                                    <label>元素个数：&nbsp;</label>\
+                                    <input id="cc_element_'+ count_block_now +'" type="number" style="width:36px;height:20px"/><br/>\
+                                    <div id="root"></div></div><br/>'
+                document.getElementById("root").appendChild(block);
+                
+                document.getElementById("cc_element_"+count_block_now).addEventListener("change", function(event) {
+                    cc_elementEventHandler(this.id);
+                });
+
+            }
+            while(count_block_now>count_block){
+                document.getElementById("root").removeChild(document.getElementById("block_"+count_block_now));
+                count_block_now = count_block_now - 1;
+            }
+        });
+
+        function cc_elementEventHandler(blockID){
+            blockIndex = parseInt(blockID.split("_")[2]);
+            count_element = document.getElementById("cc_element_"+blockIndex).value;
+            while(count_element_now[blockIndex]<count_element){
+                count_element_now[blockIndex] = count_element_now[blockIndex] + 1;
+                var element = document.createElement("element_" + blockIndex + "_"+ count_element_now[blockIndex]);
+                element.id = "element_" + blockIndex + "_" + count_element_now[blockIndex];
+                element.innerHTML = '<br/><div style="margin-left:36px;border-top:2px dashed #99CCCC"><br/>\
+                    <label>元素'+ count_element_now[blockIndex]+':&nbsp;</label>\
+                    <select id="select_' + blockIndex + "_"+count_element_now[blockIndex]+ '" style="width:50px;height:30px;background:#99CCCC;border:1px solid #ccc">\
+                    <option value="text">文本</option>\
+                    <option value="number">数字</option>\
+                    <option value="time">时间</option>\
+                    <option value="radio">选项</option>\
+                    <option value="table">表格</option>\
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;\
+                <label>元素名称: &nbsp;</label><input type="text" style="width:100px;height:20px" id="label_'+ blockIndex + "_"+count_element_now[blockIndex] + '">&nbsp;&nbsp;&nbsp;&nbsp;\
+                <label>名称拼音: &nbsp;</label><input type="text" style="width:100px;height:20px" id="name_'+ blockIndex + "_"+count_element_now[blockIndex]+'"><br/>\
+            </div><br/>'
+                document.getElementById("block_" + blockIndex).appendChild(element);
+                
+                flag[blockIndex][count_element_now[blockIndex]] = 0;
+                flag_table[blockIndex][count_element_now[blockIndex]] = 0;
+                document.getElementById("select_" + blockIndex + "_"+count_element_now[blockIndex]).addEventListener("change", function(event) {
+                    selectEventHandler(this.id);
+                });
+
+            }
+            while(count_element_now[blockIndex]>count_element){
+                document.getElementById("block_"+blockIndex).removeChild(document.getElementById("element_" + blockIndex + "_"+count_element_now[blockIndex]));
+                count_element_now[blockIndex] = count_element_now[blockIndex] - 1;
+            }
+        }
+        
+        function selectEventHandler(selectID){
+            blockIndex = parseInt(selectID.split("_")[1]);
+            elementIndex = parseInt(selectID.split("_")[2]);
+            if (document.getElementById(selectID).value=="radio"){
+
+                if (flag_table[blockIndex][elementIndex]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("table_div_"+ blockIndex + "_"+elementIndex))
+                    flag_table[blockIndex][elementIndex] = flag_table[blockIndex][elementIndex] - 1;
+                }
+                if (flag_unit[blockIndex][elementIndex]>0) {
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("unit_div_"+ blockIndex + "_"+ elementIndex));
+                    flag_unit[blockIndex][elementIndex] = 0;
+                }
+
+                var cc_option =  document.createElement("cc_option");
+                flag[blockIndex][elementIndex] = flag[blockIndex][elementIndex] + 1;
+                cc_option.id = "cc_div_" + blockIndex + "_"+ elementIndex;
+                cc_option.innerHTML = '<div style="margin-left:36px">\
+                        <label>选项个数:&nbsp;&nbsp;</label><input id="cc_'+ blockIndex + "_"+ elementIndex +'" type="number" style="width:36px;height:20px"/><br/><br/>\
+                    </div>'
+                document.getElementById("element_"+ blockIndex + "_"+elementIndex).appendChild(cc_option)
+                count_option_now[blockIndex][elementIndex] = 0;
+                document.getElementById("cc_"+ blockIndex + "_"+elementIndex).addEventListener("change", function(event) {
+                    countEventHandler(this.id);
+                });
+            }
+
+            else if (document.getElementById(selectID).value=="text" || document.getElementById(selectID).value=="number" || document.getElementById(selectID).value=="time"){
+                if (flag[blockIndex][elementIndex]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("cc_div_"+ blockIndex + "_"+elementIndex))
+                    flag[blockIndex][elementIndex] = flag[blockIndex][elementIndex] - 1;
+                }
+                if (flag_table[blockIndex][elementIndex]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("table_div_"+ blockIndex + "_"+elementIndex))
+                    flag_table[blockIndex][elementIndex] = flag_table[blockIndex][elementIndex] - 1;
+                }
+                if (document.getElementById(selectID).value=="number"){
+                    var unit_div = document.createElement("unit_div_"+ blockIndex + "_"+ elementIndex);
+                    unit_div.id = "unit_div_"+ blockIndex + "_"+ elementIndex;
+                    unit_div.innerHTML = '<div style="margin-left:36px">\
+                                    <label>单位:&nbsp;&nbsp;</label>\
+                                    <input type="text" style="width:100px;height:20px" id="unit_'+ blockIndex + "_"+ elementIndex +'"/><br/>\
+                                    </div><br/>'
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).appendChild(unit_div);
+                    flag_unit[blockIndex][elementIndex] = 1;
+                }
+                else if (flag_unit[blockIndex][elementIndex]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("unit_div_"+ blockIndex + "_"+ elementIndex));
+                    flag_unit[blockIndex][elementIndex] = 0;
+                }
+            }
+    
+            else if (document.getElementById(selectID).value=="table"){
+
+                if (flag[blockIndex][elementIndex]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("cc_div_"+ blockIndex + "_"+elementIndex))
+                    flag[blockIndex][elementIndex] = flag[blockIndex][elementIndex] - 1;
+                }
+                if (flag_unit[blockIndex][elementIndex]>0) {
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("unit_div_"+ blockIndex + "_"+ elementIndex));
+                    flag_unit[blockIndex][elementIndex] = 0;
+                }
+
+                var table_div =  document.createElement("table_div_"+ blockIndex + "_"+ elementIndex);
+                flag_table[blockIndex][elementIndex] = flag_table[blockIndex][elementIndex] + 1;
+                table_div.id = "table_div_"+ blockIndex + "_" + elementIndex;
+                table_div.innerHTML = '<div style="margin-left:36px">\
+                        <label>表格注释(选填):&nbsp;</label><br/><textarea id="explain_'+ blockIndex + "_"+ elementIndex +'" rows="5" cols="86"></textarea><br/><br/>\
+                        <label>字段个数:&nbsp;</label><input id="col_cc_'+ blockIndex + "_"+ elementIndex +'" type="number" style="width:36px;height:20px"/>&nbsp;&nbsp;\
+                        <label>表格行数:&nbsp;</label><input id="row_cc_'+ blockIndex + "_"+ elementIndex +'" type="number" style="width:36px;height:20px"/><br/>\
+                    </div><br/>'
+                document.getElementById("element_"+ blockIndex + "_"+elementIndex).appendChild(table_div)
+                count_option_now[blockIndex][elementIndex] = 0;
+                document.getElementById("col_cc_"+ blockIndex + "_"+elementIndex).addEventListener("change", function(event) {
+                    colCountEventHandler(this.id);
+                });
+            }
+        }
+
+        function countEventHandler(elementID){
+            blockIndex   = parseInt(elementID.split("_")[1])
+            elementIndex = parseInt(elementID.split("_")[2]);
+            var count = document.getElementById("cc_"+ blockIndex + "_"+elementIndex).value;
+            while(count_option_now[blockIndex][elementIndex]<count){
+                count_option_now[blockIndex][elementIndex] = count_option_now[blockIndex][elementIndex] + 1;
+                var ee = document.createElement("ee_"+ blockIndex + "_"+elementIndex+"_"+count_option_now[blockIndex][elementIndex]);
+                ee.id = "ee_" + blockIndex + "_" + elementIndex+ "_" + count_option_now[blockIndex][elementIndex];
+                ee.innerHTML = '<div style="margin-left:72px"><label>选项值'+count_option_now[blockIndex][elementIndex]+':&nbsp;</label>\
+                <input style="width:100px;height:20px" id="option_label_'+ blockIndex + "_" + elementIndex+ "_" + count_option_now[blockIndex][elementIndex] + '"/>&nbsp;&nbsp;\
+                <label>选项拼音:&nbsp;</label>\
+                <input style="width:100px;height:20px" id="option_name_'+ blockIndex + "_" + elementIndex+ "_" + count_option_now[blockIndex][elementIndex]+'"/></div><br/>'
+                document.getElementById("cc_div_"+ blockIndex + "_"+elementIndex).appendChild(ee);
+            }
+            while(count_option_now[blockIndex][elementIndex]>count){
+                document.getElementById("cc_div_"+ blockIndex + "_"+elementIndex).removeChild(document.getElementById("ee_"+ blockIndex + "_"+ elementIndex+"_" +count_option_now[blockIndex][elementIndex]));
+                count_option_now[blockIndex][elementIndex] = count_option_now[blockIndex][elementIndex] - 1;
+            }
+        }
+
+        function colCountEventHandler(elementID){
+            blockIndex   = parseInt(elementID.split("_")[2])
+            elementIndex = parseInt(elementID.split("_")[3]);
+            var count = document.getElementById("col_cc_"+ blockIndex + "_"+elementIndex).value;
+            while(count_element_element_now[blockIndex][elementIndex]<count){
+                count_element_element_now[blockIndex][elementIndex] = count_element_element_now[blockIndex][elementIndex] + 1;
+                var element = document.createElement("element_"+ blockIndex + "_"+ elementIndex + "_" + count_element_element_now[blockIndex][elementIndex]);
+                element.id = "element_" + blockIndex + "_"+ elementIndex + "_" + count_element_element_now[blockIndex][elementIndex];
+                element.innerHTML = '<br/><div style="margin-left:72px"><br/>\
+                    <label>表格元素'+ count_element_element_now[blockIndex][elementIndex]+':&nbsp;</label>\
+                    <select id="select_'+ blockIndex + "_"+ elementIndex + "_" +count_element_element_now[blockIndex][elementIndex]+ '" style="height:30px;background:#99CCCC;border:1px solid #ccc">\
+                    <option value="text">文本</option>\
+                    <option value="number">数字</option>\
+                    <option value="time">时间</option>\
+                    <option value="radio">选项</option>\
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;\
+                <label>字段名: &nbsp;</label><input type="text" style="width:100px;height:20px" id="column_label_'+ blockIndex + "_"+ elementIndex + "_" +count_element_element_now[blockIndex][elementIndex]+'">&nbsp;&nbsp;&nbsp;&nbsp;\
+                <label>字段名拼音: &nbsp;</label><input type="text" style="width:100px;height:20px" id="column_name_'+ blockIndex + "_"+ elementIndex + "_" +count_element_element_now[blockIndex][elementIndex]+'"><br/>\
+            </div><br/>'
+                document.getElementById("table_div_"+ blockIndex + "_"+ elementIndex).appendChild(element);
+                
+                flag_element[blockIndex][elementIndex][count_element_element_now[blockIndex][elementIndex]] = 0;
+                document.getElementById("select_"+ blockIndex + "_"+ elementIndex + "_" +count_element_element_now[blockIndex][elementIndex]).addEventListener("change", function(event) {
+                    selectEventHandler2(this.id);
+                });
+
+            }
+            while(count_element_element_now[blockIndex][elementIndex]>count){
+                document.getElementById("table_div_"+ blockIndex + "_"+ elementIndex).removeChild(document.getElementById("element_"+ blockIndex + "_"+ elementIndex + "_" +count_element_element_now[blockIndex][elementIndex]));
+                count_element_element_now[blockIndex][elementIndex] = count_element_element_now[blockIndex][elementIndex] - 1;
+            }
+        }
+
+        function selectEventHandler2(selectID){
+            blockIndex     = parseInt(selectID.split("_")[1])
+            elementIndex_1 = parseInt(selectID.split("_")[2]);
+            elementIndex_2 = parseInt(selectID.split("_")[3]);
+            if (document.getElementById(selectID).value=="radio"){
+
+                if (flag_unit_element[blockIndex][elementIndex_1][elementIndex_2]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2).removeChild(document.getElementById("column_unit_div_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2))
+                    flag_unit_element[blockIndex][elementIndex_1][elementIndex_2] = 0;
+                }
+
+                flag_element[blockIndex][elementIndex_1][elementIndex_2] = flag_element[blockIndex][elementIndex_1][elementIndex_2] + 1;
+                var cc_option =  document.createElement("cc_div_"+ blockIndex + "_" + elementIndex_1 + "_"+elementIndex_2);
+                cc_option.id = "cc_div_"+ blockIndex + "_" + elementIndex_1 + "_"+elementIndex_2;
+                cc_option.innerHTML = '<div style="margin-left:72px">\
+                        <label>选项个数:&nbsp;</label><input id="cc_'+ blockIndex + "_"+ elementIndex_1 + "_" + elementIndex_2 +'" type="number" style="width:36px;height:20px"/><br/><br/>\
+                    </div>'
+                document.getElementById("element_"+ blockIndex + "_"+elementIndex_1+ "_"+elementIndex_2).appendChild(cc_option)
+                count_option_now_element[blockIndex][elementIndex_1][elementIndex_2] = 0;
+                document.getElementById("cc_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2).addEventListener("change", function(event) {
+                    countEventHandler2(this.id);
+                });
+            }
+            else if (document.getElementById(selectID).value=="text" || document.getElementById(selectID).value=="number" || document.getElementById(selectID).value=="time"){
+                if (flag_element[blockIndex][elementIndex_1][elementIndex_2]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2).removeChild(document.getElementById("cc_div_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2))
+                    flag_element[blockIndex][elementIndex_1][elementIndex_2] = flag_element[blockIndex][elementIndex_1][elementIndex_2] - 1;
+                }
+                if (document.getElementById(selectID).value=="number"){
+                    var unit_div = document.createElement("column_unit_div_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2);
+                    unit_div.id = "column_unit_div_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2;
+                    unit_div.innerHTML = '<div style="margin-left:72px">\
+                                    <label>单位:&nbsp;&nbsp;</label>\
+                                    <input type="text" style="width:100px;height:20px" id="column_unit_'+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2 +'"/><br/>\
+                                    </div><br/>'
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2).appendChild(unit_div);
+                    flag_unit_element[blockIndex][elementIndex_1][elementIndex_2] = 1;
+                }
+                else if (flag_unit_element[blockIndex][elementIndex_1][elementIndex_2]>0){
+                    document.getElementById("element_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2).removeChild(document.getElementById("column_unit_div_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2))
+                    flag_unit_element[blockIndex][elementIndex_1][elementIndex_2] = 0;
+                }
+                
+            }
+        }
+
+        function countEventHandler2(elementID){
+            blockIndex     = parseInt(elementID.split("_")[1]);
+            elementIndex_1 = parseInt(elementID.split("_")[2]);
+            elementIndex_2 = parseInt(elementID.split("_")[3]);
+            var count = document.getElementById(elementID).value;
+            while(count_option_now_element[blockIndex][elementIndex_1][elementIndex_2]<count){
+                count_option_now_element[blockIndex][elementIndex_1][elementIndex_2] = count_option_now_element[blockIndex][elementIndex_1][elementIndex_2] + 1;
+                var ee = document.createElement("ee_"+ blockIndex +"_"+ elementIndex_1+"_"+elementIndex_2 +"_"+count_option_now_element[blockIndex][elementIndex_1][elementIndex_2]);
+                ee.id = "ee_" + blockIndex +"_"+ elementIndex_1+"_"+elementIndex_2 +"_"+ count_option_now_element[blockIndex][elementIndex_1][elementIndex_2];
+                ee.innerHTML = '<div style="margin-left:108px"><label>选项值'+count_option_now_element[blockIndex][elementIndex_1][elementIndex_2]+':&nbsp;</label>\
+                <input style="width:100px;height:20px" id="col_option_label_'+ blockIndex +"_"+ elementIndex_1+"_"+elementIndex_2 +"_"+ count_option_now_element[blockIndex][elementIndex_1][elementIndex_2]+'"/>&nbsp;&nbsp;\
+                <label>选项拼音:&nbsp;</label>\
+                <input style="width:100px;height:20px" id="col_option_name_'+ blockIndex +"_"+ elementIndex_1+"_"+elementIndex_2 +"_"+ count_option_now_element[blockIndex][elementIndex_1][elementIndex_2]+'"/></div><br/>'
+                document.getElementById("cc_div_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2).appendChild(ee);
+            }
+            while(count_option_now_element[blockIndex][elementIndex_1][elementIndex_2]>count){
+                document.getElementById("cc_div_"+ blockIndex + "_"+elementIndex_1+"_"+elementIndex_2).removeChild(document.getElementById("ee_"+ blockIndex +"_"+ elementIndex_1+"_"+elementIndex_2 +"_"+count_option_now_element[blockIndex][elementIndex_1][elementIndex_2]));
+                count_option_now_element[blockIndex][elementIndex_1][elementIndex_2] = count_option_now_element[blockIndex][elementIndex_1][elementIndex_2] - 1;
+            }
+        }
+
+        function submit(){
+            var block_count = document.getElementById("cc_block").value;
+            var blocks = [];
+            for (blockIndex=1; blockIndex<=block_count; blockIndex++){
+                var element_count = document.getElementById("cc_element_"+blockIndex).value;
+                var elements = [];
+                for (elementIndex=1; elementIndex<=element_count; elementIndex++){
+                    element_type = document.getElementById("select_" + blockIndex + "_"+elementIndex).value;
+                    if (element_type=="text" || element_type=="time"){
+                        var element = {
+                            class: element_type,
+                            name: document.getElementById("name_" + blockIndex + "_"+elementIndex).value,
+                            label: document.getElementById("label_" + blockIndex + "_"+elementIndex).value,
+                            value: ""
+                        }
+                    }
+                    else if (element_type=="number"){
+                        var element = {
+                            class: element_type,
+                            name: document.getElementById("name_" + blockIndex + "_"+elementIndex).value,
+                            label: document.getElementById("label_" + blockIndex + "_"+elementIndex).value,
+                            unit: document.getElementById("unit_" + blockIndex + "_"+elementIndex).value,
+                            value: ""
+                        }
+                    }
+                    else if (element_type=="radio"){
+                        var option_count = document.getElementById("cc_"+ blockIndex + "_"+elementIndex).value;
+                        var options = [];
+                        var other = 0;
+                        for (optionIndex=1;optionIndex<=option_count;optionIndex++){
+                            var option = {
+                                value :  document.getElementById("option_name_"+ blockIndex + "_" + elementIndex+ "_" + optionIndex).value,
+                                label :  document.getElementById("option_label_"+ blockIndex + "_" + elementIndex+ "_" + optionIndex).value
+                            }
+                            if (option.value=="*other") other = 1
+                            else options.push(option);
+                        }
+
+                        var element = {
+                            class: element_type,
+                            name: document.getElementById("name_" + blockIndex + "_"+elementIndex).value,
+                            label: document.getElementById("label_" + blockIndex + "_"+elementIndex).value,
+                            count: option_count,
+                            options: options,
+                            other: other,
+                            value: ""
+                        }
+                    }
+
+                    else if (element_type=="table"){
+                        var column_count = document.getElementById("col_cc_"+ blockIndex + "_"+elementIndex).value;
+                        var columns = [];
+                        for (columnIndex=1;columnIndex<=column_count;columnIndex++){
+                            var column_type = document.getElementById("select_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value;
+                            if (column_type=="text" || column_type=="time"){
+                                var column = {
+                                    class : column_type,
+                                    name :  document.getElementById("column_name_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value,
+                                    label :  document.getElementById("column_label_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value,
+                                    value: ""
+                                }
+                            }
+                            else if (column_type=="number"){
+                                var column = {
+                                    class : column_type,
+                                    name :  document.getElementById("column_name_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value,
+                                    label :  document.getElementById("column_label_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value,
+                                    unit:  document.getElementById("column_unit_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value,
+                                    value: ""
+                                }
+                            }
+                            else if (column_type=="radio"){
+                                var column_option_count = document.getElementById("cc_"+ blockIndex + "_"+elementIndex+ "_" + columnIndex).value;
+                                var column_options = [];
+                                for (column_optionIndex=1; column_optionIndex<=column_option_count; column_optionIndex++){
+                                    var column_option = {
+                                        value :  document.getElementById("col_option_name_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex+ "_" + column_optionIndex).value,
+                                        label :  document.getElementById("col_option_label_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex+ "_" + column_optionIndex).value
+                                    }
+                                    column_options.push(column_option);
+                                }
+
+                                var column = {
+                                    class: column_type,
+                                    name: document.getElementById("column_name_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value,
+                                    label: document.getElementById("column_label_"+ blockIndex + "_" + elementIndex+ "_" + columnIndex).value,
+                                    count: option_count,
+                                    options: options,
+                                    value: ""
+                                }
+                            }
+                            columns.push(column);
+                        }
+
+                        var element = {
+                            class: element_type,
+                            name: document.getElementById("name_" + blockIndex + "_"+elementIndex).value,
+                            label: document.getElementById("label_" + blockIndex + "_"+elementIndex).value,
+                            row: document.getElementById("row_cc_"+ blockIndex + "_"+elementIndex).value,
+                            col: column_count,
+                            content: columns,
+                            explain: document.getElementById("explain_" + blockIndex + "_"+elementIndex).value
+                        }
+                    }
+                    elements.push(element);
+                }
+                var block = {
+                        class : "block",
+                        name: document.getElementById("block_name_" + blockIndex).value,
+                        label: document.getElementById("block_label_" + blockIndex).value,
+                        elements: elements
+                }
+                blocks.push(block);
+            }
+            var form = {
+                class: "form",
+                name: document.getElementById("form_name").value,
+                label: document.getElementById("form_label").value,
+                blocks: blocks
+            }
+            var configuration = JSON.stringify(form);
+            console.log(configuration);
+            download("configuration.json",configuration);
+        }
+
+        function fake_click(obj) {
+            var ev = document.createEvent("MouseEvents");
+            ev.initMouseEvent(
+                "click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null
+            );
+            obj.dispatchEvent(ev);
+        }
+
+        function download(name, data) {
+            var urlObject = window.URL || window.webkitURL || window;
+            var downloadData = new Blob([data]);
+            var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+            save_link.href = urlObject.createObjectURL(downloadData);
+            save_link.download = name;
+            fake_click(save_link);
+        }
+        
+    </script>
+</body>
+</html>

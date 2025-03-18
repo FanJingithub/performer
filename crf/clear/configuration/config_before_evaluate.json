@@ -81,20 +81,20 @@
                         },
                         {
                             "class":"radio",
+                            "count":2,
                             "label":"可评估病灶",
                             "name":"is_evaluable",
-                            "value":"",
-                            "count": 2,
-                            "options": [
+                            "options":[
                                 {
-                                    "value": "yes",
-                                    "label": "是"
+                                    "label":"是",
+                                    "value":"yes"
                                 },
                                 {
-                                    "value": "not",
-                                    "label": "否"
+                                    "label":"否",
+                                    "value":"not"
                                 }
-                            ]
+                            ],
+                            "value":""
                         }
                     ],
                     "explain":"",

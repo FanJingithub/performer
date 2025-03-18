@@ -64,14 +64,23 @@ class before_evaluateHandler(tornado.web.RequestHandler):
                     </a>
             </li>
             '''
-        self.cur.execute('''SELECT base,physical_exam,lab,special_exam,before_evaluate,after_evaluate FROM data_status WHERE patient_id='{0}' '''.format(self.patient_id))
+        self.cur.execute('''SELECT base,physical_exam,lab,special_exam,radiology_colonoscopy,colonoscopy_pathology,msi_mmr,gene,clinical_stage,before_evaluate,treatment,after_evaluate,adverse_event,concomitant_medication,follow_up FROM data_status WHERE patient_id='{0}' '''.format(self.patient_id))
         for row in self.cur:
             base_page_status = row[0]
             physical_exam_page_status = row[1]
             lab_page_status = row[2]
             special_exam_page_status = row[3]
-            before_evaluate_page_status = row[4]
-            after_evaluate_page_status = row[5]
+            radiology_colonoscopy_page_status = row[4]
+            colonoscopy_pathology_page_status = row[5]
+            msi_mmr_page_status = row[6]
+            gene_page_status = row[7]
+            clinical_stage_page_status = row[8]
+            before_evaluate_page_status = row[9]
+            treatment_page_status = row[10]
+            after_evaluate_page_status = row[11]
+            adverse_event_page_status = row[12]
+            concomitant_medication_page_status = row[13]
+            follow_up_page_status = row[14]
         self.cur.close()
         
         side_menu = side_menu + '''
@@ -156,6 +165,106 @@ class before_evaluateHandler(tornado.web.RequestHandler):
         
         side_menu = side_menu + '''
             <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>影像学及肠镜</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(radiology_colonoscopy_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/radiology_colonoscopy?patient_id={1}&page_index={2}">影像学及肠镜_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/radiology_colonoscopy?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(radiology_colonoscopy_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>肠镜病理检查结果</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(colonoscopy_pathology_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/colonoscopy_pathology?patient_id={1}&page_index={2}">肠镜病理检查结果_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/colonoscopy_pathology?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(colonoscopy_pathology_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>MSI/MMR状态</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(msi_mmr_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/msi_mmr?patient_id={1}&page_index={2}">MSI/MMR状态_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/msi_mmr?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(msi_mmr_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>基因检测</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(gene_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/gene?patient_id={1}&page_index={2}">基因检测_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/gene?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(gene_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>临床分期</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(clinical_stage_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/clinical_stage?patient_id={1}&page_index={2}">临床分期_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/clinical_stage?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(clinical_stage_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
                 <a class="active" href="javascript:;">
                     <i class="fa fa-tasks"></i>
                     <span>治疗前评估</span>
@@ -182,6 +291,26 @@ class before_evaluateHandler(tornado.web.RequestHandler):
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-tasks"></i>
+                    <span>治疗</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(treatment_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/treatment?patient_id={1}&page_index={2}">治疗_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/treatment?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(treatment_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
                     <span>治疗后评估</span>
                 </a>
                 <ul class="sub">'''
@@ -193,6 +322,66 @@ class before_evaluateHandler(tornado.web.RequestHandler):
         side_menu = side_menu + '''
                 <li><a  href="/after_evaluate?patient_id={0}&page_index={1}">新增</a></li>
             '''.format(self.patient_id,str(len(after_evaluate_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>不良事件评价</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(adverse_event_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/adverse_event?patient_id={1}&page_index={2}">不良事件评价_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/adverse_event?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(adverse_event_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>伴随用药记录</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(concomitant_medication_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/concomitant_medication?patient_id={1}&page_index={2}">伴随用药记录_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/concomitant_medication?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(concomitant_medication_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>随访评价</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(follow_up_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/follow_up?patient_id={1}&page_index={2}">随访评价_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/follow_up?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(follow_up_page_status)))
         side_menu = side_menu + '''
                 </ul>
             </li>
@@ -307,14 +496,23 @@ class before_evaluateHandler(tornado.web.RequestHandler):
                     </a>
             </li>
             '''
-        self.cur.execute('''SELECT base,physical_exam,lab,special_exam,before_evaluate,after_evaluate FROM data_status WHERE patient_id='{0}' '''.format(self.patient_id))
+        self.cur.execute('''SELECT base,physical_exam,lab,special_exam,radiology_colonoscopy,colonoscopy_pathology,msi_mmr,gene,clinical_stage,before_evaluate,treatment,after_evaluate,adverse_event,concomitant_medication,follow_up FROM data_status WHERE patient_id='{0}' '''.format(self.patient_id))
         for row in self.cur:
             base_page_status = row[0]
             physical_exam_page_status = row[1]
             lab_page_status = row[2]
             special_exam_page_status = row[3]
-            before_evaluate_page_status = row[4]
-            after_evaluate_page_status = row[5]
+            radiology_colonoscopy_page_status = row[4]
+            colonoscopy_pathology_page_status = row[5]
+            msi_mmr_page_status = row[6]
+            gene_page_status = row[7]
+            clinical_stage_page_status = row[8]
+            before_evaluate_page_status = row[9]
+            treatment_page_status = row[10]
+            after_evaluate_page_status = row[11]
+            adverse_event_page_status = row[12]
+            concomitant_medication_page_status = row[13]
+            follow_up_page_status = row[14]
         self.cur.close()
         
         side_menu = side_menu + '''
@@ -399,6 +597,106 @@ class before_evaluateHandler(tornado.web.RequestHandler):
         
         side_menu = side_menu + '''
             <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>影像学及肠镜</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(radiology_colonoscopy_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/radiology_colonoscopy?patient_id={1}&page_index={2}">影像学及肠镜_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/radiology_colonoscopy?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(radiology_colonoscopy_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>肠镜病理检查结果</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(colonoscopy_pathology_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/colonoscopy_pathology?patient_id={1}&page_index={2}">肠镜病理检查结果_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/colonoscopy_pathology?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(colonoscopy_pathology_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>MSI/MMR状态</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(msi_mmr_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/msi_mmr?patient_id={1}&page_index={2}">MSI/MMR状态_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/msi_mmr?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(msi_mmr_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>基因检测</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(gene_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/gene?patient_id={1}&page_index={2}">基因检测_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/gene?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(gene_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>临床分期</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(clinical_stage_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/clinical_stage?patient_id={1}&page_index={2}">临床分期_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/clinical_stage?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(clinical_stage_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
                 <a class="active" href="javascript:;">
                     <i class="fa fa-tasks"></i>
                     <span>治疗前评估</span>
@@ -425,6 +723,26 @@ class before_evaluateHandler(tornado.web.RequestHandler):
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-tasks"></i>
+                    <span>治疗</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(treatment_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/treatment?patient_id={1}&page_index={2}">治疗_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/treatment?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(treatment_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
                     <span>治疗后评估</span>
                 </a>
                 <ul class="sub">'''
@@ -436,6 +754,66 @@ class before_evaluateHandler(tornado.web.RequestHandler):
         side_menu = side_menu + '''
                 <li><a  href="/after_evaluate?patient_id={0}&page_index={1}">新增</a></li>
             '''.format(self.patient_id,str(len(after_evaluate_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>不良事件评价</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(adverse_event_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/adverse_event?patient_id={1}&page_index={2}">不良事件评价_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/adverse_event?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(adverse_event_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>伴随用药记录</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(concomitant_medication_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/concomitant_medication?patient_id={1}&page_index={2}">伴随用药记录_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/concomitant_medication?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(concomitant_medication_page_status)))
+        side_menu = side_menu + '''
+                </ul>
+            </li>
+            '''
+        
+        side_menu = side_menu + '''
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tasks"></i>
+                    <span>随访评价</span>
+                </a>
+                <ul class="sub">'''
+        active = ''
+        for i in range(len(follow_up_page_status)):
+            side_menu = side_menu + '''
+                <li{0}><a  href="/follow_up?patient_id={1}&page_index={2}">随访评价_{3}</a></li>
+            '''.format(active,self.patient_id,str(i),str(i+1))
+        side_menu = side_menu + '''
+                <li><a  href="/follow_up?patient_id={0}&page_index={1}">新增</a></li>
+            '''.format(self.patient_id,str(len(follow_up_page_status)))
         side_menu = side_menu + '''
                 </ul>
             </li>

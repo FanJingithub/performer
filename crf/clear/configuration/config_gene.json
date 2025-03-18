@@ -1,0 +1,26 @@
+{
+    "blocks":[
+        {
+            "class":"block",
+            "elements":[
+                {
+                    "class":"label",
+                    "label":"ID",
+                    "name":"patient_id",
+                    "value":""
+                },
+                {
+                    "class":"text",
+                    "label":"基因检测结果描述",
+                    "name":"gene_result",
+                    "value":""
+                }
+            ],
+            "label":"基因检测结果",
+            "name":"gene_result"
+        }
+    ],
+    "class":"form",
+    "label":"基因检测",
+    "name":"gene"
+}

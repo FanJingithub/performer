@@ -74,13 +74,6 @@
                             <el-date-picker v-model="first_consult_date" type="date" placeholder="Pick a day" disabled></el-date-picker>
                             <br/><br/>
                         </div>
-                        <!-- <div>
-                            <label class="form-label">性别:</label>
-                            <input type="radio" id="male" value="male" v-model="gender" disabled>
-                            <label for="male">男&nbsp;&nbsp;</label>
-                            <input type="radio" id="female" value="female" v-model="gender" disabled>
-                            <label for="female">女&nbsp;&nbsp;</label><br/><br/>
-                        </div> -->
                         <div>
                             <label class="form-label">出生日期: </label>
                             <el-date-picker v-model="birth_date" type="date" placeholder="Pick a day" disabled></el-date-picker>
@@ -174,7 +167,6 @@
                     sex: "{{sex}}",
                     age: "{{age}}",
                     first_consult_date: new Date(parseInt("{{first_consult_date}}")*1000),
-                    gender: "{{gender}}",
                     birth_date: new Date(parseInt("{{birth_date}}")*1000),
                     rt_num: "{{rt_num}}",
                     patient_num: "{{patient_num}}",

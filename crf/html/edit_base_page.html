@@ -74,13 +74,6 @@
                             <el-date-picker v-model="first_consult_date" type="date" placeholder="Pick a day" ></el-date-picker>
                             <br/><br/>
                         </div>
-                        <!-- <div>
-                            <label class="form-label">性别:</label>
-                            <input type="radio" id="male" value="male" v-model="gender" >
-                            <label for="male">男&nbsp;&nbsp;</label>
-                            <input type="radio" id="female" value="female" v-model="gender" >
-                            <label for="female">女&nbsp;&nbsp;</label><br/><br/>
-                        </div> -->
                         <div>
                             <label class="form-label">出生日期: </label>
                             <el-date-picker v-model="birth_date" type="date" placeholder="Pick a day" ></el-date-picker>
@@ -174,7 +167,6 @@
                     sex: "{{sex}}",
                     age: "{{age}}",
                     first_consult_date: new Date(parseInt("{{first_consult_date}}")*1000),
-                    gender: "{{gender}}",
                     birth_date: new Date(parseInt("{{birth_date}}")*1000),
                     rt_num: "{{rt_num}}",
                     patient_num: "{{patient_num}}",
@@ -196,7 +188,6 @@
                         this.age=res.data.age;
                         this.first_consult_date=new Date(parseInt(res.data.first_consult_date)*1000);
                         if (isNaN(this.first_consult_date.getTime())) this.first_consult_date="";
-                        this.gender=res.data.gender;
                         this.birth_date=new Date(parseInt(res.data.birth_date)*1000);
                         if (isNaN(this.birth_date.getTime())) this.birth_date="";
                         this.rt_num=res.data.rt_num;
@@ -222,7 +213,6 @@
                         sex: this.sex,
                         age: this.age,
                         first_consult_date: this.first_consult_date,
-                        gender: this.gender,
                         birth_date: this.birth_date,
                         rt_num: this.rt_num,
                         patient_num: this.patient_num,

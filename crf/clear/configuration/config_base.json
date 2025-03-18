@@ -51,24 +51,6 @@
                     "value":""
                 },
                 {
-                    "class":"radio",
-                    "count":"2",
-                    "label":"性别",
-                    "name":"gender",
-                    "options":[
-                        {
-                            "label":"男",
-                            "value":"male"
-                        },
-                        {
-                            "label":"女",
-                            "value":"female"
-                        }
-                    ],
-                    "other":0,
-                    "value":""
-                },
-                {
                     "class":"time",
                     "label":"出生日期",
                     "name":"birth_date",
