@@ -53,46 +53,29 @@
                         <h3>不良事件记录</h3>
                         <div>
                             <label class="form-label">不良事件类型:</label>
-                            <input type="radio" id="ae1" value="ae1" v-model="adverse_type" >
-                            <label for="ae1">厌食&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae2" value="ae2" v-model="adverse_type" >
-                            <label for="ae2">恶心呕吐&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae3" value="ae3" v-model="adverse_type" >
-                            <label for="ae3">腹痛&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae4" value="ae4" v-model="adverse_type" >
-                            <label for="ae4">腹泻&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae5" value="ae5" v-model="adverse_type" >
-                            <label for="ae5">口腔黏膜炎&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae6" value="ae6" v-model="adverse_type" >
-                            <label for="ae6">疲乏&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae7" value="ae7" v-model="adverse_type" >
-                            <label for="ae7">脱发&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae8" value="ae8" v-model="adverse_type" >
-                            <label for="ae8">发热不伴感染&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae9" value="ae9" v-model="adverse_type" >
-                            <label for="ae9">感染&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae10" value="ae10" v-model="adverse_type" >
-                            <label for="ae10">感觉异常&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae11" value="ae11" v-model="adverse_type" >
-                            <label for="ae11">肢端麻木刺痛&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae12" value="ae12" v-model="adverse_type" >
-                            <label for="ae12">疼痛&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae13" value="ae13" v-model="adverse_type" >
-                            <label for="ae13">水肿&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae14" value="ae14" v-model="adverse_type" >
-                            <label for="ae14">静脉炎&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae15" value="ae15" v-model="adverse_type" >
-                            <label for="ae15">手足综合症&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae16" value="ae16" v-model="adverse_type" >
-                            <label for="ae16">心律失常&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae17" value="ae17" v-model="adverse_type" >
-                            <label for="ae17">血压异常&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae18" value="ae18" v-model="adverse_type" >
-                            <label for="ae18">过敏反应(除皮疹)&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae19" value="ae19" v-model="adverse_type" >
-                            <label for="ae19">皮疹&nbsp;&nbsp;</label>
-                            <input type="radio" id="ae20" value="ae20" v-model="adverse_type" >
-                            <label for="ae20">其他&nbsp;&nbsp;</label><br/><br/>
+                            <el-select v-model="adverse_type" placeholder="请选择不良事件类型">
+                                <el-option label="厌食" value="ae1"></el-option>
+                                <el-option label="恶心呕吐" value="ae2"></el-option>
+                                <el-option label="腹痛" value="ae3"></el-option>
+                                <el-option label="腹泻" value="ae4"></el-option>
+                                <el-option label="口腔黏膜炎" value="ae5"></el-option>
+                                <el-option label="疲乏" value="ae6"></el-option>
+                                <el-option label="脱发" value="ae7"></el-option>
+                                <el-option label="发热不伴感染" value="ae8"></el-option>
+                                <el-option label="感染" value="ae9"></el-option>
+                                <el-option label="感觉异常" value="ae10"></el-option>
+                                <el-option label="肢端麻木刺痛" value="ae11"></el-option>
+                                <el-option label="疼痛" value="ae12"></el-option>
+                                <el-option label="水肿" value="ae13"></el-option>
+                                <el-option label="静脉炎" value="ae14"></el-option>
+                                <el-option label="手足综合症" value="ae15"></el-option>
+                                <el-option label="心律失常" value="ae16"></el-option>
+                                <el-option label="血压异常" value="ae17"></el-option>
+                                <el-option label="过敏反应(除皮疹)" value="ae18"></el-option>
+                                <el-option label="皮疹" value="ae19"></el-option>
+                                <el-option label="其他" value="ae20"></el-option>
+                            </el-select>
+                            <br/><br/>
                         </div>
                         <div>
                             <label class="form-label">发生日期: </label>

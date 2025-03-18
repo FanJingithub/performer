@@ -53,12 +53,16 @@
                         <h3>治疗记录</h3>
                         <div>
                             <label class="form-label">分组:</label>
+                            <br/><br/>
                             <input type="radio" id="group_a" value="group_a" v-model="group" >
                             <label for="group_a">治疗组A(左半野生)，化疗+免疫+靶向&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="group_b" value="group_b" v-model="group" >
                             <label for="group_b">治疗组B(左半野生)，放化疗+免疫+靶向&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="group_c" value="group_c" v-model="group" >
                             <label for="group_c">治疗组C(右半或RAS突变)，化疗+免疫+靶向&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="group_d" value="group_d" v-model="group" >
                             <label for="group_d">治疗组D(右半或RAS突变)，放化疗+免疫+靶向&nbsp;&nbsp;</label><br/><br/>
                         </div>
@@ -80,18 +84,25 @@
                         </div>
                         <div>
                             <label class="form-label">化疗终止原因:</label>
+                            <br/><br/>
                             <input type="radio" id="reason_1" value="reason_1" v-model="stop_reason" >
                             <label for="reason_1">受试者出现病情进展&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="reason_2" value="reason_2" v-model="stop_reason" >
                             <label for="reason_2">出现受试者无法接受的不良反应&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="reason_3" value="reason_3" v-model="stop_reason" >
                             <label for="reason_3">研究者认为受试者有必要停止试验&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="reason_4" value="reason_4" v-model="stop_reason" >
                             <label for="reason_4">受试者主动要求退出试验&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="reason_5" value="reason_5" v-model="stop_reason" >
                             <label for="reason_5">违法本研究方案规定的受试者&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="reason_6" value="reason_6" v-model="stop_reason" >
                             <label for="reason_6">受试者在未完成全部治疗前不再接受用药或检测而失访&nbsp;&nbsp;</label>
+                            <br/><br/>
                             <input type="radio" id="reason_7" value="reason_7" v-model="stop_reason" >
                             <label for="reason_7">死亡&nbsp;&nbsp;</label><br/><br/>
                         </div>
