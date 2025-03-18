@@ -1,7 +1,5 @@
 #!/bin/bash
 
-## sed -i.bak '/res = \[self.patient_id/s/.*/print("hello")/' file.txt
-
 sed -i.bak '/res = \[self.patient_id/ {
   r lab_default.txt
   d
