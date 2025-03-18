@@ -20,16 +20,30 @@
                             "value":""
                         },
                         {
-                            "class":"text",
+                            "class":"radio",
                             "label":"测量方法",
                             "name":"method5",
-                            "value":""
+                            "value":"",
+                            "count": 3,
+                            "options": [
+                                {
+                                    "value": "ct",
+                                    "label": "CT"
+                                },
+                                {
+                                    "value": "mri",
+                                    "label": "MRI"
+                                },
+                                {
+                                    "value": "physical",
+                                    "label": "体格检查"
+                                }
+                            ]
                         },
                         {
-                            "class":"number",
-                            "label":"长径",
+                            "class":"text",
+                            "label":"长径(mm)",
                             "name":"long_dist2",
-                            "unit":"mm",
                             "value":""
                         }
                     ],
@@ -62,10 +76,25 @@
                             "value":""
                         },
                         {
-                            "class":"text",
+                            "class":"radio",
                             "label":"测量方法",
                             "name":"method6",
-                            "value":""
+                            "value":"",
+                            "count": 3,
+                            "options": [
+                                {
+                                    "value": "ct",
+                                    "label": "CT"
+                                },
+                                {
+                                    "value": "mri",
+                                    "label": "MRI"
+                                },
+                                {
+                                    "value": "physical",
+                                    "label": "体格检查"
+                                }
+                            ]
                         },
                         {
                             "class":"text",

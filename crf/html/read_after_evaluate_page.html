@@ -66,32 +66,67 @@
                                 background-color:#e9faff;">测量方法</td>
                                 <td width="30%" style="background:#e9faff !important; text-align:center;
                                 font-family: 微软雅黑;font-size: 16px;font-weight: bold;color: #255e95;
-                                background-color:#e9faff;">长径</td>
+                                background-color:#e9faff;">长径(mm)</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site5_0" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method5_0" disabled></td>
-                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist2_0" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method5_0" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method5_0" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method5_0" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="long_dist2_0" disabled></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site5_1" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method5_1" disabled></td>
-                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist2_1" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method5_1" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method5_1" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method5_1" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="long_dist2_1" disabled></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site5_2" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method5_2" disabled></td>
-                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist2_2" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method5_2" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method5_2" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method5_2" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="long_dist2_2" disabled></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site5_3" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method5_3" disabled></td>
-                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist2_3" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method5_3" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method5_3" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method5_3" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="long_dist2_3" disabled></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site5_4" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method5_4" disabled></td>
-                                <td style="text-align: center"><input style="width:36px; height:20px" type="number" v-model="long_dist2_4" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method5_4" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method5_4" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method5_4" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
+                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="long_dist2_4" disabled></td>
                             </tr>
                         </table>
                     </div>
@@ -119,7 +154,14 @@
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site6_0" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method6_0" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method6_0" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method6_0" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method6_0" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="status6_0" disabled></td>
                                 <td style="text-align: center">
                                     <input type="radio" id="yes" value="yes" v-model="is_evaluable2_0" disabled>
@@ -130,7 +172,14 @@
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site6_1" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method6_1" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method6_1" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method6_1" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method6_1" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="status6_1" disabled></td>
                                 <td style="text-align: center">
                                     <input type="radio" id="yes" value="yes" v-model="is_evaluable2_1" disabled>
@@ -141,7 +190,14 @@
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site6_2" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method6_2" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method6_2" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method6_2" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method6_2" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="status6_2" disabled></td>
                                 <td style="text-align: center">
                                     <input type="radio" id="yes" value="yes" v-model="is_evaluable2_2" disabled>
@@ -152,7 +208,14 @@
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site6_3" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method6_3" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method6_3" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method6_3" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method6_3" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="status6_3" disabled></td>
                                 <td style="text-align: center">
                                     <input type="radio" id="yes" value="yes" v-model="is_evaluable2_3" disabled>
@@ -163,7 +226,14 @@
                             </tr>
                             <tr>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="site6_4" disabled></td>
-                                <td style="text-align: center"><input style="width:90%; height:90%" v-model="method6_4" disabled></td>
+                                <td style="text-align: center">
+                                    <input type="radio" id="ct" value="ct" v-model="method6_4" disabled>
+                                    <label style="font-size:12px" for="ct">CT&nbsp;&nbsp;</label>
+                                    <input type="radio" id="mri" value="mri" v-model="method6_4" disabled>
+                                    <label style="font-size:12px" for="mri">MRI&nbsp;&nbsp;</label>
+                                    <input type="radio" id="physical" value="physical" v-model="method6_4" disabled>
+                                    <label style="font-size:12px" for="physical">体格检查&nbsp;&nbsp;</label>
+                                </td>
                                 <td style="text-align: center"><input style="width:90%; height:90%" v-model="status6_4" disabled></td>
                                 <td style="text-align: center">
                                     <input type="radio" id="yes" value="yes" v-model="is_evaluable2_4" disabled>

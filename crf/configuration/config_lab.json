@@ -6,7 +6,7 @@
                 {
                     "class":"time",
                     "label":"采样日期",
-                    "name":"exam_date1",
+                    "name":"exam_date0",
                     "value":""
                 },
                 {
@@ -64,7 +64,7 @@
                 {
                     "class":"time",
                     "label":"采样日期",
-                    "name":"exam_date2",
+                    "name":"exam_date1",
                     "value":""
                 },
                 {
@@ -122,7 +122,7 @@
                 {
                     "class":"time",
                     "label":"采样日期",
-                    "name":"exam_date3",
+                    "name":"exam_date2",
                     "value":""
                 },
                 {
@@ -180,7 +180,7 @@
                 {
                     "class":"time",
                     "label":"采样日期",
-                    "name":"exam_date4",
+                    "name":"exam_date3",
                     "value":""
                 },
                 {
@@ -238,7 +238,7 @@
                 {
                     "class":"time",
                     "label":"采样日期",
-                    "name":"exam_date5",
+                    "name":"exam_date4",
                     "value":""
                 },
                 {
@@ -296,7 +296,7 @@
                 {
                     "class":"time",
                     "label":"采样日期",
-                    "name":"exam_date6",
+                    "name":"exam_date5",
                     "value":""
                 },
                 {
@@ -354,7 +354,7 @@
                 {
                     "class":"time",
                     "label":"采样日期",
-                    "name":"exam_date7",
+                    "name":"exam_date6",
                     "value":""
                 },
                 {
